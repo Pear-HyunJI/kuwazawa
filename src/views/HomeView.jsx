@@ -4,25 +4,19 @@ import MainSlider from "@/components/home/MainSlider";
 import SnackSlider from "@/components/home/SnackSlider";
 import Opening from '@/components/home/Opening';
 
-const HomeViewBlock = styled.div``;
+const HomeViewBlock = styled.div`
+`;
 
 const HomeView = () => {
-  const [showOpening, setShowOpening] = useState(true);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollThreshold = 0;
-      const scrolled = window.scrollY;
-
-      if (scrolled > scrollThreshold) {
-        setShowOpening(false);
-      } else {
-        setShowOpening(true);
-      }
+      const position = window.scrollY;
+      setScrollPosition(position);
     };
 
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -30,12 +24,9 @@ const HomeView = () => {
 
   return (
     <HomeViewBlock>
-      {showOpening ? <Opening /> : (
-        <>
-          <MainSlider />
-          <SnackSlider />
-        </>
-      )}
+       <Opening scrollPosition={scrollPosition} />
+       <MainSlider />
+       <SnackSlider />
     </HomeViewBlock>
   );
 };
