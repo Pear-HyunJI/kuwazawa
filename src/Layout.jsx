@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+import LeftHeader from "@/components/layout/LeftHeader";
+import RightHeader from "@/components/layout/RightHeader";
 import { Outlet } from "react-router-dom";
-import Header from "@/components/layout/Header";
 
 const Layout = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div>
-      <Header />
+      <RightHeader isOpen={isMenuOpen} />
+      <LeftHeader isOpen={isMenuOpen} toggleMenu={toggleMenu} />
       <main>
         <Outlet />
       </main>

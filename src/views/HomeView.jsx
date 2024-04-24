@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import MainSlider from "@/components/home/MainSlider";
 import SnackSlider from "@/components/home/SnackSlider";
-import Opening from '@/components/home/Opening';
+import Opening from "@/components/home/Opening";
 
-const HomeViewBlock = styled.div``;
+const HomeViewBlock = styled.div`
+  height: 1500px;
+`;
 
 const HomeView = () => {
   const [showOpening, setShowOpening] = useState(true);
@@ -30,7 +32,9 @@ const HomeView = () => {
 
   return (
     <HomeViewBlock>
-      {showOpening ? <Opening /> : (
+      {showOpening ? (
+        <Opening />
+      ) : (
         <>
           <MainSlider />
           <SnackSlider />
