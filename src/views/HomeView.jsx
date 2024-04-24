@@ -8,6 +8,7 @@ const HomeViewBlock = styled.div``;
 const HomeView = () => {
   return (
     <HomeViewBlock>
+      <p>11</p>
       <MainSlider />
       <SnackSlider />
     </HomeViewBlock>
