@@ -4,12 +4,7 @@ import MainSlider from "@/components/home/MainSlider";
 import SnackSlider from "@/components/home/SnackSlider";
 import Opening from "@/components/home/Opening";
 
-const HomeViewBlock = styled.div`
-<<<<<<< HEAD
-=======
-  height: 1500px;
->>>>>>> 0b08b5abf4ea354ba319afaef9a7275aab818b68
-`;
+const HomeViewBlock = styled.div``;
 
 const HomeView = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -28,20 +23,9 @@ const HomeView = () => {
 
   return (
     <HomeViewBlock>
-<<<<<<< HEAD
-       <Opening scrollPosition={scrollPosition} />
-       <MainSlider />
-       <SnackSlider />
-=======
-      {showOpening ? (
-        <Opening />
-      ) : (
-        <>
-          <MainSlider />
-          <SnackSlider />
-        </>
-      )}
->>>>>>> 0b08b5abf4ea354ba319afaef9a7275aab818b68
+      <Opening scrollPosition={scrollPosition} />
+      <MainSlider />
+      <SnackSlider />
     </HomeViewBlock>
   );
 };
