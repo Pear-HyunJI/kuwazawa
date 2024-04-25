@@ -17,7 +17,7 @@ const OpeningBlock = styled.div`
   background-size: cover;
   background-position: center; 
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   top: 0;
   left: 0;
   position: ${({ scrollPosition }) => (scrollPosition > 4500 ? 'relative' : 'fixed')};
@@ -56,18 +56,20 @@ const Opening = ({ scrollPosition }) => {
   return (
     <OpeningBlock scrollPosition={scrollPosition}>
      <div className='overlay'>
-        <img src={ground3} alt="" style={{ transform: `translateY(${scrollPosition / 7}px)` }} />
-        <img src={ground2} alt="" style={{ transform: `translateY(${scrollPosition / 5}px)` }} />
-        <img src={ground} alt="" style={{ transform: `translateY(${scrollPosition / 4}px)` }} />
-        <img src={people} alt="" style={{ transform: `translateY(${scrollPosition / 4}px)` }} />
-        {/* 왼쪽 */}
-        <img src={leftTree} alt="" style={{ transform: `translate(${scrollPosition / -3}px, -${scrollPosition / 3}px)` }} />
-        <img src={leftBush} alt="" style={{ transform: `translate(-${scrollPosition / 3}px, ${scrollPosition / 3}px)` }} />
-        <img src={leftGrass} alt="" style={{ transform: `translateX(-${scrollPosition / 3}px)` }} />
-        {/* 오른쪽 */}
-        <img src={rightTree} alt="" style={{ transform: `translate(${scrollPosition / 3}px,-${scrollPosition / 3}px)` }} />
-        <img src={rightBush} alt="" style={{ transform: `translate(${scrollPosition / 3}px,${scrollPosition / 3}px)` }} />
-        <img src={rightGrass} alt="" style={{ transform: `translateX(${scrollPosition / 3}px)` }} />
+        <div>
+          <img src={ground3} alt="" style={{ transform: `translateY(${scrollPosition / 7}px)` }} />
+          <img src={ground2} alt="" style={{ transform: `translateY(${scrollPosition / 5}px)` }} />
+          <img src={ground} alt="" style={{ transform: `translateY(${scrollPosition / 4}px)` }} />
+          <img src={people} alt="" style={{ transform: `translateY(${scrollPosition / 4}px)` }} />
+          {/* 왼쪽 */}
+          <img src={leftTree} alt="" style={{ transform: `translate(${scrollPosition / -3}px, -${scrollPosition / 3}px)` }} />
+          <img src={leftBush} alt="" style={{ transform: `translate(-${scrollPosition / 3}px, ${scrollPosition / 3}px)` }} />
+          <img src={leftGrass} alt="" style={{ transform: `translateX(-${scrollPosition / 3}px)` }} />
+          {/* 오른쪽 */}
+          <img src={rightTree} alt="" style={{ transform: `translate(${scrollPosition / 3}px,-${scrollPosition / 3}px)` }} />
+          <img src={rightBush} alt="" style={{ transform: `translate(${scrollPosition / 3}px,${scrollPosition / 3}px)` }} />
+          <img src={rightGrass} alt="" style={{ transform: `translateX(${scrollPosition / 3}px)` }} />
+        </div>
      </div>
     </OpeningBlock>
   );

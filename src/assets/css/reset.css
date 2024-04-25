@@ -3,7 +3,8 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box
+    box-sizing: border-box;
+
 }
 
 a {
@@ -55,3 +56,4 @@ legend {
     overflow: hidden;
     text-indent: -99999px;
 }
+.row { max-width:1200px; margin:auto }
