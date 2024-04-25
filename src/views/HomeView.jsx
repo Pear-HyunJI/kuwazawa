@@ -6,13 +6,9 @@ import Opening from "@/components/home/Opening";
 import TextArea from "@/components/section/TextArea";
 import OtherSection from "@/components/section/OtherSection";
 
-<<<<<<< HEAD
 const HomeViewBlock = styled.div`
 
 `;
-=======
-const HomeViewBlock = styled.div``;
->>>>>>> ea797c54e7e147623ebbec1d884fa45d88952d56
 
 const HomeView = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -31,17 +27,11 @@ const HomeView = () => {
 
   return (
     <HomeViewBlock>
-<<<<<<< HEAD
        <Opening scrollPosition={scrollPosition} />
        <MainSlider />
        <TextArea />
        <SnackSlider />
        <OtherSection />
-=======
-      <Opening scrollPosition={scrollPosition} />
-      <MainSlider />
-      <SnackSlider />
->>>>>>> ea797c54e7e147623ebbec1d884fa45d88952d56
     </HomeViewBlock>
   );
 };
