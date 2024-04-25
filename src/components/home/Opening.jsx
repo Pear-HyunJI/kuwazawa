@@ -18,7 +18,7 @@ const OpeningBlock = styled.div`
   background-size: cover;
   background-position: center;
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   top: 0;
   left: 0;
   position: ${({ scrollPosition }) =>
@@ -173,22 +173,86 @@ const LogoImage = styled.img`
 const Opening = ({ scrollPosition }) => {
   return (
     <OpeningBlock scrollPosition={scrollPosition}>
-     <div className='overlay'>
-        <div>
-          <img src={ground3} alt="" style={{ transform: `translateY(${scrollPosition / 7}px)` }} />
-          <img src={ground2} alt="" style={{ transform: `translateY(${scrollPosition / 5}px)` }} />
-          <img src={ground} alt="" style={{ transform: `translateY(${scrollPosition / 4}px)` }} />
-          <img src={people} alt="" style={{ transform: `translateY(${scrollPosition / 4}px)` }} />
-          {/* 왼쪽 */}
-          <img src={leftTree} alt="" style={{ transform: `translate(${scrollPosition / -3}px, -${scrollPosition / 3}px)` }} />
-          <img src={leftBush} alt="" style={{ transform: `translate(-${scrollPosition / 3}px, ${scrollPosition / 3}px)` }} />
-          <img src={leftGrass} alt="" style={{ transform: `translateX(-${scrollPosition / 3}px)` }} />
-          {/* 오른쪽 */}
-          <img src={rightTree} alt="" style={{ transform: `translate(${scrollPosition / 3}px,-${scrollPosition / 3}px)` }} />
-          <img src={rightBush} alt="" style={{ transform: `translate(${scrollPosition / 3}px,${scrollPosition / 3}px)` }} />
-          <img src={rightGrass} alt="" style={{ transform: `translateX(${scrollPosition / 3}px)` }} />
-        </div>
-     </div>
+      <div className="overlay">
+        <img
+          src={ground3}
+          alt=""
+          style={{ transform: `translateY(${scrollPosition / 7}px)` }}
+        />
+        <img
+          src={ground2}
+          alt=""
+          style={{ transform: `translateY(${scrollPosition / 5}px)` }}
+        />
+        <img
+          src={ground}
+          alt=""
+          style={{ transform: `translateY(${scrollPosition / 4}px)` }}
+        />
+        <img
+          src={people}
+          alt=""
+          style={{ transform: `translateY(${scrollPosition / 4}px)` }}
+        />
+        {/* 왼쪽 */}
+        <img
+          src={leftTree}
+          alt=""
+          style={{
+            transform: `translate(${scrollPosition / -3}px, -${
+              scrollPosition / 3
+            }px)`,
+          }}
+        />
+        <img
+          src={leftBush}
+          alt=""
+          style={{
+            transform: `translate(-${scrollPosition / 3}px, ${
+              scrollPosition / 3
+            }px)`,
+          }}
+        />
+        <img
+          src={leftGrass}
+          alt=""
+          style={{ transform: `translateX(-${scrollPosition / 3}px)` }}
+        />
+        {/* 오른쪽 */}
+        <img
+          src={rightTree}
+          alt=""
+          style={{
+            transform: `translate(${scrollPosition / 3}px,-${
+              scrollPosition / 3
+            }px)`,
+          }}
+        />
+        <img
+          src={rightBush}
+          alt=""
+          style={{
+            transform: `translate(${scrollPosition / 3}px,${
+              scrollPosition / 3
+            }px)`,
+          }}
+        />
+        <img
+          src={rightGrass}
+          alt=""
+          style={{ transform: `translateX(${scrollPosition / 3}px)` }}
+        />
+        {/* 텍스트 */}
+
+        <LogoWrapper scrollPosition={scrollPosition}>
+          <LogoImage src={logo} alt="Logo" />
+          <Text width="400" height="100" viewBox="0 0 400 100">
+            <text x="50%" y="50%" dy=".3em" textAnchor="middle">
+              쿠와자와 과자점
+            </text>
+          </Text>
+        </LogoWrapper>
+      </div>
     </OpeningBlock>
   );
 };
