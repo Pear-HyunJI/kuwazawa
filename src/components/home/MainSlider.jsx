@@ -43,7 +43,7 @@ const MainSliderBlock = styled.div`
   display: flex;
   flex-direction: column;
   .slick-track {
-    margin-top: 340px;
+    margin-top: 410px;
     align-items: center;
     text-align: center;
     flex: 1;
