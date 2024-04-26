@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const ContentBlockBlock = styled.div`
+padding:100px 0 ;
 a{
     display:flex;
     justify-content:space-between;

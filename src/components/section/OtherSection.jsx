@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const OterSectionBlock = styled.div`
 text-align: center;
-  
+padding:100px 0;
 h2 {
     font-size: 24px;
     color: #5a4620;

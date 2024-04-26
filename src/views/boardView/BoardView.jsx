@@ -1,10 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import BoardSection from "../../components/board/BoardSection";
+
+
 
 const BoardViewBlock = styled.div``;
 
 const BoardView = () => {
-  return <BoardViewBlock>공지사항 뷰</BoardViewBlock>;
+  return <BoardViewBlock>
+    <BoardSection />
+
+  </BoardViewBlock>;
 };
 
 export default BoardView;

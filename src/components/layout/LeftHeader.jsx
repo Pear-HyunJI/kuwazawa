@@ -58,7 +58,9 @@ const leftHeader = ({ isOpen, toggleMenu }) => {
             {isOpen ? <IoCloseOutline /> : <CiMenuBurger />}
           </button>
           <div className="cart">
+            <Link to='/cart'>
             <BsCart4 />
+            </Link>
           </div>
         </div>
         {isOpen && (
