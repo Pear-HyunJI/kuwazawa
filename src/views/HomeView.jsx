@@ -11,6 +11,19 @@ import InnerSection from "@/components/home/InnerSection";
 
 const HomeViewBlock = styled.div``;
 
+const OtherSectionBlock = styled.div`
+  border-radius: 100px;
+  margin-top: -90px;
+  z-index: 99999999;
+  background-color: #fffbf2;
+  position: relative;
+`;
+
+const SnackSliderBlock = styled.div`
+  z-index: 10;
+  position: relative;
+`;
+
 const HomeView = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -32,8 +45,12 @@ const HomeView = () => {
       <MainSlider />
       <TextArea />
       <StartSnackSlider scrollPosition={scrollPosition} />
-      <SnackSlider />
-      <OtherSection />
+      <SnackSliderBlock>
+        <SnackSlider />
+      </SnackSliderBlock>
+      <OtherSectionBlock>
+        <OtherSection />
+      </OtherSectionBlock>
       <ContentBlock />
       <InnerSection />
     </HomeViewBlock>

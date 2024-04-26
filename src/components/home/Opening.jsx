@@ -19,6 +19,7 @@ const OpeningBlock = styled.div`
   background-position: center;
   height: 100vh;
   width: 100vw;
+  max-width: 100%;
   top: 0;
   left: 0;
   position: ${({ scrollPosition }) =>
@@ -45,7 +46,7 @@ const OpeningBlock = styled.div`
   img {
     position: absolute;
     transition: all 0.5s ease;
-    background:transparent;
+    background: transparent;
     &:nth-child(1) {
       bottom: ${({ scrollPosition }) => (scrollPosition > 4500 ? "5%" : "0%")};
       max-width: ${({ scrollPosition }) =>
@@ -153,7 +154,7 @@ const Text = styled.svg`
   stroke-linecap: round;
   stroke-linejoin: round;
   animation: ${fillText} 3s ease-in-out forwards;
-  background:transparent;
+  background: transparent;
 `;
 
 const fadeIn = keyframes`
@@ -170,7 +171,6 @@ const LogoImage = styled.img`
   // left: 100%;
   transform: translate(145%, -120%);
   animation: ${fadeIn} 3s ease-in-out forwards;
-  
 `;
 
 const Opening = ({ scrollPosition }) => {

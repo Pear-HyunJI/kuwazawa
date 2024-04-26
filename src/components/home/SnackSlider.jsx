@@ -1,48 +1,115 @@
 import React from "react";
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useHorizontalScroll } from "@/components/layout/UseHorizontalScroll";
 import { Link } from "react-router-dom";
 
-const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Song+Myung&display=swap');
+const hoverLine = keyframes`
+   0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  49.9% {
+    opacity: 0;
+    transform: translateX(-99%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
 `;
 
 const Container = styled.div`
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  position: relative;
+  padding: 50px 0 300px 0;
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  overflow: hidden;
   background: #5a462099;
+  .animal {
+    position: absolute;
+    top: 79%;
+    right: 5%;
+  }
+  .flower {
+    position: absolute;
+    width: 30%;
+    top: 0%;
+    left: 0%;
+  }
+  h2 {
+    text-align: center;
+    color: #5a4620;
+    font-size: 50px;
+    font-weight: normal;
+    margin-bottom: 100px;
+  }
 `;
 
 const SliderWrapper = styled.div`
-  border: 1px solid pink;
   display: flex;
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-  padding: 0 150px;
+  padding: 0 120px;
+
   .slide {
-    border: 1px solid red;
+    positon: relative;
+    border: 2px solid #5a4620;
     border-radius: 30px;
-    flex: 0 0 25%;
+    flex: 0 0 30%;
     height: 600px;
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 0 50px;
-    margin: 20px;
-    background-color: #fffbf2;
+    margin: 0px 20px;
+    background: url("./assets/image/fadein/3_bg1_pc-252c0289.webp");
+    background-size: cover;
     h3 {
-      font-family: "Song Myung", serif;
+      color: #5a4620;
+      font-size: 30px;
     }
     img {
+      z-index: 2;
       width: 250px;
-      margin: 20px 0;
+      margin: 40px 0;
     }
     .desc {
       text-align: center;
+      color: #5a4620;
+      margin-bottom: 30px;
+      p {
+        padding: 4px;
+      }
+    }
+    a {
+      margin-right: 50px;
+      color: #5a4620;
+      font-weight: bold;
+      position: relative;
+      &::before {
+        overflow: hidden;
+        content: "";
+        position: absolute;
+        height: 1px;
+        width: 100%;
+        top: 50%;
+        left: 110%;
+        background-color: #5a4620;
+      }
+      &:hover::before {
+        animation: ${hoverLine} 2s infinite;
+        visibility: visible;
+      }
     }
   }
 `;
@@ -74,7 +141,7 @@ const SnackSlider = () => {
     },
     {
       name: "귤의언덕",
-      img: "./assets/image/homeSnack/tangerine.png",
+      img: "./assets/image/homeSnack/home_img8.png",
       desc1: "상큼하고 달콤한 귤의 맛을 구운 과자로、",
       desc2: "촉촉하게 구워낸 반족 속에도",
       desc3: "귤이 들어있어요。",
@@ -90,7 +157,17 @@ const SnackSlider = () => {
 
   return (
     <Container>
-      <h2>대표 과자</h2>
+      <img
+        className="flower"
+        src="./assets/image/fadein/7_border2_pc-d89d5f5f.webp"
+        alt="flower"
+      />
+      <img
+        className="animal"
+        src="./assets/image/fadein/1_squirrel_pc-32d0e05a.png"
+        alt="flower"
+      />
+      <h2>대표 메뉴</h2>
       <SliderWrapper ref={sliderRef}>
         {sliders.map((item, index) => (
           <div key={index} className="slide">
