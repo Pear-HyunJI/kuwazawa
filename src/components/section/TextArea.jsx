@@ -12,6 +12,7 @@ const TextAreaBlock = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+
   }
   .cream {
     z-index: 50;
@@ -26,7 +27,7 @@ const TextAreaBlock = styled.div`
     width: 250px;
     overflow: hidden;
     position: sticky;
-    top: 50%; /* 원하는 위치로 조정하세요 */
+    top: 50%;
     z-index: 49;
   }
   .bottom {
@@ -74,7 +75,7 @@ const TextArea = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
-    const handleScrollThrottled = _.throttle(handleScroll, 200); // 200ms마다 한 번만 호출되도록 설정
+    const handleScrollThrottled = _.throttle(handleScroll, 200);
     window.addEventListener('scroll', handleScrollThrottled);
     return () => {
       window.removeEventListener('scroll', handleScrollThrottled);

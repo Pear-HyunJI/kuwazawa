@@ -1,9 +1,36 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const OterSectionBlock = styled.div`
-text-align:center;
-h2{font-size:24px; color: #5A4620;}
+text-align: center;
+  
+h2 {
+    font-size: 24px;
+    color: #5a4620;
+  }
+  ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  li {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  p {
+    color: #5a4620;
+    font-size: 20px;
+  }
+  img {
+    width: 70%;
+    transition: transform 0.5s; 
+  }
+  img:hover {
+    transform: rotate(10deg) scale(90%);
+  }
 `
 
 const OterSection = () => {
@@ -19,9 +46,19 @@ const OterSection = () => {
 
     return (
         <OterSectionBlock className='row'>
-            <h2>다른 자만 과자</h2>
+            <h2>다른 대표메뉴</h2>
             <div className='introduce'>
-                <img src="" alt="" />
+                <ul>
+                    {bread.map((item,index)=>(
+                        <li key={index}>
+                        <Link to={'/'}>
+                            <img src={item.img} alt={item.name} />
+                            <p>{item.name}</p>
+                        </Link>
+                        </li>
+                    ))
+                    }
+                </ul>
             </div>
         </OterSectionBlock>
     );

@@ -45,7 +45,7 @@ const OpeningBlock = styled.div`
   img {
     position: absolute;
     transition: all 0.5s ease;
-
+    background:transparent;
     &:nth-child(1) {
       bottom: ${({ scrollPosition }) => (scrollPosition > 4500 ? "5%" : "0%")};
       max-width: ${({ scrollPosition }) =>
@@ -140,6 +140,7 @@ const LogoWrapper = styled.div`
     }
   }};
 transition: opacity 0.5s ease;
+background:transparent;
   }
 `;
 
@@ -152,6 +153,7 @@ const Text = styled.svg`
   stroke-linecap: round;
   stroke-linejoin: round;
   animation: ${fillText} 3s ease-in-out forwards;
+  background:transparent;
 `;
 
 const fadeIn = keyframes`
@@ -168,6 +170,7 @@ const LogoImage = styled.img`
   // left: 100%;
   transform: translate(145%, -120%);
   animation: ${fadeIn} 3s ease-in-out forwards;
+  
 `;
 
 const Opening = ({ scrollPosition }) => {

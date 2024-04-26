@@ -1,10 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import OnlineShopSlide from "@/components/onlineShop/OnlineShopSlide";
+import OnlineShopSection from "@/components/onlineShop/OnlineShopSection";
 
 const ItemListViewBlock = styled.div``;
 
 const ItemListView = () => {
-  return <ItemListViewBlock>아이템리스트 뷰</ItemListViewBlock>;
+  return <ItemListViewBlock>
+    <OnlineShopSlide />
+    <OnlineShopSection />
+  </ItemListViewBlock>;
 };
 
 export default ItemListView;

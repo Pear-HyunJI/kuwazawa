@@ -5,6 +5,8 @@ import SnackSlider from "@/components/home/SnackSlider";
 import Opening from "@/components/home/Opening";
 import TextArea from "@/components/section/TextArea";
 import OtherSection from "@/components/section/OtherSection";
+import ContentBlock from "@/components/home/ContentBlock";
+import InnerSection from "@/components/home/InnerSection";
 
 const HomeViewBlock = styled.div`
 
@@ -32,6 +34,8 @@ const HomeView = () => {
        <TextArea />
        <SnackSlider />
        <OtherSection />
+       <ContentBlock />
+       <InnerSection />
     </HomeViewBlock>
   );
 };
