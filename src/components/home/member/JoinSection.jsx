@@ -28,6 +28,8 @@ max-width:600px; margin:50px auto;
 `
 
 const JoinSection = () => {
+
+    
     return (
         <JoinSectionBlock>
             <div className='header'>
