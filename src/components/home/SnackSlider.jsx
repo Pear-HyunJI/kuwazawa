@@ -107,7 +107,7 @@ const SliderWrapper = styled.div`
         background-color: #5a4620;
       }
       &:hover::before {
-        animation: ${hoverLine} 2s infinite;
+        animation: ${hoverLine} 1.5s infinite;
         visibility: visible;
       }
     }

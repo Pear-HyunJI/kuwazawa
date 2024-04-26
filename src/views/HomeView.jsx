@@ -30,6 +30,7 @@ const HomeView = () => {
     const handleScroll = () => {
       const position = window.scrollY;
       setScrollPosition(position);
+      console.log(window.scrollY);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -42,7 +43,7 @@ const HomeView = () => {
     <HomeViewBlock>
       <Opening scrollPosition={scrollPosition} />
       <MainSlider />
-      <TextArea />
+      <TextArea scrollPosition={scrollPosition} />
       <StartSnackSlider scrollPosition={scrollPosition} />
       <SnackSliderBlock>
         <SnackSlider />

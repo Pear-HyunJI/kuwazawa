@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import _ from 'lodash';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import _ from "lodash";
 
 const TextAreaBlock = styled.div`
   text-align: center;
+  margin: 400px auto 300px;
   .container {
+    height: 1150px;
     font-size: 168px;
     color: #000;
     background: transparent;
@@ -12,7 +14,6 @@ const TextAreaBlock = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-
   }
   .cream {
     z-index: 50;
@@ -27,12 +28,13 @@ const TextAreaBlock = styled.div`
     width: 250px;
     overflow: hidden;
     position: sticky;
-    top: 50%;
+    top: 40vh;
     z-index: 49;
   }
   .bottom {
     font-size: 22px;
     color: #333;
+    margin: 50px;
   }
   .btn {
     font-size: 20px;
@@ -44,17 +46,18 @@ const TextAreaBlock = styled.div`
     overflow: hidden;
     transition: all 0.5s ease;
     cursor: pointer;
-    border-top: 5px solid #5A4620;
+    border-top: 5px solid #5a4620;
     width: fit-content;
     max-width: 200px;
+    margin: 50px;
     &:after {
-      content: '';
+      content: "";
       position: absolute;
       top: 0;
       left: 50%;
       width: 100%;
       height: 100%;
-      background: #5A4620;
+      background: #5a4620;
       transition: all 0.5s ease;
       z-index: -1;
       transform: translateX(-50%) scaleY(0);
@@ -71,30 +74,30 @@ const TextAreaBlock = styled.div`
   }
 `;
 
-const TextArea = () => {
+const TextArea = ({ scrollPosition }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     const handleScrollThrottled = _.throttle(handleScroll, 200);
-    window.addEventListener('scroll', handleScrollThrottled);
+    window.addEventListener("scroll", handleScrollThrottled);
     return () => {
-      window.removeEventListener('scroll', handleScrollThrottled);
+      window.removeEventListener("scroll", handleScrollThrottled);
     };
   }, []);
 
   const handleScroll = () => {
-    const scrollPosition = window.scrollY;
-    const threshold = 500;
+    // const threshold = 5060;
+    const threshold = 5000;
     if (scrollPosition > threshold) {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % product.length);
     }
   };
 
   const product = [
-    { img: './assets/image/advertise/batadorayaki_img2.jpg' },
-    { img: './assets/image/advertise/home_img17.jpg' },
-    { img: './assets/image/advertise/home_img19.jpg' },
-    { img: './assets/image/advertise/jonamagashi_img4.jpg' },
+    { img: "./assets/image/advertise/batadorayaki_img2.jpg" },
+    { img: "./assets/image/advertise/home_img17.jpg" },
+    { img: "./assets/image/advertise/home_img19.jpg" },
+    { img: "./assets/image/advertise/jonamagashi_img4.jpg" },
   ];
 
   return (
@@ -105,23 +108,24 @@ const TextArea = () => {
         </div>
 
         <div className="cream">
-          <p>Cream</p>
+          <p>传统</p>
         </div>
         <div className="and">
-          <p>AND</p>
+          <p>与</p>
         </div>
         <div className="paste">
-          <p>Paste</p>
+          <p>真诚</p>
         </div>
       </div>
       <div className="bottom">
+        <h3>전통과 정성</h3> <br />
         <p>후쿠시마현 이시카와초에 있는 창업 메이지 20년의 화과자점 입니다 .</p>
         <p>
-          창업 당시부터 변함없는 제법의 차 만주 야도라 구이에 생크림 샌드 한 인기 의 쿠 와 도라 장인이 색채를 더하는
-          계절의 상생 과자 등 . 수제이므로 만날 수 있는 맛 을 즐기 세요 .
+          창업 당시부터 변함없는 제법의 차 만주 야도라 구이에 생크림 샌드 한
+          인기 의 쿠 와 도라 장인이 색채를 더하는 계절의 상생 과자 등 .
+          수제이므로 만날 수 있는 맛 을 즐기 세요 .
         </p>
         <button className="btn">View More</button>
-        
       </div>
     </TextAreaBlock>
   );

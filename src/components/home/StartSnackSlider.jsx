@@ -4,7 +4,6 @@ import styled from "styled-components";
 const StartSnackSliderBlock = styled.div`
   height: 130vh;
   position: relative;
-  border: 1px solid red;
   overflow: hidden;
   .snack {
     position: absolute;
@@ -26,8 +25,8 @@ const StartSnackSliderBlock = styled.div`
 `;
 
 const StartSnackSlider = ({ scrollPosition }) => {
-  const startScroll = 6500; // 시작 스크롤 위치
-  const endScroll = 7000; // 끝 스크롤 위치
+  const startScroll = 7750; // 시작 스크롤 위치
+  const endScroll = 8200; // 끝 스크롤 위치
   const maxSize = 2500; // 최대 크기
   const minSize = 200; // 최소 크기
   const minCirclePosition = 0; // 최소 circle 상대 위치
