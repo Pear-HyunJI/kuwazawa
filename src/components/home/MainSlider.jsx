@@ -36,11 +36,11 @@ const shaking = keyframes`
 `;
 
 const MainSliderBlock = styled.div`
+  max-width: 1800px;
+  margin: auto;
   position: relative;
   margin-top: 4100px;
   width: 100vw;
-  border: 1px solid red;
-
   .slick-track {
     margin-top: 410px;
 
@@ -135,68 +135,6 @@ const MainSlider = () => {
           </div>
         ))}
       </Slider>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
-      <div>늘리기</div>
     </MainSliderBlock>
   );
 };
