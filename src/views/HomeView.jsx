@@ -14,7 +14,7 @@ const HomeViewBlock = styled.div``;
 const OtherSectionBlock = styled.div`
   border-radius: 100px;
   margin-top: -90px;
-  z-index: 99999999;
+  z-index: 11;
   background-color: #fffbf2;
   position: relative;
 `;
