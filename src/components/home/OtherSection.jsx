@@ -5,8 +5,9 @@ import styled from "styled-components";
 const OterSectionBlock = styled.div`
   text-align: center;
   h2 {
-    font-size: 24px;
+    font-size: 30px;
     color: #5a4620;
+    padding: 150px 0;
   }
   ul {
     display: flex;
@@ -34,12 +35,36 @@ const OterSectionBlock = styled.div`
 
 const OterSection = () => {
   const bread = [
-    { img: "./assets/image/homeSnack/home_img11.png", name: "사과나무" },
-    { img: "./assets/image/homeSnack/home_img12.png", name: "카스텔라" },
-    { img: "./assets/image/homeSnack/home_img13.png", name: "보름달" },
-    { img: "./assets/image/homeSnack/home_img14.png", name: "백안과 생초코" },
-    { img: "./assets/image/homeSnack/home_img15.png", name: "구운 도넛" },
-    { img: "./assets/image/homeSnack/home_img16.png", name: "크림 치즈의 달" },
+    {
+      img: "./assets/image/homeSnack/home_img11.png",
+      name: "사과나무",
+      scrollPosition: 0,
+    },
+    {
+      img: "./assets/image/homeSnack/home_img12.png",
+      name: "카스텔라",
+      scrollPosition: 0,
+    },
+    {
+      img: "./assets/image/homeSnack/home_img13.png",
+      name: "보름달",
+      scrollPosition: 0,
+    },
+    {
+      img: "./assets/image/homeSnack/home_img14.png",
+      name: "백안과 생초코",
+      scrollPosition: 0,
+    },
+    {
+      img: "./assets/image/homeSnack/home_img15.png",
+      name: "구운 도넛",
+      scrollPosition: 0,
+    },
+    {
+      img: "./assets/image/homeSnack/home_img16.png",
+      name: "크림 치즈의 달",
+      scrollPosition: 0,
+    },
   ];
 
   return (
@@ -51,7 +76,12 @@ const OterSection = () => {
           <ul>
             {bread.map((item, index) => (
               <li key={index}>
-                <Link to={"/"}>
+                <Link
+                  to={{
+                    pathname: "/snackInfo",
+                    state: { scrollPosition: item.scrollPosition },
+                  }}
+                >
                   <img src={item.img} alt={item.name} />
                   <p>{item.name}</p>
                 </Link>

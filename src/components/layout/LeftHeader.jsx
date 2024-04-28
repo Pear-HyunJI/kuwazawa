@@ -8,8 +8,9 @@ import { BsCart4 } from "react-icons/bs";
 const LeftHeaderBlock = styled.div`
   position: fixed;
   z-index: 500;
+  top: 0;
   left: 0px;
-  background-color: ${(props) => (props.isOpen ? "#5a462080;" : "none")};
+  background-color: ${(props) => (props.isOpen ? "#5a462090;" : "none")};
   transition: color 0.3s ease;
   .nav {
     padding: 50px 50px;
@@ -49,7 +50,7 @@ const LeftHeaderBlock = styled.div`
   }
 `;
 
-const leftHeader = ({ isOpen, toggleMenu }) => {
+const leftHeader = ({ isOpen, toggleMenu, handleCloseMenu }) => {
   return (
     <LeftHeaderBlock isOpen={isOpen}>
       <div className="nav">
@@ -58,8 +59,8 @@ const leftHeader = ({ isOpen, toggleMenu }) => {
             {isOpen ? <IoCloseOutline /> : <CiMenuBurger />}
           </button>
           <div className="cart">
-            <Link to='/cart'>
-            <BsCart4 />
+            <Link to="/cart">
+              <BsCart4 />
             </Link>
           </div>
         </div>
@@ -67,20 +68,33 @@ const leftHeader = ({ isOpen, toggleMenu }) => {
           <div className="menu">
             <ul>
               <li className="member">
-                <Link to="/login">로그인&nbsp;&nbsp;</Link> |
-                <Link to="/join">&nbsp;&nbsp;회원가입</Link>
+                <Link to="/login" onClick={handleCloseMenu}>
+                  로그인&nbsp;&nbsp;
+                </Link>{" "}
+                |
+                <Link to="/join" onClick={handleCloseMenu}>
+                  &nbsp;&nbsp;회원가입
+                </Link>
               </li>
               <li>
-                <NavLink to="/storeInfo">점포 소개</NavLink>
+                <NavLink to="/storeInfo" onClick={handleCloseMenu}>
+                  점포 소개
+                </NavLink>
               </li>
               <li>
-                <NavLink to="/snackInfo">과자 소개</NavLink>
+                <NavLink to="/snackInfo" onClick={handleCloseMenu}>
+                  과자 소개
+                </NavLink>
               </li>
               <li>
-                <NavLink to="/itemList">온라인 과자점</NavLink>
+                <NavLink to="/itemList" onClick={handleCloseMenu}>
+                  온라인 과자점
+                </NavLink>
               </li>
               <li>
-                <NavLink to="/board">공지사항</NavLink>
+                <NavLink to="/board" onClick={handleCloseMenu}>
+                  공지사항
+                </NavLink>
               </li>
             </ul>
           </div>

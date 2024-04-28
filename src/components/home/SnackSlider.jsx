@@ -47,8 +47,7 @@ const Container = styled.div`
   h2 {
     text-align: center;
     color: #5a4620;
-    font-size: 50px;
-    font-weight: normal;
+    font-size: 45px;
     margin-bottom: 100px;
   }
 `;

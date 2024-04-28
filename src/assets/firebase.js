@@ -1,21 +1,20 @@
-import firebase from 'firebase/compat/app'
-import 'firebase/compat/database';
-import 'firebase/compat/storage';
+import firebase from "firebase/compat/app";
+import "firebase/compat/database";
+import "firebase/compat/storage";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyBK0qIGfK9v3e6IryfWr2FLOUjUoOIVnxY",
-    authDomain: "junhyeok-c5930.firebaseapp.com",
-    databaseURL: "https://junhyeok-c5930-default-rtdb.firebaseio.com",
-    projectId: "junhyeok-c5930",
-    storageBucket: "junhyeok-c5930.appspot.com",
-    messagingSenderId: "412684647867",
-    appId: "1:412684647867:web:221f97b5e4b7bd3ec0189e",
-    measurementId: "G-SFZ84SL69X"
-  };
+const firebaseConfig = firebase.initializeApp({
+  apiKey: "AIzaSyD7jmy_j4jjBxftLeRAlYMSJNwT3n9och8",
+  authDomain: "starship-42d0b.firebaseapp.com",
+  databaseURL: "https://starship-42d0b-default-rtdb.firebaseio.com",
+  projectId: "starship-42d0b",
+  storageBucket: "starship-42d0b.appspot.com",
+  messagingSenderId: "578506708894",
+  appId: "1:578506708894:web:ffbfd39632dae08d1f288f",
+});
 
-const oDB = firebaseConfig.database()
-export const productDB = oDB.ref('products')
-export const cartDB = oDB.ref('carts')
-export const memberDB = oDB.ref('members')
+const kuwazawaDB = firebaseConfig.database();
+export const kuwazawa_productDB = kuwazawaDB.ref("kuwazawa_products");
+export const kuwazawa_cartDB = kuwazawaDB.ref("kuwazawa_carts");
+export const kuwazawa_memberDB = kuwazawaDB.ref("kuwazawa_members");
 
 export const oStorage = firebaseConfig.storage();

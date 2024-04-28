@@ -11,14 +11,22 @@ const Layout = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleCloseMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <div>
-      <RightHeader isOpen={isMenuOpen} />
-      <LeftHeader isOpen={isMenuOpen} toggleMenu={toggleMenu} />
+      <RightHeader isOpen={isMenuOpen} handleCloseMenu={handleCloseMenu} />
+      <LeftHeader
+        isOpen={isMenuOpen}
+        toggleMenu={toggleMenu}
+        handleCloseMenu={handleCloseMenu}
+      />
       <main>
         <Outlet />
       </main>
-      <Footer /> 
+      <Footer />
     </div>
   );
 };

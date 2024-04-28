@@ -4,8 +4,8 @@ import MainSlider from "@/components/home/MainSlider";
 import SnackSlider from "@/components/home/SnackSlider";
 import StartSnackSlider from "@/components/home/StartSnackSlider";
 import Opening from "@/components/home/Opening";
-import TextArea from "@/components/section/TextArea";
-import OtherSection from "@/components/section/OtherSection";
+import TextArea from "@/components/home/TextArea";
+import OtherSection from "@/components/home/OtherSection";
 import ContentBlock from "@/components/home/ContentBlock";
 
 const HomeViewBlock = styled.div``;

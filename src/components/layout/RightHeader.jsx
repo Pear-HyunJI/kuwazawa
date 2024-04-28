@@ -15,11 +15,13 @@ const RightHeaderBlock = styled.div`
   transition: color 0.3s ease;
 `;
 
-const rightHeader = ({ isOpen }) => {
+const rightHeader = ({ isOpen, handleCloseMenu }) => {
   return (
     <RightHeaderBlock isOpen={isOpen}>
       <div>
-        <Link to="/">쿠와자와 과자점</Link>
+        <Link to="/" onClick={handleCloseMenu}>
+          쿠와자와 과자점
+        </Link>
       </div>
     </RightHeaderBlock>
   );

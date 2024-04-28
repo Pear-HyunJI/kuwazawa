@@ -4,7 +4,7 @@ import _ from "lodash";
 
 const TextAreaBlock = styled.div`
   text-align: center;
-  margin: 400px auto 300px;
+  margin: 400px auto 200px;
   .container {
     height: 1150px;
     font-size: 168px;
@@ -34,7 +34,7 @@ const TextAreaBlock = styled.div`
   .bottom {
     font-size: 22px;
     color: #333;
-    margin: 50px;
+    margin: 60px;
   }
   .btn {
     font-size: 20px;
@@ -87,7 +87,7 @@ const TextArea = ({ scrollPosition }) => {
 
   const handleScroll = () => {
     // const threshold = 5060;
-    const threshold = 5000;
+    const threshold = 5300;
     if (scrollPosition > threshold) {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % product.length);
     }
