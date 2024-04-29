@@ -7,15 +7,19 @@ import StoreInfoView from "@/views/storeInfoView/StoreInfoView";
 // 과자 소개
 import SnackInfoView from "@/views/snackInfoView/SnackInfoView";
 // 온라인 샵 (아이템 리스트, 디테일 아이템, 장바구니)
-import ItemListView from "@/views/onlineShopView/ItemListView";
 import DetailItemView from "@/views/onlineShopView/DetailItemView";
 import CartView from "@/views/onlineShopView/CartView";
+import ProductView from '@/views/product/ProductView'
+import ProductModifyView from "@/views/product/ProductModifyView";
+import ProductInsertView from "@/views/product/ProductInsertView";
+import ProductDetailView from "@/views/product/ProductDetailView";
 // 공지사항
 import BoardView from "@/views/boardView/BoardView";
 // 회원관리
 import JoinView from "@/views/memberView/JoinView";
 import LoginView from "@/views/memberView/LoginView";
 import MemberModifyView from "@/views/memberView/MemberModifyView";
+
 
 const App = () => {
   return (
@@ -27,9 +31,12 @@ const App = () => {
         {/* 과자소개 */}
         <Route path="/snackInfo" element={<SnackInfoView />} />
         {/* 온라인 샵 */}
-        <Route path="/itemList" element={<ItemListView />} />
+        <Route path="/product" element={<ProductView />} />
         <Route path="/detailItem" element={<DetailItemView />} />
         <Route path="/cart" element={<CartView />} />
+        <Route path="/productInsert" element={<ProductInsertView />} />
+        <Route path="/productModify" element={<ProductModifyView />} />
+        <Route path="/product/:id" element={<ProductDetailView />} />
         {/* 공지사항 */}
         <Route path="/board" element={<BoardView />} />
         {/* 회원관리 */}

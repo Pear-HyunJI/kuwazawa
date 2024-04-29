@@ -16,7 +16,7 @@ const memberSlice = createSlice({
       state.user = action.payload;
       //사용자가 페이지를 새로고침하거나 브라우저를 닫은 후에도 사용자 정보를 유지
       localStorage.loging = JSON.stringify(action.payload);
-      if (action.payload.userId == "manager@gmail.com") {
+      if (action.payload.userId == "junhyeok_an@naver.com") {
         localStorage.manager = JSON.stringify(true);
         state.manager = true;
       } else {

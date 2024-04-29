@@ -3,13 +3,14 @@ import "firebase/compat/database";
 import "firebase/compat/storage";
 
 const firebaseConfig = firebase.initializeApp({
-  apiKey: "AIzaSyD7jmy_j4jjBxftLeRAlYMSJNwT3n9och8",
-  authDomain: "starship-42d0b.firebaseapp.com",
-  databaseURL: "https://starship-42d0b-default-rtdb.firebaseio.com",
-  projectId: "starship-42d0b",
-  storageBucket: "starship-42d0b.appspot.com",
-  messagingSenderId: "578506708894",
-  appId: "1:578506708894:web:ffbfd39632dae08d1f288f",
+  apiKey: "AIzaSyDrX4-ok49Iq3keId02eHwny0aW81Hvz-s",
+  authDomain: "kuwazawa-8e440.firebaseapp.com",
+  databaseURL: "https://kuwazawa-8e440-default-rtdb.firebaseio.com",
+  projectId: "kuwazawa-8e440",
+  storageBucket: "kuwazawa-8e440.appspot.com",
+  messagingSenderId: "746739462010",
+  appId: "1:746739462010:web:c378a6853b7cfe767e30c3",
+  measurementId: "G-H1DQNGCPC2"
 });
 
 const kuwazawaDB = firebaseConfig.database();

@@ -31,7 +31,7 @@ const JoinSectionBlock = styled.div`
       input {
         border: 1px solid #ddd;
         height: 30px;
-        width: 100%;
+        width: 70%;
         text-indent: 1em;
       }
     }

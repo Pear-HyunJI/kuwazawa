@@ -9,7 +9,6 @@ const CartViewBlock = styled.div``;
 
 const CartView = () => {
   return <CartViewBlock>
-    
     <CartSection />
   </CartViewBlock>;
 };

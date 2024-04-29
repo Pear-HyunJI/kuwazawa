@@ -89,7 +89,7 @@ const Footer = () => {
     <FooterBlock className="row">
       <div className="footer">
         <div className="footerTop">
-          <Link to="/itemList" className="goToLink">
+          <Link to="/product" className="goToLink">
             <img src={footer1} alt="" className="footerImg footerImg1" />
             <img src={footer2} alt="" className="footerImg footerImg2" />
             <p className="topLine">온라인 상점</p>
