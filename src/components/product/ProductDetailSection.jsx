@@ -54,7 +54,7 @@ const ProductDetailSection = ({product}) => {
                 </div>
                 <div className="info">
                     <p>{ product.category }</p>
-                    <p>{ product.price.toLocaleString() }</p>
+                    <p>{ product.price.toLocaleString() }&yen;</p>
                     <p><span dangerouslySetInnerHTML={{ __html: product.description }} /></p>
                     <div className="btn">
                       <Link to="">구매하기</Link>

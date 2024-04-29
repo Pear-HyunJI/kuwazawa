@@ -59,6 +59,7 @@ const OnlineShopModify = ({item}) => {
             }
             await kuwazawa_productDB.child(item.key).update(product)
             navigate('/product')
+            
         } catch(error){
             console.log("오류 : ", error)
         }
