@@ -1,0 +1,68 @@
+[
+  {
+    "title": "쿠와도라",
+    "content": "도라야키에 프리미엄 생크림을 곁들여",
+    "image": "./assets/image/detailSnack/kuwadora_img1.jpg",
+    "kategory": "donut"
+  },
+  {
+    "title": "버터ー도라야키",
+    "content": "정성스럽게 구운 통통한 빵과 버터의 풍미",
+    "image": "./assets/image/detailSnack/batadorayaki_img1.jpg",
+    "kategory": "donut"
+  },
+  {
+    "title": "구운도넛",
+    "content": "튀기지 않은 도넛이기에 건강하고 맛있는",
+    "image": "./assets/image/detailSnack/yakidonatsu_img1.jpg",
+    "kategory": "donut"
+  },
+  {
+    "title": "화과자",
+    "content": "일본의 아름다운 사계절을 비추는 화과자의 세계",
+    "image": "./assets/image/detailSnack/jonamagashi_img1.jpg",
+    "kategory": "snack"
+  },
+  {
+    "title": "귤의 언덕",
+    "content": "신선한 과육과 반죽에 숨겨진 귤껍질",
+    "image": "./assets/image/detailSnack/mikannoka_img1.jpg",
+    "kategory": "snack"
+  },
+  {
+    "title": "보름달",
+    "content": "단맛을 살짝 곁들인 부드러운 맛",
+    "image": "./assets/image/detailSnack/ishikawamangetsu_img1.jpg",
+    "kategory": "snack"
+  },
+  {
+    "title": "차 만주",
+    "content": "그리움을 느끼는 전통 차 만주",
+    "image": "./assets/image/detailSnack/chamanju_img1.jpg",
+    "kategory": "bread"
+  },
+  {
+    "title": "사과나무",
+    "content": "전국 과자 박람회 금상 일본식 애플 파이",
+    "image": "./assets/image/detailSnack/ringonoki_img1.jpg",
+    "kategory": "bread"
+  },
+  {
+    "title": "카스텔라",
+    "content": "신선한 달걍을 사용한 전통 카스텔라",
+    "image": "./assets/image/detailSnack/sakuraishi_img1.jpg",
+    "kategory": "bread"
+  },
+  {
+    "title": "백앙금 생초코 ",
+    "content": "부드러운 단맛의 흰 팥소와 생 초콜릿의 조화",
+    "image": "./assets/image/detailSnack/yakishokora_img1.jpg",
+    "kategory": "dessert"
+  },
+  {
+    "title": "크림치즈의 달",
+    "content": "크림치즈의 은은한 짠맛과 쫄깃한 팥고물",
+    "image": "./assets/image/detailSnack/kurimuchizunotsukisama_img1.jpg",
+    "kategory": "dessert"
+  }
+]
