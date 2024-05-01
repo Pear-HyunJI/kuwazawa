@@ -15,6 +15,9 @@ import ProductInsertView from "@/views/product/ProductInsertView";
 import ProductDetailView from "@/views/product/ProductDetailView";
 // 공지사항
 import BoardView from "@/views/boardView/BoardView";
+import BoardDetailView from "./views/boardView/BoardDetailView";
+import BoardModifyView from "./views/boardView/BoardModifyView";
+import BoardWriteView from "./views/boardView/BoardWriteView";
 // 회원관리
 import JoinView from "@/views/memberView/JoinView";
 import LoginView from "@/views/memberView/LoginView";
@@ -39,6 +42,9 @@ const App = () => {
         <Route path="/product/:id" element={<ProductDetailView />} />
         {/* 공지사항 */}
         <Route path="/board" element={<BoardView />} />
+        <Route path="/boardWrite" element={ <BoardWriteView /> } />
+        <Route path="/boardModify/:subject" element={ <BoardModifyView /> } />
+        <Route path="/boardDetail/:subject" element={ <BoardDetailView /> } />
         {/* 회원관리 */}
         <Route path="/join" element={<JoinView />} />
         <Route path="/login" element={<LoginView />} />

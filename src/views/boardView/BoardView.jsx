@@ -7,9 +7,8 @@ import BoardSection from "../../components/board/BoardSection";
 const BoardViewBlock = styled.div``;
 
 const BoardView = () => {
-  return <BoardViewBlock>
+  return <BoardViewBlock className="row">
     <BoardSection />
-
   </BoardViewBlock>;
 };
 
