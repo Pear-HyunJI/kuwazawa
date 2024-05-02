@@ -8,15 +8,19 @@ const SnackInfoViewBlock = styled.div``;
 
 const SnackInfoView = () => {
   const [pageIndex, setPageIndex] = useState(0); // 페이지 인덱스 상태
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   const handleButtonClick = (index) => {
     setPageIndex(index);
   };
+  const onSearch = (keyword) => {
+    setSearchKeyword(keyword);
+  };
   return (
     <SnackInfoViewBlock>
-      <SnackSearch />
+      <SnackSearch onSearch={onSearch} />
       <SnackTag onButtonClick={handleButtonClick} />
-      <SnackList pageIndex={pageIndex} />
+      <SnackList pageIndex={pageIndex} searchKeyword={searchKeyword} />
     </SnackInfoViewBlock>
   );
 };
