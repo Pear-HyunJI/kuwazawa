@@ -7,7 +7,7 @@ import SnackTag from "@/components/snackInfo/SnackTag";
 const SnackInfoViewBlock = styled.div``;
 
 const SnackInfoView = () => {
-  const [pageIndex, setPageIndex] = useState(0); // 페이지 인덱스 상태
+  const [pageIndex, setPageIndex] = useState(); // 페이지 인덱스 상태
   const [searchKeyword, setSearchKeyword] = useState("");
 
   const handleButtonClick = (index) => {

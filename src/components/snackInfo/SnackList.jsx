@@ -3,13 +3,16 @@ import styled from "styled-components";
 import PageFlip from "react-pageflip";
 import oddPagesData from "@/assets/data/oddPages";
 import evenPagesData from "@/assets/data/evenPages";
+import { GrPrevious, GrNext } from "react-icons/gr";
 
 const SnackListBlock = styled.div`
+
+padding: 100px 0;
   .book-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     font-family: "Gungsuh", serif;
   }
 
@@ -19,13 +22,21 @@ const SnackListBlock = styled.div`
     height: 100%;
     // background-color: #edecd1;
     background-color: #fffee9;
-    border: 1px solid #5a462090;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    border: 0px solid #5a462099;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.8);
+
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 24px;
     padding: 30px;
+    .pageIndex {
+      font-size: 15px;
+      position: absolute;
+      bottom: 3%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 
   .oddPage {
@@ -42,17 +53,17 @@ const SnackListBlock = styled.div`
         transform: translateX(-50%);
         width: 1px;
         height: 50px;
-        background-color: black;
+        background-color: #50453299;
         opacity: 1;
       }
     }
     .titleContainer {
-      margin: 150px 0 50px;
+      margin: 120px 0 85px;
 
       position: relative;
       .title {
         color: #504532;
-        font-size: 50px;
+        font-size: 40px;
         position: absolute;
         writing-mode: vertical-lr;
         top: -20%;
@@ -65,19 +76,70 @@ const SnackListBlock = styled.div`
       }
     }
     .subTitle {
+      font-weight: lighter;
+      position: relative;
+      font-size: 20px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: -190%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        height: 35px;
+        background-color: #50453299;
+        opacity: 1;
+      }
     }
   }
   .evenPage {
     text-align: center;
-    .content {
-      font-size: 16px;
+    // display: flex;
+    // justify-content: center;
+    .imageContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      .center{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        .contentImage {
+          margin: 15px;
+          width: 170px;
+          border: 0px solid #5a4620;
+          border-radius: 50%;
+        }
+        .content{
+          flex: 1;
+          font-size: 16px;
+          font-weight: lighter;
+          word-break: keep-all;
+        }
+      }
     }
-    .contentImage {
-      display: block;
-      width: 200px;
-      border: 0px solid #5a4620;
-      border-radius: 50%;
-      // transform: translateX(50%);
+    .info {
+      font-size: 12px;
+    }
+  }
+  button {
+    padding: 10px;
+    background: #5a4620;
+    color: #fff;
+    margin : 10px;
+    .prevPage {
+      position: a
+      top: 10px;
+      left: 10px;
+     
+    }
+    .nextPage {
+      top: 10px;
+      right: 10px;
     }
   }
 `;
@@ -91,15 +153,28 @@ const SnackList = ({ pageIndex, searchKeyword }) => {
   console.log("현재페이지", currentPageIndex);
   console.log("검색값", searchKeyword);
 
-  const changePage = () => {
-    const pageNum = 4;
-    pageFlipRef.current.pageFlip().flip(pageNum);
+  const onFlip = () => {
+    const currentPage = pageFlipRef.current.pageFlip().getCurrentPageIndex();
+    if (currentPage == currentPageIndex) {
+      setCurrentPageIndex(currentPage);
+    }
   };
 
+  const nextPage = () => {
+    setTimeout(() => {
+      pageFlipRef.current.pageFlip().flipNext();
+    }, 500);
+  };
+  const prevPage = () => {
+    setTimeout(() => {
+      pageFlipRef.current.pageFlip().flipPrev();
+    }, 500);
+  };
+
+  // 태그 기능
   useEffect(() => {
     if (pageIndex !== undefined && currentPageIndex !== pageIndex) {
       // pageIndex와 currentPageIndex와 다를 때
-      // pageFlipRef.current.pageFlip().flip(pageIndex);
       setCurrentPageIndex(pageIndex);
       setTimeout(() => {
         pageFlipRef.current.pageFlip().flip(pageIndex);
@@ -107,6 +182,7 @@ const SnackList = ({ pageIndex, searchKeyword }) => {
     }
   }, [pageIndex, currentPageIndex]);
 
+  //서치 기능
   useEffect(() => {
     if (searchKeyword && searchKeyword.length >= 1) {
       const matchedPages = oddPagesData.filter((page) =>
@@ -117,19 +193,12 @@ const SnackList = ({ pageIndex, searchKeyword }) => {
         const matchedPageIndex = oddPagesData.indexOf(matchedPages[0]) * 2;
         console.log("matchedPageIndex", matchedPageIndex);
         setCurrentPageIndex(matchedPageIndex);
-        // pageFlipRef.current.pageFlip().turnToPage(matchedPageIndex);
-        // pageFlipRef.current.pageFlip().flip(matchedPageIndex);
         setTimeout(() => {
           pageFlipRef.current.pageFlip().flip(matchedPageIndex);
         }, 500);
       }
     }
   }, [searchKeyword]);
-
-  const onFlip = () => {
-    const currentPage = pageFlipRef.current.pageFlip().getCurrentPageIndex();
-    setCurrentPageIndex(currentPage);
-  };
 
   const allPages = oddPages.reduce((acc, page, index) => {
     acc.push(
@@ -144,9 +213,8 @@ const SnackList = ({ pageIndex, searchKeyword }) => {
           <img className="titleImage" src={page.image} alt="" />
         </div>
         <p className="subTitle">{page.content}</p>
-        <p>{index * 2 + 1}</p>
-        <p>{index}</p>
-        <p>실제페이지 인덱스 : {index * 2}</p>
+        <p className="pageIndex">-{index * 2 + 1}-</p>
+        {/* <p>실제페이지 인덱스 : {index * 2}</p> */}
       </div>
     );
 
@@ -157,25 +225,35 @@ const SnackList = ({ pageIndex, searchKeyword }) => {
           key={`even-${index}`}
           style={{ boxShadow: "inset 0px 0px 10px rgba(0, 0, 0, 0.6)" }}
         >
-          <img
-            className="contentImage"
-            src={evenPages[index].image1}
-            alt={`Page ${index + 2} Image`}
-          />
-          <img
-            className="contentImage"
-            src={evenPages[index].image2}
-            alt={`Page ${index + 2} Image`}
-          />
-          <img
-            className="contentImage"
-            src={evenPages[index].image3}
-            alt={`Page ${index + 2} Image`}
-          />
-          <p className="content">{evenPages[index].text1}</p>
-          <p>{index * 2 + 2}</p>
-          <p>{index}</p>
-          <p>실제페이지 인덱스 : {index * 2 + 1}</p>
+          <div className="imageContainer">
+            <div className="center">
+              <img
+                className="contentImage"
+                src={evenPages[index].image1}
+                alt={`Page ${index + 2} Image`}
+              />
+              <p className="content">{evenPages[index].text1}</p>
+            </div>
+            <div className="center">
+              <p className="content">{evenPages[index].text2}</p>
+              <img
+                className="contentImage"
+                src={evenPages[index].image2}
+                alt={`Page ${index + 2} Image`}
+              />
+            </div>
+            <div className="center">
+              <img
+                className="contentImage"
+                src={evenPages[index].image3}
+                alt={`Page ${index + 2} Image`}
+              />
+              <p className="content">{evenPages[index].text3}</p>
+            </div>
+          </div>
+          <p className="info">{evenPages[index].text4}</p>
+          <p className="pageIndex">-{index * 2 + 2}-</p>
+          {/* <p>실제페이지 인덱스 : {index * 2 + 1}</p> */}
         </div>
       );
     }
@@ -186,12 +264,16 @@ const SnackList = ({ pageIndex, searchKeyword }) => {
   return (
     <SnackListBlock>
       <div className="book-container">
-        <PageFlip width={650} height={800} ref={pageFlipRef} onFlip={onFlip}>
+        <button className="prevPage" onClick={prevPage}>
+          <GrPrevious />
+        </button>
+        <PageFlip width={600} height={700} ref={pageFlipRef} onFlip={onFlip}>
           {allPages}
         </PageFlip>
-        <div>
-          <button onClick={changePage}>페이지 이동</button>
-        </div>
+
+        <button className="nextPage" onClick={nextPage}>
+          <GrNext />
+        </button>
       </div>
     </SnackListBlock>
   );
