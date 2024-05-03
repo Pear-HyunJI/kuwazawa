@@ -73,14 +73,62 @@ const FooterBlock = styled.div`
   }
   .footerBottom {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
   }
+
   .left {
+    flex: 1;
+    text-align: left;
+  }
+
+  .title p {
+    color: #5a4620;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .info p {
+    color: #5a4620;
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+
+  .right {
+    flex: 1;
     display: flex;
-    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
   }
-  .title {
+
+  button {
+    background-color: #5a4620;
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 20px;
+
+    &:hover {
+      background-color: #48390f;
+    }
   }
-  .info {
+
+  .right a {
+    color: #5a4620;
+    font-size: 1.5rem;
+    margin: 0 10px;
+  }
+
+  .right p {
+    color: #5a4620;
+    font-size: 0.8rem;
+    margin: 0;
   }
 `;
 

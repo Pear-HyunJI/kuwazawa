@@ -2,11 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 const InfoSectionBlock = styled.div`
-  padding: 100px 0;
+  max-width:100%;
+  padding: 100px 20px;
   text-align: center;
 
   h2 {
-    font-size: 35px;
+    font-size: 2.5rem;
     color: #5a4620;
     margin-bottom: 50px;
   }
@@ -18,22 +19,22 @@ const InfoSectionBlock = styled.div`
   }
 
   .photoBox {
-    max-width: 65%;
-    border-radius: 30px;
+    max-width: 100%;
+    border-radius: 15px;
     overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   .shopInfo {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     padding: 20px;
-    border-bottom: 1px solid #000;
-    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
   }
 
   p {
-    color: #5a4620;
+    color: #333;
     margin: 0;
   }
 
@@ -49,7 +50,7 @@ const InfoSectionBlock = styled.div`
 
 const InfoSection = () => {
   return (
-    <InfoSectionBlock className="row">
+    <InfoSectionBlock>
       <h2>점포 정보</h2>
       <div className="shopBox">
         <div className="photoBox">

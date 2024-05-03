@@ -47,7 +47,6 @@ const ReviewSectionBlock = styled.div`
 const ReviewSection = () => {
     const navigate = useNavigate();
     const user = useSelector((state) => state.members.user);
-
     const [review, setReview] = useState({
         rating: '', 
         content: ''

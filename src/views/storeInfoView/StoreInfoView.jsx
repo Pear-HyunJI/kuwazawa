@@ -7,7 +7,7 @@ const StoreInfoViewBlock = styled.div``;
 
 const StoreInfoView = () => {
   return (
-    <StoreInfoViewBlock>
+    <StoreInfoViewBlock  className="row">
       <InfoSection />
       <MapSection />
     </StoreInfoViewBlock>

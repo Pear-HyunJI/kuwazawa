@@ -22,8 +22,10 @@ import BoardWriteView from "./views/boardView/BoardWriteView";
 import JoinView from "@/views/memberView/JoinView";
 import LoginView from "@/views/memberView/LoginView";
 import MemberModifyView from "@/views/memberView/MemberModifyView";
+//리뷰관리
 import ReviewView from "@/views/Review/ReviewView";
 import ReviewListView from "@/views/Review/ReviewListView";
+import ReviewModifyView from "@/views/Review/ReviewModifyView";
 
 
 const App = () => {
@@ -54,6 +56,7 @@ const App = () => {
         {/* 리뷰관리 */}
         <Route path="/review" element={<ReviewView />} />
         <Route path="/reviewList" element={<ReviewListView />} />
+        <Route path="/reviewModify/:content" element={<ReviewModifyView />} />
       </Route>
     </Routes>
   );

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { kuwazawa_noticeDB, kuwazawa_reviewDB } from '@/assets/firebase';
 
-const boardSlice = createSlice({
+const boardSlice = createSlice({ //name,initialstate,reducer 포함 
     name: 'boards',
     initialState: {
         notice: [],
@@ -14,12 +14,8 @@ const boardSlice = createSlice({
         },
         initReview(state, action) {
             state.review = action.payload.sort((a, b) => a.key > b.key ? -1 : 1);
-            state.list = state.notice;
+            state.list = state.review;
         },
-        setList(state, action) {
-            state.list = action.payload;
-        },
-
     }
 });
 
@@ -33,7 +29,6 @@ export const fetchNotice = () => async dispatch => {
                 return { key: key, ...value };
             });
             dispatch(initNotice(noticeArr));
-            dispatch(setList(noticeArr)); // setList 액션을 dispatch하여 list 상태를 초기화
         });
     } catch (error) {
         console.error('Error fetching notice:', error);
@@ -47,8 +42,8 @@ export const fetchReview = () => async dispatch => {
             const reviewArr = Object.entries(reviewObj).map(([key, value]) => {
                 return { key: key, ...value };
             });
+            console.log(reviewArr)
             dispatch(initReview(reviewArr));
-            dispatch(setList(reviewArr)); // setList 액션을 dispatch하여 list 상태를 초기화
         });
     } catch (error) {
         console.error('Error fetching notice:', error);

@@ -43,7 +43,7 @@ const OnlineShopsection = ({title}) => {
     const sortType = [
         { type:'title', text:'상품명순'},
         { type:'price', text:'가격순'},
-        {type:'category', text:'카테고리순'}
+
     ]
 
     const [changeSort, setChangeSort] = useState("")

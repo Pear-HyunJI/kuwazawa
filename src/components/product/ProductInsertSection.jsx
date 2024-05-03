@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components'
 import { kuwazawa_productDB, oStorage } from '@/assets/firebase'
+import { useNavigate } from 'react-router-dom';
 
 const OnlineShopInsertSectionBlock = styled.div`
     max-width:500px; margin:0 auto;
@@ -27,7 +28,8 @@ const OnlineShopInsertSectionBlock = styled.div`
     }
 `
 const OnlineShopInsertSection = () => {
-
+    const navigate = useNavigate();
+    
     const [product, setProduct] = useState({
         name:"",
         price:"",
@@ -41,16 +43,12 @@ const OnlineShopInsertSection = () => {
     const handleChange = (e)=>{
         console.log(e)
         const {value, name} = e.target
-        // setProduct(product=>{
-        //     let newProduct = {...product, [name]:value }
-        //     return newProduct
-        // })
         setProduct(product=>({...product, [name]:value }))
     }
 
     const handleFileChange = (e) => {
-        const file = e.target.files[0]; // 선택된 파일
-        console.log(file)  // 선택파일에 대한 모든 정보(사이즈, 이름 등)
+        const file = e.target.files[0]; 
+        console.log(file)  
         setProduct((prevProduct) => ({...prevProduct, photo: file }));
         setPhotoValue(e.target.value)
     };
@@ -64,7 +62,7 @@ const OnlineShopInsertSection = () => {
                 const storageRef = oStorage.ref();
                 const fileRef = storageRef.child(product.photo.name);
                 await fileRef.put(product.photo);
-                addProduct.photo = await fileRef.getDownloadURL(); // 업로드한 파일의 다운로드 URL을 상품 데이터에 추가
+                addProduct.photo = await fileRef.getDownloadURL();
             }
             await kuwazawa_productDB.push(addProduct)
             setProduct({
@@ -78,6 +76,7 @@ const OnlineShopInsertSection = () => {
         } catch(error){
             console.log("오류 : ", error)
         }
+        navigate(`/product`)
     }
 
     return (
