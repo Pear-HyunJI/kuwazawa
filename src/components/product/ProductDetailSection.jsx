@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
+
+
 const ProductDetailSectionBlock = styled.div`
   h2 {
     text-align: center;
@@ -30,7 +32,7 @@ const ProductDetailSectionBlock = styled.div`
       }
       .btn {
         a { padding:10px 20px; background:#5A4620; color:#fff; margin:20px 5px;
-          &:nth-child(2) { background:#ddd; color:#000 }
+          &:nth-child(3) { background:#ddd; color:#000 }
         }
       }
     }
@@ -58,6 +60,7 @@ const ProductDetailSection = ({product}) => {
                     <p><span dangerouslySetInnerHTML={{ __html: product.description }} /></p>
                     <div className="btn">
                       <Link to="">구매하기</Link>
+                      <Link to="/review">리뷰쓰기</Link>
                       { loging && <Link to="/productModify" state={{ product  }}>상품수정</Link>}
                     </div>
                 </div>

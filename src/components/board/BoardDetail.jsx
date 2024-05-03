@@ -7,30 +7,21 @@ import { kuwazawa_noticeDB } from '@/assets/firebase';
 const BoardDetailBlock = styled.div`
     max-width: 600px; 
     margin: 0 auto 50px; 
-
-    table {
-        col:nth-child(1) { width: 100px; }
-        col:nth-child(2) { width: auto; }
-
-        td { 
-            padding: 5px;
-
-            input { 
-                width: 100%; 
-                border: 1px solid #ddd; 
-                height: 30px; 
-                padding: 5px; 
-            }
-
-            textarea { 
-                width: 100%; 
-                border: 1px solid #ddd; 
-                padding: 5px; 
-                height: 200px; 
-            }
-        }
+    h2{
+        border-bottom:1px solid #000;
     }
-
+    .name{
+        display:flex;
+        justify-content:space-around;
+        padding-bottom:30px;
+        font-size:20px
+    }
+    .content{
+        background:#fff;
+        width:100%;
+        height:600px;
+        padding:30px;
+    }
     .btn { 
         text-align: center; 
         margin-top: 20px;
@@ -42,6 +33,7 @@ const BoardDetailBlock = styled.div`
             font-size: 14px; 
         }
     }
+
 `;
 
 const BoardDetail = ({ post }) => {
@@ -63,32 +55,17 @@ const BoardDetail = ({ post }) => {
     return (
         <BoardDetailBlock>
             <h2>{post.subject}</h2>
-            <table border="1">
-                <colgroup>
-                    <col />
-                    <col />
-                </colgroup>
-                <tbody>
-                    <tr>
-                        <td>작성자</td>
-                        <td>
-                            <input type="text" name="writer" value={post.writer} disabled />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>제목</td>
-                        <td>
-                            <input type="text" name="subject" value={post.subject} disabled />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>내용</td>
-                        <td>
-                            <textarea name="content" value={post.content} disabled></textarea>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                    <div className='name'>
+                    <p>작성자 : </p>
+                    <p style={{fontWeight:'bold'}}>{post.writer}</p> 
+
+                    </div>
+                    <div className='content'>
+                        <p>
+                            {post.content}
+                        </p>
+
+                    </div>
             <div className="btn">
                 {user && post.writer === user.userId && (
                     <>

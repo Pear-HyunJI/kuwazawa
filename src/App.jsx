@@ -22,6 +22,8 @@ import BoardWriteView from "./views/boardView/BoardWriteView";
 import JoinView from "@/views/memberView/JoinView";
 import LoginView from "@/views/memberView/LoginView";
 import MemberModifyView from "@/views/memberView/MemberModifyView";
+import ReviewView from "@/views/Review/ReviewView";
+import ReviewListView from "@/views/Review/ReviewListView";
 
 
 const App = () => {
@@ -49,6 +51,9 @@ const App = () => {
         <Route path="/join" element={<JoinView />} />
         <Route path="/login" element={<LoginView />} />
         <Route path="/memberModify" element={<MemberModifyView />} />
+        {/* 리뷰관리 */}
+        <Route path="/review" element={<ReviewView />} />
+        <Route path="/reviewList" element={<ReviewListView />} />
       </Route>
     </Routes>
   );

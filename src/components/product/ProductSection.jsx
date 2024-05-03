@@ -138,7 +138,7 @@ const OnlineShopsection = ({title}) => {
                             <p><a href="#">{item.name}</a></p>
                             <p>{parseInt(item.price).toLocaleString()}&yen;</p>
                             { item.inventory!=cartIdCount(item.id) ? <button onClick={ ()=>addToCart(item.id) }><BsGiftFill /></button> : <button><BsGift /></button> }
-                            { item.inventory!=cartIdCount(item.id) ? <span>{ item.inventory - cartIdCount(item.id) }</span> : <span>sold out</span>}
+                            { item.inventory!=cartIdCount(item.id) ? <span>{ item.inventory - cartIdCount(item.id) }</span> : <span style={{color:"red"}}>sold out</span>}
                         </div>
                     </ListBlock>
                 ))
