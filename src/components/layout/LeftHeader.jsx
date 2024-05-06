@@ -1,12 +1,12 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
 import { CiMenuBurger } from "react-icons/ci";
 import { IoCloseOutline } from "react-icons/io5";
 import { BsCart4 } from "react-icons/bs";
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchProducts } from '@/store/product'
-import { userLogout, userLogin } from '@/store/member'
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProducts } from "@/store/product";
+import { userLogout, userLogin } from "@/store/member";
 
 const LeftHeaderBlock = styled.div`
   position: fixed;
@@ -38,9 +38,9 @@ const LeftHeaderBlock = styled.div`
           height: 20px;
           border-radius: 50%;
           background: none;
-          border: 1px solid ;
-          border-color :${(props) => (props.isOpen ? "#fff" : "#5a4620")};
-          color:  ${(props) => (props.isOpen ? "#fff" : "#5a4620")};
+          border: 1px solid;
+          border-color: ${(props) => (props.isOpen ? "#fff" : "#5a4620")};
+          color: ${(props) => (props.isOpen ? "#fff" : "#5a4620")};
           font-size: 12px;
           line-height: 20px;
           text-align: center;
@@ -68,24 +68,24 @@ const LeftHeaderBlock = styled.div`
       }
     }
   }
-`
+`;
 
 const LeftHeader = ({ isOpen, toggleMenu, handleCloseMenu }) => {
-    const dispatch = useDispatch()
-    const carts = useSelector(state=>state.products.carts)
-    const user = useSelector(state=>state.members.user)
-    const handleLogout = (e)=>{
-      e.preventDefault()
-      dispatch(userLogout())
-      alert("로그아웃 되었습니다.")
+  const dispatch = useDispatch();
+  const carts = useSelector((state) => state.products.carts);
+  const user = useSelector((state) => state.members.user);
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(userLogout());
+    alert("로그아웃 되었습니다.");
+  };
+  useEffect(() => {
+    dispatch(fetchProducts());
+    let loging = localStorage.loging;
+    if (loging) {
+      dispatch(userLogin(JSON.parse(loging)));
     }
-    useEffect(()=>{
-      dispatch(fetchProducts())
-      let loging = localStorage.loging
-      if (loging) {
-        dispatch(userLogin(JSON.parse(loging)))
-      }
-    }, [dispatch])
+  }, [dispatch]);
   return (
     <LeftHeaderBlock isOpen={isOpen}>
       <div className="nav">
@@ -96,30 +96,34 @@ const LeftHeader = ({ isOpen, toggleMenu, handleCloseMenu }) => {
           <div className="cart">
             <Link to="/cart">
               <BsCart4 />
-              <span>{ carts ? carts.length : 0 }</span>
+              <span>{carts ? carts.length : 0}</span>
             </Link>
           </div>
         </div>
         {isOpen && (
           <div className="menu">
             <ul>
-            { user ?
-             <li className="member">
-              <a href="#" onClick={handleLogout}>로그아웃&nbsp;&nbsp;</a>{" "}
-              |
-              <Link to="/" onClick={handleCloseMenu}>&nbsp;&nbsp;정보수정({user.userId})</Link>
-              </li>
-                :
-              <li className="member">
-                <Link to="/login" onClick={handleCloseMenu}>
-                  로그인&nbsp;&nbsp;
-                </Link>{" "}
-                |
-                <Link to="/join" onClick={handleCloseMenu}>
-                  &nbsp;&nbsp;회원가입
-                </Link>
-              </li>
-              }
+              {user ? (
+                <li className="member">
+                  <a href="#" onClick={handleLogout}>
+                    로그아웃&nbsp;&nbsp;
+                  </a>{" "}
+                  |
+                  <Link to="/" onClick={handleCloseMenu}>
+                    &nbsp;&nbsp;정보수정({user.userId})
+                  </Link>
+                </li>
+              ) : (
+                <li className="member">
+                  <Link to="/login" onClick={handleCloseMenu}>
+                    로그인&nbsp;&nbsp;
+                  </Link>{" "}
+                  |
+                  <Link to="/join" onClick={handleCloseMenu}>
+                    &nbsp;&nbsp;회원가입
+                  </Link>
+                </li>
+              )}
               <li>
                 <NavLink to="/storeInfo" onClick={handleCloseMenu}>
                   점포 소개
@@ -138,6 +142,11 @@ const LeftHeader = ({ isOpen, toggleMenu, handleCloseMenu }) => {
               <li>
                 <NavLink to="/board" onClick={handleCloseMenu}>
                   공지사항
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/game" onClick={handleCloseMenu}>
+                  게임
                 </NavLink>
               </li>
             </ul>

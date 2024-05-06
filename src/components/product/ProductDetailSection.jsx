@@ -7,37 +7,44 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const ProductDetailSectionBlock = styled.div`
+  margin-top: 100px;
   h2 {
     text-align: center;
-    font-size: 2.5rem;
-    margin: 40px 0;
-    color: #333;
+    font-size: 30px;
+    margin: 20px 0;
   }
-
   .content {
-    display: flex;
-    align-item: center;
-    justify-content:center;
-    .photo {
-      width: 300px;
-      margin-right: 50px;
+    // display: flex;
+    // align-item: center;
+    // justify-content: center;
+    .sliderContainer {
+      max-width: 600px;
+      .subSlide {
+        border: 1px solid green;
+        .slick-slide {
+          border: 1px solid red;
+          padding: 10px;
+        }
+      }
     }
-
     .info {
-      flex:0 1 30%;
-      p{
-        padding:20px 0 ;
+      p {
+        padding: 20px 0;
       }
       button {
         background: red;
-        color: #fff;
-        padding: 10px 20px;
         margin: 10px 0;
       }
-
       .btn {
-        a { padding:10px 20px; background:#5A4620; color:#fff; margin:20px 5px;
-          &:nth-child(3) { background:#ddd; color:#000 }
+        a {
+          padding: 10px 20px;
+          background: #5a4620;
+          color: #fff;
+          margin: 20px 5px;
+          &:nth-child(3) {
+            background: #ddd;
+            color: #000;
+          }
         }
       }
     }
@@ -102,19 +109,30 @@ const ProductDetailSection = ({ product }) => {
                 <div key={index}>
                   <img src={item} alt="" />
                 </div>
-                <div className="info">
-                    <p>{ product.category }</p>
-                    <p>{ product.price.toLocaleString() }&yen;</p>
-                    <p><span dangerouslySetInnerHTML={{ __html: product.description }} /></p>
-                    <div className="btn">
-                      <Link to="">구매하기</Link>
-                      <Link to="/review">리뷰쓰기</Link>
-                      { loging && <Link to="/productModify" state={{ product  }}>상품수정</Link>}
-                    </div>
-                </div>
-            </div>
-        </ProductDetailSectionBlock>
-    );
+              );
+            })}
+          </Slider>
+        </div>
+
+        <div className="info">
+          <p>{product.category}</p>
+          <p>가격 : {product.price.toLocaleString()}&yen;</p>
+          <p>
+            <span dangerouslySetInnerHTML={{ __html: product.description }} />
+          </p>
+          <div className="btn">
+            <Link to="">구매하기</Link>
+            <Link to="/review">리뷰쓰기</Link>
+            {loging && (
+              <Link to="/productModify" state={{ product }}>
+                상품수정
+              </Link>
+            )}
+          </div>
+        </div>
+      </div>
+    </ProductDetailSectionBlock>
+  );
 };
 
 export default ProductDetailSection;

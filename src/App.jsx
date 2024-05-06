@@ -9,7 +9,7 @@ import SnackInfoView from "@/views/snackInfoView/SnackInfoView";
 // 온라인 샵 (아이템 리스트, 디테일 아이템, 장바구니)
 import DetailItemView from "@/views/onlineShopView/DetailItemView";
 import CartView from "@/views/onlineShopView/CartView";
-import ProductView from '@/views/product/ProductView'
+import ProductView from "@/views/product/ProductView";
 import ProductModifyView from "@/views/product/ProductModifyView";
 import ProductInsertView from "@/views/product/ProductInsertView";
 import ProductDetailView from "@/views/product/ProductDetailView";
@@ -26,7 +26,8 @@ import MemberModifyView from "@/views/memberView/MemberModifyView";
 import ReviewView from "@/views/Review/ReviewView";
 import ReviewListView from "@/views/Review/ReviewListView";
 import ReviewModifyView from "@/views/Review/ReviewModifyView";
-
+//게임
+import GameView from "@/views/gameView/GameView";
 
 const App = () => {
   return (
@@ -46,9 +47,9 @@ const App = () => {
         <Route path="/product/:id" element={<ProductDetailView />} />
         {/* 공지사항 */}
         <Route path="/board" element={<BoardView />} />
-        <Route path="/boardWrite" element={ <BoardWriteView /> } />
-        <Route path="/boardModify/:subject" element={ <BoardModifyView /> } />
-        <Route path="/boardDetail/:subject" element={ <BoardDetailView /> } />
+        <Route path="/boardWrite" element={<BoardWriteView />} />
+        <Route path="/boardModify/:subject" element={<BoardModifyView />} />
+        <Route path="/boardDetail/:subject" element={<BoardDetailView />} />
         {/* 회원관리 */}
         <Route path="/join" element={<JoinView />} />
         <Route path="/login" element={<LoginView />} />
@@ -57,6 +58,8 @@ const App = () => {
         <Route path="/review" element={<ReviewView />} />
         <Route path="/reviewList" element={<ReviewListView />} />
         <Route path="/reviewModify/:content" element={<ReviewModifyView />} />
+        {/* 게임 */}
+        <Route path="/game" element={<GameView />} />
       </Route>
     </Routes>
   );
