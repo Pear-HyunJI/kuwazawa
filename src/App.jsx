@@ -28,6 +28,7 @@ import ReviewListView from "@/views/Review/ReviewListView";
 import ReviewModifyView from "@/views/Review/ReviewModifyView";
 //게임
 import GameView from "@/views/gameView/GameView";
+import MiniGameView from "@/views/gameView/MiniGameView";
 
 const App = () => {
   return (
@@ -59,7 +60,7 @@ const App = () => {
         <Route path="/reviewList" element={<ReviewListView />} />
         <Route path="/reviewModify/:content" element={<ReviewModifyView />} />
         {/* 게임 */}
-        <Route path="/game" element={<GameView />} />
+        <Route path="/game" element={<MiniGameView />} />
       </Route>
     </Routes>
   );
