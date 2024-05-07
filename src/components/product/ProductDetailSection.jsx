@@ -71,6 +71,11 @@ const ProductDetailSection = ({ product }) => {
     setSubNav(subSliderRef.current);
   }, []);
 
+  const handleClick = () => {
+    console.log("product :", product);
+    console.log("product.name :", product.name);
+  };
+
   return (
     <ProductDetailSectionBlock className="row">
       <h2>{product.name}</h2>
@@ -122,7 +127,13 @@ const ProductDetailSection = ({ product }) => {
           </p>
           <div className="btn">
             <Link to="">구매하기</Link>
-            <Link to="/review">리뷰쓰기</Link>
+            <Link
+              to={`/review/${product.name}`}
+              state={{ product: product }}
+              onClick={handleClick}
+            >
+              리뷰쓰기
+            </Link>
             {loging && (
               <Link to="/productModify" state={{ product }}>
                 상품수정
