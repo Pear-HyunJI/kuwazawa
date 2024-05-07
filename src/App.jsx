@@ -55,7 +55,7 @@ const App = () => {
         <Route path="/login" element={<LoginView />} />
         <Route path="/memberModify" element={<MemberModifyView />} />
         {/* 리뷰관리 */}
-        <Route path="/review" element={<ReviewView />} />
+        <Route path="/review/:product" element={<ReviewView />} />
         <Route path="/reviewList" element={<ReviewListView />} />
         <Route path="/reviewModify/:content" element={<ReviewModifyView />} />
         {/* 게임 */}
