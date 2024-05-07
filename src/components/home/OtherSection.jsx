@@ -2,38 +2,68 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const OterSectionBlock = styled.div`
+const OtherSectionBlock = styled.div`
   text-align: center;
+  padding: 100px 0;
+
   h2 {
-    font-size: 30px;
+    font-size: 2rem;
     color: #5a4620;
-    padding: 150px 0;
+    margin-bottom: 50px;
   }
+
   ul {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-  li {
-    padding: 10px;
-    display: flex;
+    justify-content: center;
     flex-wrap: wrap;
-    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
+
+  li {
+    flex: 0 0 calc(33.333% - 20px);
+    margin: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.5s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
   p {
     color: #5a4620;
-    font-size: 20px;
+    font-size: 1.2rem;
+    margin-top: 10px;
   }
-  img {
-    width: 70%;
-    transition: transform 0.5s;
+
+  @media (max-width: 768px) {
+    li {
+      flex: 0 0 calc(33.333% - 20px);
+    }
   }
-  img:hover {
-    transform: rotate(10deg) scale(90%);
+
+  @media (max-width: 480px) {
+    li {
+      flex: 0 0 calc(33.333% - 20px);
+    }
   }
 `;
 
-const OterSection = () => {
+const OtherSection = () => {
   const bread = [
     {
       img: "./assets/image/homeSnack/home_img11.png",
@@ -68,30 +98,25 @@ const OterSection = () => {
   ];
 
   return (
-    <OterSectionBlock>
-      <div className="pageTop"></div>
-      <div className="row">
-        <h2>다른 대표메뉴</h2>
-        <div className="introduce">
-          <ul>
-            {bread.map((item, index) => (
-              <li key={index}>
-                <Link
-                  to={{
-                    pathname: "/snackInfo",
-                    state: { scrollPosition: item.scrollPosition },
-                  }}
-                >
-                  <img src={item.img} alt={item.name} />
-                  <p>{item.name}</p>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </OterSectionBlock>
+    <OtherSectionBlock>
+      <h2>다른 대표메뉴</h2>
+      <ul>
+        {bread.map((item, index) => (
+          <li key={index}>
+            <Link
+              to={{
+                pathname: "/snackInfo",
+                state: { scrollPosition: item.scrollPosition },
+              }}
+            >
+              <img src={item.img} alt={item.name} />
+              <p>{item.name}</p>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </OtherSectionBlock>
   );
 };
 
-export default OterSection;
+export default OtherSection;

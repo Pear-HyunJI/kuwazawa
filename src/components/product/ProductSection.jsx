@@ -6,30 +6,202 @@ import { BsGiftFill, BsGift  } from "react-icons/bs";
 import { Link } from 'react-router-dom'
 import { kuwazawa_cartDB } from '@/assets/firebase'
 
-const OnlineShopsectionBlock = styled.div``
+const OnlineShopsectionBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const UlBlock = styled.ul`
-    border: 0px solid #000;
-    display: flex;
-    flex-wrap: wrap;
-    list-style:none; 
-    margin-top:50px; 
-`
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin-top: 50px;
+`;
+
 const ListBlock = styled.li`
-    flex: 0 0 21%;
+  flex: 0 0 21%;
+  margin: 20px 2%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  .photo {
+    overflow: hidden;
+    height: 200px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .info {
+    padding: 20px;
+
+    p:first-child {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+
+      a {
+        color: #3d3115;
+        text-decoration: none;
+
+        &:hover {
+          color: #5a4620; 
+        }
+      }
+    }
+
+    p:last-child {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #5a4620;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 8px 8px 12px;
+      font-size: 1.1rem;
+      margin-right: 10px;
+      cursor: pointer;
+
+      svg {
+        vertical-align: middle;
+        margin-right: 5px;
+      }
+    }
+
+    span {
+      color: #5A4620;
+      font-size: 1.1rem;
+    }
+  }
+  @media (max-width: 768px){
+    flex: 0 0 46%;
     margin: 20px 2%;
-`
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+  
+    &:hover {
+      transform: translateY(-5px);
+    }
+  
+    .photo {
+      overflow: hidden;
+      height: 200px;
+  
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  
+    .info {
+      padding: 20px;
+  
+      p:first-child {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+  
+        a {
+          color: #3d3115;
+          text-decoration: none;
+  
+          &:hover {
+            color: #5a4620; 
+          }
+        }
+      }
+  
+      p:last-child {
+        font-size: 1.1rem;
+        color: #666;
+        margin-bottom: 10px;
+      }
+  
+      button {
+        background-color: #5a4620;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 8px 8px 12px;
+        font-size: 1.1rem;
+        margin-right: 10px;
+        cursor: pointer;
+  
+        svg {
+          vertical-align: middle;
+          margin-right: 5px;
+        }
+      }
+  
+      span {
+        color: #5A4620;
+        font-size: 1.1rem;
+      }
+    }
+  }
+`;
 
 const ButtonBlock = styled.div`
-    button {
-        margin:50px 5px; padding:5px 10px; 
-        &.on { background:#5A4620; color:#fff }
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+
+  button {
+    background-color: transparent;
+    color: #333;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: border-bottom-color 0.3s ease-in-out;
+
+    &.on {
+      border-bottom-color: #5a4620;
     }
-`
+
+    &:hover {
+      color: #5a4620;
+    }
+  }
+`;
+
 const ProductInsert = styled.div`
-    text-align:center;
-    margin:50px 0;
-    a { padding:10px 20px; background:#999; }
+  text-align: center;
+  margin: 50px 0;
+
+  a {
+    padding: 10px 20px;
+    background: #5a4620;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: background 0.3s ease-in-out;
+
+    &:hover {
+        background: #3d3115;
+    }
+  }
 `
 
 const OnlineShopsection = ({title}) => {
@@ -41,7 +213,7 @@ const OnlineShopsection = ({title}) => {
     const allData = useSelector(state=>state.products.products)
     const [products, setProducts] = useState(allData)
     const sortType = [
-        { type:'title', text:'상품명순'},
+        { type:'name', text:'상품명순'},
         { type:'price', text:'가격순'},
 
     ]

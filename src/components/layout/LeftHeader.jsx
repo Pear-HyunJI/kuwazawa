@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
 import { CiMenuBurger } from "react-icons/ci";
@@ -7,6 +7,7 @@ import { BsCart4 } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "@/store/product";
 import { userLogout, userLogin } from "@/store/member";
+import { FaDiceOne, FaDiceTwo, FaDiceThree, FaDiceFour, FaDiceFive, FaDiceSix } from "react-icons/fa";
 
 const LeftHeaderBlock = styled.div`
   position: fixed;
@@ -68,6 +69,12 @@ const LeftHeaderBlock = styled.div`
       }
     }
   }
+.dice{
+  margin-top:15px;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+}
 `;
 
 const LeftHeader = ({ isOpen, toggleMenu, handleCloseMenu }) => {
@@ -86,6 +93,20 @@ const LeftHeader = ({ isOpen, toggleMenu, handleCloseMenu }) => {
       dispatch(userLogin(JSON.parse(loging)));
     }
   }, [dispatch]);
+
+  //주사위 돌리기
+
+  const [dice, setDice] = useState(0); 
+
+    const rollDice = () => {
+        const randomNumber = Math.trunc(Math.random() * 6) + 1;
+        setDice(randomNumber);
+    };
+
+    useEffect(() => {
+        rollDice();
+    }, []); 
+
   return (
     <LeftHeaderBlock isOpen={isOpen}>
       <div className="nav">
@@ -98,6 +119,26 @@ const LeftHeader = ({ isOpen, toggleMenu, handleCloseMenu }) => {
               <BsCart4 />
               <span>{carts ? carts.length : 0}</span>
             </Link>
+            <div className="dice">
+            
+            {dice !== null && (
+                <>
+                    {dice === 1 && <FaDiceOne />}
+                    {dice === 2 && <FaDiceTwo />}
+                    {dice === 3 && <FaDiceThree />}
+                    {dice === 4 && <FaDiceFour />}
+                    {dice === 5 && <FaDiceFive />}
+                    {dice === 6 && <FaDiceSix />}
+                </>
+            )}
+            <button className="diceBtn" onClick={rollDice} style={{
+              padding:'5px',
+              fontSize:"14px", 
+              background:'rgba(255,255,255,0.3)',
+              borderRadius:'10px',
+              
+              }}>Roll dice</button>
+        </div>
           </div>
         </div>
         {isOpen && (

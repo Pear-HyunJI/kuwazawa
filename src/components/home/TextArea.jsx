@@ -86,8 +86,8 @@ const TextArea = ({ scrollPosition }) => {
   }, []);
 
   const handleScroll = () => {
-    // const threshold = 5060;
-    const threshold = 5300;
+    const threshold = 5000;
+    //const threshold = 5300;
     if (scrollPosition > threshold) {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % product.length);
     }
