@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+
 const OtherSectionBlock = styled.div`
   text-align: center;
   padding: 100px 0;
@@ -40,7 +41,7 @@ const OtherSectionBlock = styled.div`
     transition: transform 0.5s;
 
     &:hover {
-      transform: scale(1.1);
+      transform: scale(0.8) rotate(15deg);
     }
   }
 
@@ -98,7 +99,7 @@ const OtherSection = () => {
   ];
 
   return (
-    <OtherSectionBlock>
+    <OtherSectionBlock className="row">
       <h2>다른 대표메뉴</h2>
       <ul>
         {bread.map((item, index) => (
