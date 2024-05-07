@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components'
 import { kuwazawa_productDB, oStorage } from '@/assets/firebase'
+import { useNavigate } from "react-router-dom";
 
 const OnlineShopInsertSectionBlock = styled.div`
   max-width: 500px;
@@ -66,57 +67,77 @@ const OnlineShopInsertSectionBlock = styled.div`
 
 const OnlineShopInsertSection = () => {
 
+    const navigate = useNavigate();
     const [product, setProduct] = useState({
         name:"",
         price:"",
         description:"",
         inventory:"",
         photo:"",
+        detailPhotos: [],
     })
 
     const [photoValue, setPhotoValue] = useState("")
+    const [detailPhotos, setDetailPhotos] = useState([]);
 
-    const handleChange = (e)=>{
-        console.log(e)
-        const {value, name} = e.target
-        // setProduct(product=>{
-        //     let newProduct = {...product, [name]:value }
-        //     return newProduct
-        // })
-        setProduct(product=>({...product, [name]:value }))
-    }
-
-    const handleFileChange = (e) => {
-        const file = e.target.files[0]; // 선택된 파일
-        console.log(file)  // 선택파일에 대한 모든 정보(사이즈, 이름 등)
-        setProduct((prevProduct) => ({...prevProduct, photo: file }));
-        setPhotoValue(e.target.value)
+    const handleChange = (e) => {
+      const { value, name } = e.target;
+      setProduct((product) => ({ ...product, [name]: value }));
     };
 
-    const onSubmit = async (e)=>{
-        e.preventDefault()
-        console.log(product)
-        const addProduct = {...product, id:Date.now()}
-        try {
-            if (product.photo) {
-                const storageRef = oStorage.ref();
-                const fileRef = storageRef.child(product.photo.name);
-                await fileRef.put(product.photo);
-                addProduct.photo = await fileRef.getDownloadURL(); // 업로드한 파일의 다운로드 URL을 상품 데이터에 추가
-            }
-            await kuwazawa_productDB.push(addProduct)
-            setProduct({
-                name:"",
-                price:"",
-                description:"",
-                inventory:"",
-                photo:""
-            })
-            setPhotoValue("")
-        } catch(error){
-            console.log("오류 : ", error)
+    const handleFileChange = (e) => {
+      const file = e.target.files[0];
+      setProduct((prevProduct) => ({ ...prevProduct, photo: file }));
+      setPhotoValue(e.target.value);
+    };
+  
+    const handleDetailFileChange = (e) => {
+      const files = e.target.files;
+      setDetailPhotos(Array.from(files));
+    };
+  
+    const onSubmit = async (e) => {
+      e.preventDefault();
+      const addProduct = { ...product, id: Date.now() };
+      try {
+        const storageRef = oStorage.ref();
+        if (product.photo) {
+          const fileRef = storageRef.child(product.photo.name);
+          await fileRef.put(product.photo);
+          addProduct.photo = await fileRef.getDownloadURL();
         }
-    }
+        if (detailPhotos.length > 0) {
+          const detailPhotoURLs = [];
+          await Promise.all(
+            detailPhotos.map(async (file, index) => {
+              const fileName = `detailPhoto${index + 1}_${Date.now()}_${
+                file.name
+              }`;
+              const detailFileRef = storageRef.child(fileName);
+              await detailFileRef.put(file);
+              detailPhotoURLs.push(await detailFileRef.getDownloadURL());
+            })
+          );
+          addProduct.detailPhotos = detailPhotoURLs;
+        }
+        await kuwazawa_productDB.push(addProduct);
+        setProduct({
+          name: "",
+          price: "",
+          description: "",
+          inventory: "",
+          photo: "",
+          detailPhotos: [],
+        });
+        setPhotoValue("");
+        setDetailPhotos([]);
+        navigate("/product");
+      } catch (error) {
+        console.log("오류 : ", error);
+      }
+    };
+
+    
 
   return (
     <OnlineShopInsertSectionBlock>
