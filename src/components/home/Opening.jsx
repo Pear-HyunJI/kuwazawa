@@ -25,7 +25,7 @@ const OpeningBlock = styled.div`
   position: ${({ scrollPosition }) =>
     scrollPosition > 4500 ? "relative" : "fixed"};
   overflow: hidden;
-  z-index: 10;
+  z-index: 1000;
   &::before {
     content: "";
     position: absolute;

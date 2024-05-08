@@ -16,62 +16,66 @@ import {
   FaDiceSix,
 } from "react-icons/fa";
 
-const LeftHeaderBlock = styled.div`
+const MHeaderBlock = styled.div`
+  color: #5a4620;
   border: 1px solid red;
   position: fixed;
   z-index: 500;
-  top: 0;
+  top: 0px;
   left: 0px;
-  width: ${(props) => (props.isOpen ? "100%" : "auto")}; /* 변경 */
+  width: 100%;
   background-color: ${(props) => (props.isOpen ? "#5a462090;" : "none")};
   transition: all 0.3s ease;
   .nav {
     border: 1px solid yellow;
-    // padding: 50px 50px;
-    width: 100px;
-    padding: 50px 0;
+
+    width: 100%;
     .menuButton {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       button {
+        border: 1px solid red;
         background: none;
         font-size: 30px;
         padding-bottom: 10px;
-        color: ${(props) => (props.isOpen ? "#fff" : "#5a4620")};
         transition: color 0.3s ease;
       }
-      .cart {
-        margin: auto;
-        font-size: 30px;
-        color: ${(props) => (props.isOpen ? "#fff" : "#5a4620")};
-        transition: color 0.3s ease;
-        // position: absolute;
-        position: relative;
-        span {
-          position: absolute;
-          top: -2px;
-          right: -5px;
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          background: none;
-          border: 1px solid;
-          border-color: ${(props) => (props.isOpen ? "#fff" : "#5a4620")};
-          color: ${(props) => (props.isOpen ? "#fff" : "#5a4620")};
-          font-size: 12px;
-          line-height: 20px;
-          text-align: center;
-          font-weight: bold;
-        }
-      }
-      .dice {
-        border: 1px solid green;
-
-        color: ${(props) => (props.isOpen ? "#fff" : "#5a4620")};
-        margin-top: 15px;
-        display: flex;
-        flex-direction: column;
+      .logo {
+        border: 1px solid red;
         align-items: center;
+        text-align: center;
+      }
+      .cartNdice {
+        display: flex;
+        .cart {
+          margin: auto;
+          font-size: 30px;
+          transition: color 0.3s ease;
+          // position: absolute;
+          position: relative;
+          span {
+            position: absolute;
+            top: -2px;
+            right: 25px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: none;
+            border: 1px solid;
+            border-color: ${(props) => (props.isOpen ? "#fff" : "#5a4620")};
+            font-size: 12px;
+            line-height: 20px;
+            text-align: center;
+            font-weight: bold;
+          }
+        }
+        .dice {
+          border: 1px solid green;
+          margin-top: 15px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
       }
     }
   }
@@ -95,7 +99,7 @@ const LeftHeaderBlock = styled.div`
   }
 `;
 
-const LeftHeader = ({ isOpen, toggleMenu, handleCloseMenu }) => {
+const MHeader = ({ isOpen, toggleMenu, handleCloseMenu }) => {
   const dispatch = useDispatch();
   const carts = useSelector((state) => state.products.carts);
   const user = useSelector((state) => state.members.user);
@@ -126,41 +130,49 @@ const LeftHeader = ({ isOpen, toggleMenu, handleCloseMenu }) => {
   }, []);
 
   return (
-    <LeftHeaderBlock isOpen={isOpen}>
+    <MHeaderBlock isOpen={isOpen}>
       <div className="nav">
         <div className="menuButton">
           <button onClick={toggleMenu}>
             {isOpen ? <IoCloseOutline /> : <CiMenuBurger />}
           </button>
-          <div className="cart">
-            <Link to="/cart" onClick={handleCloseMenu}>
-              <BsCart4 />
-              <span>{carts ? carts.length : 0}</span>
+
+          <div className="logo">
+            <Link to="/" onClick={handleCloseMenu}>
+              쿠와자와 과자점
             </Link>
           </div>
-          <div className="dice">
-            {dice !== null && (
-              <>
-                {dice === 1 && <FaDiceOne />}
-                {dice === 2 && <FaDiceTwo />}
-                {dice === 3 && <FaDiceThree />}
-                {dice === 4 && <FaDiceFour />}
-                {dice === 5 && <FaDiceFive />}
-                {dice === 6 && <FaDiceSix />}
-              </>
-            )}
-            <button
-              className="diceBtn"
-              onClick={rollDice}
-              style={{
-                padding: "5px",
-                fontSize: "14px",
-                background: "rgba(255,255,255,0.3)",
-                borderRadius: "10px",
-              }}
-            >
-              Roll dice
-            </button>
+          <div className="cartNdice">
+            <div className="cart">
+              <Link to="/cart" onClick={handleCloseMenu}>
+                <BsCart4 />
+                <span>{carts ? carts.length : 0}</span>
+              </Link>
+            </div>
+            <div className="dice">
+              {dice !== null && (
+                <>
+                  {dice === 1 && <FaDiceOne />}
+                  {dice === 2 && <FaDiceTwo />}
+                  {dice === 3 && <FaDiceThree />}
+                  {dice === 4 && <FaDiceFour />}
+                  {dice === 5 && <FaDiceFive />}
+                  {dice === 6 && <FaDiceSix />}
+                </>
+              )}
+              <button
+                className="diceBtn"
+                onClick={rollDice}
+                style={{
+                  padding: "5px",
+                  fontSize: "14px",
+                  background: "rgba(255,255,255,0.3)",
+                  borderRadius: "10px",
+                }}
+              >
+                Roll dice
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -216,8 +228,8 @@ const LeftHeader = ({ isOpen, toggleMenu, handleCloseMenu }) => {
           </ul>
         </div>
       )}
-    </LeftHeaderBlock>
+    </MHeaderBlock>
   );
 };
 
-export default LeftHeader;
+export default MHeader;

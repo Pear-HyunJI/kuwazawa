@@ -7,7 +7,7 @@ const RightHeaderBlock = styled.div`
   font-weight: bold;
   writing-mode: vertical-lr;
   position: fixed;
-  z-index: 500;
+
   right: 0px;
   padding: 50px;
   z-index: 1000;
