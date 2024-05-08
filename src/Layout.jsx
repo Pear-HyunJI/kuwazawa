@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import LeftHeader from "@/components/layout/LeftHeader";
 import RightHeader from "@/components/layout/RightHeader";
-import MHeader from "@/components/layout/MHeader";
 import { Outlet } from "react-router-dom";
+import MHeader from "@/components/layout/MHeader";
 import Footer from "@/components/layout/Footer";
 import { useMediaQuery } from "react-responsive";
 
@@ -28,25 +28,27 @@ const Layout = () => {
 
   return (
     <LayoutBlock>
-      {mobile || (
-        <div className="header">
-          <RightHeader isOpen={isMenuOpen} handleCloseMenu={handleCloseMenu} />
-          <LeftHeader
-            isOpen={isMenuOpen}
-            toggleMenu={toggleMenu}
-            handleCloseMenu={handleCloseMenu}
-          />
-        </div>
-      )}
-      {mobile && (
-        <>
+      <div className="header">
+        {mobile ? (
           <MHeader
             isOpen={isMenuOpen}
             toggleMenu={toggleMenu}
             handleCloseMenu={handleCloseMenu}
           />
-        </>
-      )}
+        ) : (
+          <>
+            <RightHeader
+              isOpen={isMenuOpen}
+              handleCloseMenu={handleCloseMenu}
+            />
+            <LeftHeader
+              isOpen={isMenuOpen}
+              toggleMenu={toggleMenu}
+              handleCloseMenu={handleCloseMenu}
+            />
+          </>
+        )}
+      </div>
       <MainBlur isMenuOpen={isMenuOpen}>
         <Outlet />
         <Footer />

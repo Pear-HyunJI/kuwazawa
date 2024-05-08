@@ -17,7 +17,6 @@ import {
 } from "react-icons/fa";
 
 const LeftHeaderBlock = styled.div`
-  border: 1px solid red;
   position: fixed;
   z-index: 500;
   top: 0;
@@ -26,7 +25,6 @@ const LeftHeaderBlock = styled.div`
   background-color: ${(props) => (props.isOpen ? "#5a462090;" : "none")};
   transition: all 0.3s ease;
   .nav {
-    border: 1px solid yellow;
     // padding: 50px 50px;
     width: 100px;
     padding: 50px 0;
@@ -65,8 +63,6 @@ const LeftHeaderBlock = styled.div`
         }
       }
       .dice {
-        border: 1px solid green;
-
         color: ${(props) => (props.isOpen ? "#fff" : "#5a4620")};
         margin-top: 15px;
         display: flex;
@@ -85,7 +81,6 @@ const LeftHeaderBlock = styled.div`
       top: 25%;
       left: 30%;
       li {
-        border: 1px solid #green;
         margin-bottom: 20px;
         .member {
           display: flex;
