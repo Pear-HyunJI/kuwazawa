@@ -9,6 +9,11 @@ import { useMediaQuery } from "react-responsive";
 
 const LayoutBlock = styled.div``;
 
+const MainBlur = styled.div`
+  filter: ${(props) => (props.isMenuOpen ? "blur(5px)" : "none")};
+  background-color: ${(props) => props.isMenuOpen && "#f5eeda90"};
+`;
+
 const Layout = () => {
   const mobile = useMediaQuery({ maxWidth: 412 });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -42,10 +47,10 @@ const Layout = () => {
           />
         </>
       )}
-      <main>
+      <MainBlur isMenuOpen={isMenuOpen}>
         <Outlet />
-      </main>
-      <Footer />
+        <Footer />
+      </MainBlur>
     </LayoutBlock>
   );
 };

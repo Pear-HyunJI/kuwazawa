@@ -18,32 +18,33 @@ import {
 
 const MHeaderBlock = styled.div`
   color: #5a4620;
-  border: 1px solid red;
+
   position: fixed;
   z-index: 500;
   top: 0px;
   left: 0px;
   width: 100%;
-  background-color: ${(props) => (props.isOpen ? "#5a462090;" : "none")};
-  transition: all 0.3s ease;
   .nav {
-    border: 1px solid yellow;
-
     width: 100%;
+    background-color: #f5eeda;
     .menuButton {
       display: flex;
+      align-items: center;
       justify-content: space-between;
       button {
-        border: 1px solid red;
+        padding: 10px;
+
+        display: inline-flex;
         background: none;
         font-size: 30px;
         padding-bottom: 10px;
         transition: color 0.3s ease;
       }
       .logo {
-        border: 1px solid red;
         align-items: center;
         text-align: center;
+        font-weight: bold;
+        font-size: 20px;
       }
       .cartNdice {
         display: flex;
@@ -61,8 +62,8 @@ const MHeaderBlock = styled.div`
             height: 20px;
             border-radius: 50%;
             background: none;
-            border: 1px solid;
-            border-color: ${(props) => (props.isOpen ? "#fff" : "#5a4620")};
+            border: 1px solid #5a4620;
+
             font-size: 12px;
             line-height: 20px;
             text-align: center;
@@ -70,7 +71,6 @@ const MHeaderBlock = styled.div`
           }
         }
         .dice {
-          border: 1px solid green;
           margin-top: 15px;
           display: flex;
           flex-direction: column;
@@ -80,16 +80,26 @@ const MHeaderBlock = styled.div`
     }
   }
   .menu {
-    width: 100vw;
-    height: 100vh;
-    color: #fff;
+    position: absolute;
+
+    top: ${(props) =>
+      props.isOpen ? "80px" : "-1500px"}; /* 초기 상태에서 숨겨진 상태로 설정 */
+    transition: top 1s ease;
+    left: 17px;
+    width: 90vw;
+    height: 50vh;
+    color: #5a4620;
+    background-color: #f5eeda90;
     ul {
+      padding: 10px 0;
       font-size: 20px;
       position: absolute;
-      top: 25%;
-      left: 30%;
+      top: 0%;
+      left: 0%;
+      width: 100%;
       li {
-        border: 1px solid #green;
+        padding: 10px;
+        border-bottom: 1px solid #5a4620;
         margin-bottom: 20px;
         .member {
           display: flex;
