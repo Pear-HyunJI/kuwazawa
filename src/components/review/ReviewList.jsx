@@ -9,7 +9,8 @@ import { Link } from "react-router-dom";
 
 const ReviewListBlock = styled.div`
   background: #fff;
-  border: 1px solid #000;
+  border-radius:10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   .content {
     padding: 30px;
   }
@@ -67,8 +68,9 @@ const ReviewListBlock = styled.div`
     cursor: pointer;
     padding: 5px 10px;
     border-radius: 5px;
-    border: 1px solid #5a4620;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    margin:10px;
   }
 
   .page-link:hover {

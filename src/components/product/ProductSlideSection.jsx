@@ -28,6 +28,32 @@ position:relative;
         &.slick-active { button { background: black; } }
     }
 }
+@media (max-width: 768px){
+    position:relative; 
+.slide {
+    height:70vw;
+    margin-top:10%; 
+    background-size:cover;
+    background-position:center;
+    &.slide1 { background-image:url('./assets/image/main_slide_crvt_24205_pc_02.jpg')}
+    &.slide2 { background-image:url('./assets/image/main_slide_crvt_240111_pc.jpg')}
+    &.slide3 { background-image:url('./assets/image/main_slide_jsw_231212_pc.jpg')}
+}
+.slick-arrow {
+    position:absolute; top:50%; transform:translateY(-50%); 
+    font-size:50px; color:#fff; 
+    &.slick-prev { left:50px; z-index:9999 }
+    &.slick-next { right:50px } 
+}
+.slick-dots { position:absolute; bottom:30px; 
+              left:50%; transform:translate(-50%);
+   li { display:inline-block; padding:0 5px; 
+        button { width:10px; height:10px; border-radius:50%; 
+               background:#ddd; text-indent:-9999px; overflow:hidden }
+        &.slick-active { button { background: black; } }
+    }
+}
+}
 `
 const OnlineShopsection = () => {
     const sliders=[

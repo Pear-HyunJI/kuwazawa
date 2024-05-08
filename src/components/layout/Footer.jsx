@@ -103,53 +103,12 @@ const FooterBlock = styled.div`
       padding-top: 150px;
       padding-bottom: 60px;
     }
-    .footerTop {
-      padding: 150px 0;
-      width: 150px;
-    }
-    .goToLink {
-      display: flex;
-      align-items: center;
-      position: relative;
-    }
-    .footerImg1 {
-      opacity: 1;
-      transition: all 1s ease;
-      position: absolute;
-      bottom: 40px;
-    }
-    .footerImg2 {
-      opacity: 0;
-      position: absolute;
-      bottom: 40px;
-    }
-    .footerTop:hover .footerImg1 {
-      opacity: 0;
-    }
-    .footerTop:hover .footerImg2 {
-      opacity: 1;
-    }
-    .topLine {
-      color: #5a4620;
-      position: absolute;
-      bottom: 0px;
-      text-align: center;
-      width: 100%;
-      font-weight: bold;
-    }
-    .botLine {
-      color: #5a4620;
-      position: absolute;
-      bottom: -30px;
-      text-align: center;
-      width: 100%;
-    }
     .footerBottom{
       display:block;
     }
     .footerLogo{
       display:block;
-      margin-left:155px;
+      margin-left:160px;
     }
     p {
       color: #5a4620;

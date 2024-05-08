@@ -1,10 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import MemberModifySection from "@/components/member/MemberModifySection";
+
 
 const MemberModifyViewBlock = styled.div``;
 
 const MemberModifyView = () => {
-  return <MemberModifyViewBlock>회원정보수정 뷰</MemberModifyViewBlock>;
+  return <MemberModifyViewBlock>
+    <MemberModifySection />
+  </MemberModifyViewBlock>;
 };
 
 export default MemberModifyView;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { kuwazawa_reviewDB } from "@/assets/firebase";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const ReviewSectionBlock = styled.div`
   max-width: 500px;
@@ -47,6 +47,7 @@ const ReviewSectionBlock = styled.div`
 const ReviewSection = ({ productArray }) => {
   const location = useLocation(); // useLocation 훅을 사용하여 현재 URL 정보 가져오기
   const { product } = location.state; // 전달된 상품 정보 가져오기
+  
 
   // 상품의 이름을 동적 URL 매개변수로부터 가져오기
   // const { product } = useParams();
@@ -68,12 +69,18 @@ const ReviewSection = ({ productArray }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const date = new Date().toISOString();
+    if (!user) {
+      alert("로그인 후 이용해주세요.");
+      navigate("/login")
+      return;
+    }
     if (!review.rating) {
       alert("별점을 선택하세요.");
       return;
     }
     if (!review.content) {
       alert("리뷰 내용을 입력하세요.");
+      
       return;
     }
     kuwazawa_reviewDB.push({
