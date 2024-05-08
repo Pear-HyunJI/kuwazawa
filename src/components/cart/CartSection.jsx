@@ -94,7 +94,7 @@ const CartSectionBlock = styled.div`
   
     th,
     td {
-      padding: 15px;
+      padding: 10px;
       border-bottom: 1px solid #ddd;
       text-align: left;
       font-size:12px;
@@ -106,7 +106,13 @@ const CartSectionBlock = styled.div`
       font-size:14px;
     }
   
+    .nameTd{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     td {
+
       input[type='number'] {
         width: 50px;
         padding: 5px;
@@ -130,6 +136,7 @@ const CartSectionBlock = styled.div`
   
     .empty {
       td {
+        
         padding: 100px 0;
         text-align: center;
         font-size: 1.5rem;
@@ -137,6 +144,7 @@ const CartSectionBlock = styled.div`
           display: block;
           margin: 0 auto 20px;
           max-width: 200px;
+         
         }
       }
     }
@@ -196,6 +204,8 @@ const CartSection = () => {
       });
   };
 
+  
+
   const tempProducts = carts.map(item => {
     const product = products.find(product => product.id === item.id);
     return { product: product, qty: item.qty };
@@ -227,7 +237,7 @@ const CartSection = () => {
                 <td>
                   <img src={item.product.photo} alt={item.product.name} />
                 </td>
-                <td>
+                <td className='nameTd'>
                   {item.product.name} ({parseInt(item.product.price).toLocaleString()}&yen;)
                 </td>
                 <td>

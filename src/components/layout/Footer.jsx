@@ -149,7 +149,7 @@ const FooterBlock = styled.div`
     }
     .footerLogo{
       display:block;
-      margin-left:190px;
+      margin-left:155px;
     }
     p {
       color: #5a4620;
@@ -179,7 +179,7 @@ const FooterBlock = styled.div`
       }
     }
     .right button{
-      margin-left:130px;
+      margin-left:100px;
     }
     .right a {
       color: #5a4620;
