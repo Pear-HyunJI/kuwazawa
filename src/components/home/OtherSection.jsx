@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+
 
 const OtherSectionBlock = styled.div`
   text-align: center;
   padding: 100px 0;
-
+  display: ${({ isVisible }) => (isVisible ? "block" : "none")};
   h2 {
     font-size: 2rem;
     color: #5a4620;
@@ -23,7 +24,7 @@ const OtherSectionBlock = styled.div`
 
   li {
     flex: 0 0 calc(33.333% - 20px);
-    margin: 10px;
+    margin: 130px 10px;
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
@@ -40,7 +41,7 @@ const OtherSectionBlock = styled.div`
     transition: transform 0.5s;
 
     &:hover {
-      transform: scale(1.1);
+      transform: scale(0.8) rotate(15deg);
     }
   }
 
@@ -56,14 +57,35 @@ const OtherSectionBlock = styled.div`
     }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
     li {
       flex: 0 0 calc(33.333% - 20px);
+      margin: 50px 10px;
     }
   }
 `;
 
 const OtherSection = () => {
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // 요소가 보여야 할 스크롤 위치
+      const scrollThreshold = 9999; // 예시로 설정한 임계값
+
+      // 다른 대표 메뉴 섹션의 위치 계산
+      const otherSectionElement = document.querySelector("#other-section");
+      const otherSectionPosition = otherSectionElement.getBoundingClientRect().top;
+
+      // 스크롤 위치에 따라 요소의 가시성 결정
+      setIsVisible(otherSectionPosition < scrollThreshold);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const bread = [
     {
       img: "./assets/image/homeSnack/home_img11.png",
@@ -98,17 +120,12 @@ const OtherSection = () => {
   ];
 
   return (
-    <OtherSectionBlock>
+    <OtherSectionBlock id="other-section" className="row" isVisible={isVisible}>
       <h2>다른 대표메뉴</h2>
       <ul>
         {bread.map((item, index) => (
           <li key={index}>
-            <Link
-              to={{
-                pathname: "/snackInfo",
-                state: { scrollPosition: item.scrollPosition },
-              }}
-            >
+            <Link to={{pathname: "/snackInfo",state: { scrollPosition: item.scrollPosition },}}>
               <img src={item.img} alt={item.name} />
               <p>{item.name}</p>
             </Link>

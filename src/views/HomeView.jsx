@@ -52,6 +52,7 @@ const HomeView = () => {
         <OtherSection />
       </OtherSectionBlock>
       <ContentBlock />
+
     </HomeViewBlock>
   );
 };
