@@ -7,6 +7,9 @@ const BoardSearchBlock = styled.div`
   margin: auto;
   padding: 100px 0 20px;
   text-align: center;
+  @media screen and (max-width: 412px) {
+    padding: 100px 0 0px;
+  }
 
   h2 {
     font-size: 35px;
@@ -32,6 +35,16 @@ const BoardSearchBlock = styled.div`
       font-weight: bold;
       padding: 5px 0px;
       background-color: transparent;
+    }
+    @media screen and (max-width: 412px) {
+      justify-content: center;
+      input {
+        padding: 10px 130px 10px 10px;
+      }
+      button {
+        font-size: 25px;
+        padding: 10px 3px;
+      }
     }
   }
 `;

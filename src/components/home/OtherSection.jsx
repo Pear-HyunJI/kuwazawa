@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-
 const OtherSectionBlock = styled.div`
   text-align: center;
-  padding: 100px 0;
+  padding: 120px 0;
   display: ${({ isVisible }) => (isVisible ? "block" : "none")};
   h2 {
     font-size: 2rem;
@@ -24,7 +23,7 @@ const OtherSectionBlock = styled.div`
 
   li {
     flex: 0 0 calc(33.333% - 20px);
-    margin: 130px 10px;
+    margin: 50px 0px;
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
@@ -51,22 +50,32 @@ const OtherSectionBlock = styled.div`
     margin-top: 10px;
   }
 
-  @media (max-width: 768px) {
-    li {
-      flex: 0 0 calc(33.333% - 20px);
+  @media (max-width: 412px) {
+    h2 {
+      font-size: 1.6rem;
     }
-  }
-
-  @media (max-width: 768px) {
     li {
-      flex: 0 0 calc(33.333% - 20px);
-      margin: 50px 10px;
+      flex: 0 0 calc(40% - 20px);
+      margin: 20px 30px;
+
+      position: relative;
+      height: 160px;
+    }
+    img {
+      width: 90%;
+    }
+    p {
+      position: absolute;
+      width: 100%;
+
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
 `;
 
 const OtherSection = () => {
-
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -76,7 +85,8 @@ const OtherSection = () => {
 
       // 다른 대표 메뉴 섹션의 위치 계산
       const otherSectionElement = document.querySelector("#other-section");
-      const otherSectionPosition = otherSectionElement.getBoundingClientRect().top;
+      const otherSectionPosition =
+        otherSectionElement.getBoundingClientRect().top;
 
       // 스크롤 위치에 따라 요소의 가시성 결정
       setIsVisible(otherSectionPosition < scrollThreshold);
@@ -125,7 +135,12 @@ const OtherSection = () => {
       <ul>
         {bread.map((item, index) => (
           <li key={index}>
-            <Link to={{pathname: "/snackInfo",state: { scrollPosition: item.scrollPosition },}}>
+            <Link
+              to={{
+                pathname: "/snackInfo",
+                state: { scrollPosition: item.scrollPosition },
+              }}
+            >
               <img src={item.img} alt={item.name} />
               <p>{item.name}</p>
             </Link>

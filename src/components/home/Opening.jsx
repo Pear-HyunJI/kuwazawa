@@ -110,103 +110,80 @@ const OpeningBlock = styled.div`
         scrollPosition > 4500 ? "calc(100% - 30%)" : "0"};
     }
   }
-  @media (max-width: 768px){
-      background: url(${backImg});
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  width: 100vw;
-  max-width: 100%;
-  top: 0;
-  left: 0;
-  position: ${({ scrollPosition }) =>
-    scrollPosition > 4500 ? "relative" : "fixed"};
-  overflow: hidden;
-  z-index: 10;
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(
-      255,
-      255,
-      255,
-      ${({ scrollPosition }) =>
-        scrollPosition > 3800 && scrollPosition <= 4500 ? "0.5" : "0"}
-    );
-    transition: background-color 0.5s ease;
-  }
-  img {
-    position: absolute;
-    transition: all 0.5s ease;
-    background: transparent;
-    &:nth-child(1) {
-      bottom: ${({ scrollPosition }) => (scrollPosition > 4500 ? "5%" : "0%")};
-      max-width: ${({ scrollPosition }) =>
-        scrollPosition > 4500 ? "70%" : "100%"};
-      left: ${({ scrollPosition }) => (scrollPosition > 4500 ? "-30%" : "0")};
+  @media (max-width: 768px) {
+    z-index: 1000;
+    img {
+      position: absolute;
+      transition: all 0.5s ease;
+      background: transparent;
+      &:nth-child(1) {
+        bottom: ${({ scrollPosition }) =>
+          scrollPosition > 4500 ? "5%" : "0%"};
+        max-width: ${({ scrollPosition }) =>
+          scrollPosition > 4500 ? "70%" : "100%"};
+        left: ${({ scrollPosition }) => (scrollPosition > 4500 ? "-30%" : "0")};
+      }
+      &:nth-child(2) {
+        top: ${({ scrollPosition }) => (scrollPosition > 4500 ? "15%" : "82%")};
+        max-width: ${({ scrollPosition }) =>
+          scrollPosition > 4500 ? "70%" : "100%"};
+        left: ${({ scrollPosition }) => (scrollPosition > 4500 ? "0" : "0")};
+      }
+      &:nth-child(3) {
+        bottom: ${({ scrollPosition }) =>
+          scrollPosition > 4500 ? "10%" : "0%"};
+        max-width: ${({ scrollPosition }) =>
+          scrollPosition > 4500 ? "70%" : "100%"};
+        left: ${({ scrollPosition }) => (scrollPosition > 4500 ? "-30%" : "0")};
+      }
+      &:nth-child(4) {
+        top: ${({ scrollPosition }) => (scrollPosition > 4500 ? "5%" : "75%")};
+        max-width: ${({ scrollPosition }) =>
+          scrollPosition > 4500 ? "70%" : "100%"};
+        left: ${({ scrollPosition }) =>
+          scrollPosition > 4500 ? "-50%" : "50%"};
+      }
+      &:nth-child(5) {
+        left: 0;
+        max-width: ${({ scrollPosition }) =>
+          scrollPosition > 4500 ? "25%" : "45%"};
+        bottom: 10%;
+        left: ${({ scrollPosition }) => (scrollPosition > 4500 ? "-30%" : "0")};
+      }
+      &:nth-child(6) {
+        left: 0;
+        top: 81%;
+        left: ${({ scrollPosition }) => (scrollPosition > 4500 ? "-30%" : "0")};
+      }
+      &:nth-child(7) {
+        left: 0;
+        top: 81%;
+        max-width: ${({ scrollPosition }) =>
+          scrollPosition > 4500 ? "10%" : "15%"};
+        right: ${({ scrollPosition }) =>
+          scrollPosition > 4500 ? "-30%" : "0"};
+      }
+      &:nth-child(8) {
+        right: 0;
+        max-width: ${({ scrollPosition }) =>
+          scrollPosition > 4500 ? "30%" : "50%"};
+        bottom: 10%;
+        right: ${({ scrollPosition }) =>
+          scrollPosition > 4500 ? "calc(100% - 30%)" : "0"};
+      }
+      &:nth-child(9) {
+        top: 81%;
+        right: ${({ scrollPosition }) =>
+          scrollPosition > 4500 ? "calc(100% - 30%)" : "0"};
+      }
+      &:nth-child(10) {
+        top: 81%;
+        max-width: ${({ scrollPosition }) =>
+          scrollPosition > 4500 ? "10%" : "15%"};
+        right: ${({ scrollPosition }) =>
+          scrollPosition > 4500 ? "calc(100% - 30%)" : "0"};
+      }
     }
-    &:nth-child(2) {
-      top: ${({ scrollPosition }) => (scrollPosition > 4500 ? "15%" : "82%")};
-      max-width: ${({ scrollPosition }) =>
-        scrollPosition > 4500 ? "70%" : "100%"};
-      left: ${({ scrollPosition }) => (scrollPosition > 4500 ? "0" : "0")};
-    }
-    &:nth-child(3) {
-      bottom: ${({ scrollPosition }) => (scrollPosition > 4500 ? "10%" : "0%")};
-      max-width: ${({ scrollPosition }) =>
-        scrollPosition > 4500 ? "70%" : "100%"};
-      left: ${({ scrollPosition }) => (scrollPosition > 4500 ? "-30%" : "0")};
-    }
-    &:nth-child(4) {
-      top: ${({ scrollPosition }) => (scrollPosition > 4500 ? "5%" : "75%")};
-      max-width: ${({ scrollPosition }) =>
-        scrollPosition > 4500 ? "70%" : "100%"};
-      left: ${({ scrollPosition }) => (scrollPosition > 4500 ? "-50%" : "50%")};
-    }
-    &:nth-child(5) {
-      left: 0;
-      max-width: ${({ scrollPosition }) =>
-        scrollPosition > 4500 ? "25%" : "45%"};
-      bottom: 10%;
-      left: ${({ scrollPosition }) => (scrollPosition > 4500 ? "-30%" : "0")};
-    }
-    &:nth-child(6) {
-      left: 0;
-      top: 81%;
-      left: ${({ scrollPosition }) => (scrollPosition > 4500 ? "-30%" : "0")};
-    }
-    &:nth-child(7) {
-      left: 0;
-      top: 81%;
-      max-width: ${({ scrollPosition }) =>
-        scrollPosition > 4500 ? "10%" : "15%"};
-      right: ${({ scrollPosition }) => (scrollPosition > 4500 ? "-30%" : "0")};
-    }
-    &:nth-child(8) {
-      right: 0;
-      max-width: ${({ scrollPosition }) =>
-        scrollPosition > 4500 ? "30%" : "50%"};
-      bottom: 10%;
-      right: ${({ scrollPosition }) =>
-        scrollPosition > 4500 ? "calc(100% - 30%)" : "0"};
-    }
-    &:nth-child(9) {
-      top: 81%;
-      right: ${({ scrollPosition }) =>
-        scrollPosition > 4500 ? "calc(100% - 30%)" : "0"};
-    }
-    &:nth-child(10) {
-      top: 81%;
-      max-width: ${({ scrollPosition }) =>
-        scrollPosition > 4500 ? "10%" : "15%"};
-      right: ${({ scrollPosition }) =>
-        scrollPosition > 4500 ? "calc(100% - 30%)" : "0"};
-    }
-  }
   }
 `;
 
@@ -250,8 +227,11 @@ const Text = styled.svg`
   stroke-width: 0.75px;
   stroke-linecap: round;
   stroke-linejoin: round;
-  animation: ${fillText} 3s ease-in-out forwards;
+  animation: ${fillText} 4s ease-in-out forwards;
   background: transparent;
+  @media screen and (max-width: 415px) {
+    font-size: 30px;
+  }
 `;
 
 const fadeIn = keyframes`
@@ -268,6 +248,10 @@ const LogoImage = styled.img`
   // left: 100%;
   transform: translate(145%, -120%);
   animation: ${fadeIn} 3s ease-in-out forwards;
+  @media screen and (max-width: 415px) {
+    width: 80px;
+    transform: translate(195%, -120%);
+  }
 `;
 
 const Opening = ({ scrollPosition }) => {

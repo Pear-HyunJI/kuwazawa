@@ -63,15 +63,86 @@ const BoardSectionBlock = styled.div`
       }
     }
   }
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .page-item {
+    list-style: none;
+    margin: 0 5px;
+  }
+
+  .page-link {
+    color: #5a4620;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    margin: 10px;
+  }
+
+  .page-link:hover {
+    background-color: #5a4620;
+    color: #fff;
+  }
+
+  .page-link:focus {
+    outline: none;
+  }
+
+  .page-link.active {
+    background-color: #5a4620;
+    color: #fff;
+  }
 `;
 
 const MBoardSectionBlock = styled.div`
   background: #fafafa;
-  border: 1px solid red;
+
   max-width: 390px;
   margin: 0 auto;
-  .infoWrap {
-    display: flex;
+
+  .list {
+    border-bottom: 1px solid #bababa;
+    padding: 10px;
+    .infoWrap {
+      display: flex;
+      padding: 10px 0px;
+    }
+    .subject {
+      font-size: 20px;
+
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+
+      white-space: normal;
+      line-height: 1.2;
+      height: 2.4em;
+      text-align: left;
+      word-wrap: break-word;
+
+      text-overflow: ellipsis;
+    }
+  }
+  .btn {
+    text-align: center;
+    margin: 20px 0;
+    a {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #5a4620;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s;
+      &:hover {
+        background: #3d3115;
+      }
+    }
   }
 `;
 
@@ -80,10 +151,16 @@ const BoardSection = ({ title, boardKeyword }) => {
   const list = useSelector((state) => state.boards.list);
   const user = useSelector((state) => state.members.user);
   const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
+  const boardPerPage = 10;
 
   useEffect(() => {
     dispatch(fetchNotice());
   }, [dispatch]);
+
+  const indexOfLastReview = currentPage * boardPerPage;
+  const indexOfFirstReview = indexOfLastReview - boardPerPage;
+  const currentBoard = list.slice(indexOfFirstReview, indexOfLastReview);
 
   return (
     <>
@@ -109,8 +186,8 @@ const BoardSection = ({ title, boardKeyword }) => {
               </tr>
             </thead>
             <tbody>
-              {list.length > 0 &&
-                list
+              {currentBoard.length > 0 &&
+                currentBoard
                   .filter(
                     (item) =>
                       (title === "all" || item.category === title) &&
@@ -136,6 +213,24 @@ const BoardSection = ({ title, boardKeyword }) => {
                   ))}
             </tbody>
           </table>
+          <div>
+            {list.length > 0 && (
+              <ul className="pagination">
+                {[...Array(Math.ceil(list.length / boardPerPage)).keys()].map(
+                  (number) => (
+                    <li key={number} className="page-item">
+                      <button
+                        onClick={() => paginate(number + 1)}
+                        className="page-link"
+                      >
+                        {number + 1}
+                      </button>
+                    </li>
+                  )
+                )}
+              </ul>
+            )}
+          </div>
           {user && user.userId === "junhyeok_an@naver.com" && (
             <div className="btn">
               <Link to="/boardWrite">글쓰기</Link>
@@ -154,15 +249,14 @@ const BoardSection = ({ title, boardKeyword }) => {
                     (boardKeyword === "" || item.subject.includes(boardKeyword))
                 )
                 .map((post, index) => (
-                  <div key={index}>
+                  <div key={index} className="list">
                     <div className="infoWrap">
                       <div>
                         {dayjs(post.date).format("YYYY-MM-DD")}&nbsp;|&nbsp;{" "}
                       </div>
                       <div>{post.category}</div>
                     </div>
-                    <div>
-                      s
+                    <div className="subject">
                       <Link
                         to={`/boardDetail/${post.subject}`}
                         state={{ post: post }}
@@ -172,6 +266,29 @@ const BoardSection = ({ title, boardKeyword }) => {
                     </div>
                   </div>
                 ))}
+            <div>
+              {list.length > 0 && (
+                <ul className="pagination">
+                  {[...Array(Math.ceil(list.length / boardPerPage)).keys()].map(
+                    (number) => (
+                      <li key={number} className="page-item">
+                        <button
+                          onClick={() => paginate(number + 1)}
+                          className="page-link"
+                        >
+                          {number + 1}
+                        </button>
+                      </li>
+                    )
+                  )}
+                </ul>
+              )}
+            </div>
+            {user && user.userId === "junhyeok_an@naver.com" && (
+              <div className="btn">
+                <Link to="/boardWrite">글쓰기</Link>
+              </div>
+            )}
           </div>
         </MBoardSectionBlock>
       )}

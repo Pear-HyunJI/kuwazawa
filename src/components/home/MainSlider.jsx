@@ -83,6 +83,15 @@ const MainSliderBlock = styled.div`
       left: 50%;
     }
   }
+  @media screen and (max-width: 412px) {
+    .slick-track {
+      margin-top: 400px;
+      .slide {
+        height: 40vh;
+        line-height: 40vh;
+      }
+    }
+  }
 `;
 
 const MainSlider = () => {
@@ -96,6 +105,15 @@ const MainSlider = () => {
     centerMode: true,
     centerPadding: "60px",
     infinite: true,
+    responsive: [
+      {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: 1,
+          centerPadding: "90px",
+        },
+      },
+    ],
     beforeChange: (next) => {
       const slideItems = document.querySelectorAll(".slide");
       slideItems.forEach((item, index) => {

@@ -72,26 +72,47 @@ const TextAreaBlock = styled.div`
       width: 120%;
     }
   }
+  @media screen and (max-width: 412px) {
+    margin: 300px auto 200px;
+    .container {
+      height: 930px;
+      font-size: 130px;
+    }
+
+    .imgBox {
+      width: 200px;
+    }
+    .bottom {
+      font-size: 22px;
+      color: #333;
+      margin: 40px;
+      word-break: keep-all;
+    }
+  }
 `;
 
-const TextArea = ({ scrollPosition }) => {
+const TextArea = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const threshold = 5400;
 
   useEffect(() => {
-    const handleScrollThrottled = _.throttle(handleScroll, 200);
-    window.addEventListener("scroll", handleScrollThrottled);
+    const handleScroll = _.throttle(() => {
+      setScrollPosition(window.scrollY || window.pageYOffset);
+    }, 200);
+
+    window.addEventListener("scroll", handleScroll);
+
     return () => {
-      window.removeEventListener("scroll", handleScrollThrottled);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  const handleScroll = () => {
-    const threshold = 5000;
-    //const threshold = 5300;
+  useEffect(() => {
     if (scrollPosition > threshold) {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % product.length);
     }
-  };
+  }, [scrollPosition, threshold]);
 
   const product = [
     { img: "./assets/image/advertise/batadorayaki_img2.jpg" },
@@ -121,9 +142,9 @@ const TextArea = ({ scrollPosition }) => {
         <h3>전통과 정성</h3> <br />
         <p>후쿠시마현 이시카와초에 있는 창업 메이지 20년의 화과자점 입니다 .</p>
         <p>
-          창업 당시부터 변함없는 맛의 차, 만주, 도랴야끼에 생크림 샌드.
-          인기의 화과자 장인이 색채를 더하는 계절의 화과자 등 .
-          수제로만든 맛있는 느낌을 즐기세요 .
+          창업 당시부터 변함없는 맛의 차, 만주, 도랴야끼에 생크림 샌드. 인기의
+          화과자 장인이 색채를 더하는 계절의 화과자 등 . 수제로만든 맛있는
+          느낌을 즐기세요 .
         </p>
         <button className="btn">View More</button>
       </div>

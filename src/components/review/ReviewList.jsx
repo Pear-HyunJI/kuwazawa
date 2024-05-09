@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const ReviewListBlock = styled.div`
   background: #fff;
-  border-radius:10px;
+  border-radius: 10px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   .content {
     padding: 30px;
@@ -70,16 +70,12 @@ const ReviewListBlock = styled.div`
     border-radius: 5px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    margin:10px;
+    margin: 5px;
   }
 
   .page-link:hover {
     background-color: #5a4620;
     color: #fff;
-  }
-
-  .page-link:focus {
-    outline: none;
   }
 
   .page-link.active {
@@ -94,6 +90,7 @@ const ReviewList = ({ product }) => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const reviewsPerPage = 4;
+  const paginationLength = 5;
 
   useEffect(() => {
     dispatch(fetchReview());
@@ -117,6 +114,26 @@ const ReviewList = ({ product }) => {
   );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const lastPage = Math.ceil(filteredReviews.length / reviewsPerPage);
+
+  let startPage, endPage;
+  if (lastPage <= paginationLength) {
+    startPage = 1;
+    endPage = lastPage;
+  } else {
+    const halfPages = Math.floor(paginationLength / 2);
+    if (currentPage <= halfPages) {
+      startPage = 1;
+      endPage = paginationLength;
+    } else if (currentPage + halfPages >= lastPage) {
+      startPage = lastPage - paginationLength + 1;
+      endPage = lastPage;
+    } else {
+      startPage = currentPage - halfPages;
+      endPage = currentPage + halfPages;
+    }
+  }
 
   return (
     <ReviewListBlock>
@@ -150,20 +167,44 @@ const ReviewList = ({ product }) => {
       <div>
         {filteredReviews.length > 0 && (
           <ul className="pagination">
-            {[
-              ...Array(
-                Math.ceil(filteredReviews.length / reviewsPerPage)
-              ).keys(),
-            ].map((number) => (
-              <li key={number} className="page-item">
-                <button
-                  onClick={() => paginate(number + 1)}
-                  className="page-link"
-                >
-                  {number + 1}
-                </button>
-              </li>
-            ))}
+            <li className="page-item">
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                className="page-link"
+              >
+                이전
+              </button>
+            </li>
+            {[...Array(endPage - startPage + 1).keys()].map((i) => {
+              const pageNumber = i + startPage;
+              return (
+                <li key={pageNumber} className="page-item">
+                  <button
+                    onClick={() => paginate(pageNumber)}
+                    className={`page-link ${
+                      currentPage === pageNumber ? "active" : ""
+                    }`}
+                  >
+                    {pageNumber}
+                  </button>
+                </li>
+              );
+            })}
+            <li className="page-item">
+              <button
+                onClick={() =>
+                  setCurrentPage((prev) =>
+                    Math.min(
+                      prev + 1,
+                      Math.ceil(filteredReviews.length / reviewsPerPage)
+                    )
+                  )
+                }
+                className="page-link"
+              >
+                다음
+              </button>
+            </li>
           </ul>
         )}
       </div>

@@ -50,6 +50,21 @@ const Container = styled.div`
     font-size: 45px;
     margin-bottom: 100px;
   }
+  @media screen and (max-width: 412px) {
+    padding: 20px 0 200px 0;
+    .animal {
+      top: 70%;
+    }
+    .flower {
+      width: 60%;
+      left: -20%;
+      z-index: 0;
+    }
+    h2 {
+      font-size: 40px;
+      z-index: 1;
+    }
+  }
 `;
 
 const SliderWrapper = styled.div`
@@ -108,6 +123,26 @@ const SliderWrapper = styled.div`
       &:hover::before {
         animation: ${hoverLine} 1.5s infinite;
         visibility: visible;
+      }
+    }
+  }
+  @media screen and (max-width: 412px) {
+    padding: 0px 50px;
+    .slide {
+      flex: 0 0 100%;
+      // width: 300px;
+      height: 400px;
+      padding: 0 10px;
+      margin: 0px 20px;
+      h3 {
+        font-size: 25px;
+      }
+      img {
+        width: 150px;
+        margin: 20px 0 20px 0;
+      }
+      .desc {
+        margin-bottom: 20px;
       }
     }
   }
