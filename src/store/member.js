@@ -46,4 +46,13 @@ export const fetchMembers = () => async (dispatch) => {
     console.error(error);
   }
 };
+
+export const updateMember = (members, updatedData) => async (dispatch) => {
+  try {
+    await kuwazawa_memberDB.child(members).update(updatedData);
+    dispatch(updateMember({ members, updatedData }));
+  } catch (error) {
+    console.error(error);
+  }
+};
 export default memberSlice.reducer;
