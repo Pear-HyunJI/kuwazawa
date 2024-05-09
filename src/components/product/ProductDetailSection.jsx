@@ -8,9 +8,9 @@ import "slick-carousel/slick/slick-theme.css";
 import Modal from "@/components/product/Modal";
 
 const ProductDetailSectionBlock = styled.div`
-  margin-top: 100px;
   text-align: center;
-  padding: 50px 0;
+  padding: 100px 0;
+
   .content {
     display: flex;
     justify-content: center;
