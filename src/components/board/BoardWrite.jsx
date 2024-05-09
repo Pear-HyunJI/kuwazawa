@@ -3,10 +3,17 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { kuwazawa_noticeDB } from "@/assets/firebase";
+import dayjs from "dayjs";
 
 const BoardWriteBlock = styled.div`
+  padding: 100px 0 20px;
   max-width: 600px;
   margin: 0 auto 50px;
+  h2 {
+    font-size: 35px;
+    color: #5a4620;
+    margin-bottom: 80px;
+  }
   table {
     col:nth-child(1) {
       width: 100px;
@@ -14,6 +21,7 @@ const BoardWriteBlock = styled.div`
     col:nth-child(2) {
       width: auto;
     }
+
     td {
       padding: 5px;
       input {
@@ -46,6 +54,7 @@ const BoardWriteBlock = styled.div`
 const BoardWrite = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.members.user);
+  const date = new Date().toISOString();
 
   const [board, setBoard] = useState({
     category: "notice",
@@ -60,7 +69,6 @@ const BoardWrite = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const date = new Date().toISOString();
     if (!board.subject) {
       alert("제목을 입력하세요.");
       document.getElementsByName("subject")[0].focus();
@@ -88,11 +96,12 @@ const BoardWrite = () => {
           <colgroup>
             <col />
             <col />
+            <col />
           </colgroup>
           <tbody>
             <tr>
               <td>카테고리</td>
-              <td>
+              <td colspan="2">
                 <select
                   name="category"
                   value={board.category}
@@ -110,10 +119,19 @@ const BoardWrite = () => {
               <td>
                 <input type="text" name="writer" value={user.userId} disabled />
               </td>
+              <td>
+                {/* <input type="text" name="date" value={date} disabled /> */}
+                <input
+                  type="text"
+                  name="date"
+                  value={dayjs(date).format("YYYY-MM-DD")}
+                  disabled
+                />
+              </td>
             </tr>
             <tr>
               <td>제목</td>
-              <td>
+              <td colspan="2">
                 <input
                   type="text"
                   name="subject"
@@ -124,7 +142,7 @@ const BoardWrite = () => {
             </tr>
             <tr>
               <td>내용</td>
-              <td>
+              <td colspan="2">
                 <textarea
                   name="content"
                   value={board.content}

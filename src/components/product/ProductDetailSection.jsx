@@ -5,17 +5,17 @@ import { useSelector } from "react-redux";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Modal from '@/components/product/Modal'
+import Modal from "@/components/product/Modal";
 
 const ProductDetailSectionBlock = styled.div`
   margin-top: 100px;
   text-align: center;
-  padding:50px 0 ;
+  padding: 50px 0;
   .content {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     .sliderContainer {
       max-width: 600px;
       .subSlide {
@@ -40,21 +40,18 @@ const ProductDetailSectionBlock = styled.div`
         color: #555;
       }
 
+      span {
+        margin-right: 10px;
+        color: #555;
+      }
 
-
-        span {
-          margin-right: 10px;
-          color: #555;
-        }
-
-        input {
-          width: 50px;
-          padding: 8px;
-          border-radius: 5px;
-          border: 1px solid #ccc;
-          font-size: 16px;
-        }
-      
+      input {
+        width: 50px;
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+      }
     }
 
     .btn {
@@ -70,22 +67,22 @@ const ProductDetailSectionBlock = styled.div`
         border-radius: 5px;
         text-decoration: none;
         transition: background 0.3s;
-        width : 300px;
+        width: 300px;
         &:hover {
           background-color: #3d3115;
         }
       }
     }
   }
-  @media (max-width: 768px){
+  @media (max-width: 768px) {
     margin-top: 100px;
     text-align: center;
-    padding:50px 0 ;
+    padding: 50px 0;
     .content {
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      flex-wrap:wrap;
+      flex-wrap: wrap;
       .sliderContainer {
         max-width: 350px;
         .subSlide {
@@ -96,7 +93,7 @@ const ProductDetailSectionBlock = styled.div`
           }
         }
       }
-  
+
       .info {
         padding: 20px;
         background-color: #fff;
@@ -104,29 +101,26 @@ const ProductDetailSectionBlock = styled.div`
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         margin-left: 0px;
         max-width: 400px;
-  
+
         p {
           padding: 10px 0;
           color: #555;
         }
-  
-  
-  
-          span {
-            margin-right: 0px;
-            color: #555;
-          }
-  
-          input {
-            width: 50px;
-            padding: 8px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-          }
-        
+
+        span {
+          margin-right: 0px;
+          color: #555;
+        }
+
+        input {
+          width: 50px;
+          padding: 8px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          font-size: 16px;
+        }
       }
-  
+
       .btn {
         align-items: center;
         margin: 5px 0;
@@ -140,7 +134,7 @@ const ProductDetailSectionBlock = styled.div`
           border-radius: 5px;
           text-decoration: none;
           transition: background 0.3s;
-          width : 300px;
+          width: 300px;
           &:hover {
             background-color: #3d3115;
           }
@@ -151,8 +145,8 @@ const ProductDetailSectionBlock = styled.div`
 `;
 
 const ProductDetailSection = ({ product }) => {
-  const [qty, setQty] = useState(1)
-  const [modalOpen, setModalOpen] = useState({open:false, what:""})
+  const [qty, setQty] = useState(1);
+  const [modalOpen, setModalOpen] = useState({ open: false, what: "" });
 
   // 관리자 로그인
   const manager = useSelector((state) => state.members.manager);
@@ -161,6 +155,25 @@ const ProductDetailSection = ({ product }) => {
     setLoging(manager);
   }, [manager]);
 
+  const handleClick = () => {
+    console.log("product :", product);
+    console.log("product.name :", product.name);
+  };
+
+  const handleChange = (e) => {
+    let newQty = parseInt(e.target.value);
+    if (newQty < 1) {
+      newQty = 1;
+    }
+    if (newQty > product.inventory) {
+      newQty = product.inventory;
+    }
+    setQty(newQty);
+  };
+
+  const onReset = () => {
+    setModalOpen(false);
+  };
   // 슬라이더 동기화
 
   const [nav, setNav] = useState(null);
@@ -173,29 +186,11 @@ const ProductDetailSection = ({ product }) => {
     setSubNav(subSliderRef.current);
   }, []);
 
-  const handleClick = () => {
-    console.log("product :", product);
-    console.log("product.name :", product.name);
-  };
-
-  const handleChange = (e)=>{
-    let newQty = parseInt(e.target.value)
-    if (newQty<1) {
-      newQty = 1
-    }
-    if (newQty>product.inventory) {
-        newQty = product.inventory
-    }
-    setQty(newQty)
- }
-
-  const onReset = ()=>{
-    setModalOpen(false)
- }
-
   return (
     <ProductDetailSectionBlock className="row">
-      <h2 style={{color:"#333", marginBottom:"20px",fontSize:'30px'}}>{product.name}</h2>
+      <h2 style={{ color: "#333", marginBottom: "20px", fontSize: "30px" }}>
+        {product.name}
+      </h2>
       <div className="content">
         <div className="sliderContainer">
           <Slider
@@ -238,14 +233,39 @@ const ProductDetailSection = ({ product }) => {
 
         <div className="info">
           <p>가격 : {product.price.toLocaleString()}&yen;</p>
-          <p><span dangerouslySetInnerHTML={{ __html: product.description }} /></p>
-          
-          <div className="btn">
-          <p>구매수량 : <input type="number" value={qty} onChange={ handleChange } /></p>
-          <a href="#" onClick={ (e)=>{e.preventDefault(); setModalOpen({open:true, what:"cart"}) } }>장바구니</a>
-          <a href="#" onClick={ (e)=>{e.preventDefault(); setModalOpen({open:true, what:"buy"}) } }>구매하기</a>
+          <p>
+            <span dangerouslySetInnerHTML={{ __html: product.description }} />
+          </p>
 
-          {loging && (<Link to="/productModify" state={{ product }}>상품수정</Link>)}
+          <div className="btn">
+            <p>
+              구매수량 :{" "}
+              <input type="number" value={qty} onChange={handleChange} />
+            </p>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setModalOpen({ open: true, what: "cart" });
+              }}
+            >
+              장바구니
+            </a>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setModalOpen({ open: true, what: "buy" });
+              }}
+            >
+              구매하기
+            </a>
+
+            {loging && (
+              <Link to="/productModify" state={{ product }}>
+                상품수정
+              </Link>
+            )}
             <Link
               to={`/review/${product.name}`}
               state={{ product: product }}
@@ -254,9 +274,14 @@ const ProductDetailSection = ({ product }) => {
               리뷰쓰기
             </Link>
           </div>
-          </div>
+        </div>
       </div>
-      <Modal product={product} qty={qty} modalOpen={modalOpen} onReset={onReset} />
+      <Modal
+        product={product}
+        qty={qty}
+        modalOpen={modalOpen}
+        onReset={onReset}
+      />
     </ProductDetailSectionBlock>
   );
 };

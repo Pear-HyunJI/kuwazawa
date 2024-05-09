@@ -89,10 +89,6 @@ const BoardSectionBlock = styled.div`
     color: #fff;
   }
 
-  .page-link:focus {
-    outline: none;
-  }
-
   .page-link.active {
     background-color: #5a4620;
     color: #fff;
@@ -144,6 +140,36 @@ const MBoardSectionBlock = styled.div`
       }
     }
   }
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .page-item {
+    list-style: none;
+    margin: 0 5px;
+  }
+
+  .page-link {
+    color: #5a4620;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    margin: 10px;
+  }
+
+  .page-link:hover {
+    background-color: #5a4620;
+    color: #fff;
+  }
+
+  .page-link.active {
+    background-color: #5a4620;
+    color: #fff;
+  }
 `;
 
 const BoardSection = ({ title, boardKeyword }) => {
@@ -152,7 +178,8 @@ const BoardSection = ({ title, boardKeyword }) => {
   const user = useSelector((state) => state.members.user);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
-  const boardPerPage = 10;
+  const boardPerPage = 4;
+  const paginationLength = 5;
 
   useEffect(() => {
     dispatch(fetchNotice());
@@ -161,6 +188,28 @@ const BoardSection = ({ title, boardKeyword }) => {
   const indexOfLastReview = currentPage * boardPerPage;
   const indexOfFirstReview = indexOfLastReview - boardPerPage;
   const currentBoard = list.slice(indexOfFirstReview, indexOfLastReview);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const lastPage = Math.ceil(list.length / boardPerPage);
+
+  let startPage, endPage;
+  if (lastPage <= paginationLength) {
+    startPage = 1;
+    endPage = lastPage;
+  } else {
+    const halfPages = Math.floor(paginationLength / 2);
+    if (currentPage <= halfPages) {
+      startPage = 1;
+      endPage = paginationLength;
+    } else if (currentPage + halfPages >= lastPage) {
+      startPage = lastPage - paginationLength + 1;
+      endPage = lastPage;
+    } else {
+      startPage = currentPage - halfPages;
+      endPage = currentPage + halfPages;
+    }
+  }
 
   return (
     <>
@@ -216,18 +265,46 @@ const BoardSection = ({ title, boardKeyword }) => {
           <div>
             {list.length > 0 && (
               <ul className="pagination">
-                {[...Array(Math.ceil(list.length / boardPerPage)).keys()].map(
-                  (number) => (
-                    <li key={number} className="page-item">
+                <li className="page-item">
+                  <button
+                    onClick={() =>
+                      setCurrentPage((prev) => Math.max(prev - 1, 1))
+                    }
+                    className="page-link"
+                  >
+                    이전
+                  </button>
+                </li>
+                {[...Array(endPage - startPage + 1).keys()].map((i) => {
+                  const pageNumber = i + startPage;
+                  return (
+                    <li key={pageNumber} className="page-item">
                       <button
-                        onClick={() => paginate(number + 1)}
-                        className="page-link"
+                        onClick={() => paginate(pageNumber)}
+                        className={`page-link ${
+                          currentPage === pageNumber ? "active" : ""
+                        }`}
                       >
-                        {number + 1}
+                        {pageNumber}
                       </button>
                     </li>
-                  )
-                )}
+                  );
+                })}
+                <li className="page-item">
+                  <button
+                    onClick={() =>
+                      setCurrentPage((prev) =>
+                        Math.min(
+                          prev + 1,
+                          Math.ceil(list.length / boardPerPage)
+                        )
+                      )
+                    }
+                    className="page-link"
+                  >
+                    다음
+                  </button>
+                </li>
               </ul>
             )}
           </div>
@@ -266,21 +343,50 @@ const BoardSection = ({ title, boardKeyword }) => {
                     </div>
                   </div>
                 ))}
+
             <div>
               {list.length > 0 && (
                 <ul className="pagination">
-                  {[...Array(Math.ceil(list.length / boardPerPage)).keys()].map(
-                    (number) => (
-                      <li key={number} className="page-item">
+                  <li className="page-item">
+                    <button
+                      onClick={() =>
+                        setCurrentPage((prev) => Math.max(prev - 1, 1))
+                      }
+                      className="page-link"
+                    >
+                      이전
+                    </button>
+                  </li>
+                  {[...Array(endPage - startPage + 1).keys()].map((i) => {
+                    const pageNumber = i + startPage;
+                    return (
+                      <li key={pageNumber} className="page-item">
                         <button
-                          onClick={() => paginate(number + 1)}
-                          className="page-link"
+                          onClick={() => paginate(pageNumber)}
+                          className={`page-link ${
+                            currentPage === pageNumber ? "active" : ""
+                          }`}
                         >
-                          {number + 1}
+                          {pageNumber}
                         </button>
                       </li>
-                    )
-                  )}
+                    );
+                  })}
+                  <li className="page-item">
+                    <button
+                      onClick={() =>
+                        setCurrentPage((prev) =>
+                          Math.min(
+                            prev + 1,
+                            Math.ceil(list.length / boardPerPage)
+                          )
+                        )
+                      }
+                      className="page-link"
+                    >
+                      다음
+                    </button>
+                  </li>
                 </ul>
               )}
             </div>
