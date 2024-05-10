@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { NavLink, Link } from "react-router-dom";
 import { CiMenuBurger } from "react-icons/ci";
 import { IoCloseOutline } from "react-icons/io5";
 import { BsCart4 } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts } from "@/store/product";
-import { userLogout, userLogin } from "@/store/member";
+import { fetchCarts, initCarts } from "@/store/product";
+import { userLogout, localUser } from "@/store/member";
 import {
   FaDiceOne,
   FaDiceTwo,
@@ -110,21 +111,25 @@ const MHeaderBlock = styled.div`
 `;
 
 const MHeader = ({ isOpen, toggleMenu, handleCloseMenu }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const carts = useSelector((state) => state.products.carts);
+
   const user = useSelector((state) => state.members.user);
+  const cartsCount = useSelector((state) => state.products.cartsCount);
+
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(userLogout());
-    alert("로그아웃 되었습니다.");
+    dispatch(initCarts([]));
+    navigate("/");
   };
+
   useEffect(() => {
-    dispatch(fetchProducts());
-    let loging = localStorage.loging;
-    if (loging) {
-      dispatch(userLogin(JSON.parse(loging)));
+    dispatch(fetchCarts());
+    if (localStorage.getItem("loging")) {
+      dispatch(localUser(JSON.parse(localStorage.getItem("loging"))));
     }
-  }, [dispatch]);
+  }, [dispatch, cartsCount]);
 
   //주사위 돌리기
 
@@ -156,7 +161,7 @@ const MHeader = ({ isOpen, toggleMenu, handleCloseMenu }) => {
             <div className="cart">
               <Link to="/cart" onClick={handleCloseMenu}>
                 <BsCart4 />
-                <span>{carts ? carts.length : 0}</span>
+                <span>{cartsCount}</span>
               </Link>
             </div>
             <div className="dice">

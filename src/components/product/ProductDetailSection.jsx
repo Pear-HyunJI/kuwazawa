@@ -76,7 +76,7 @@ const ProductDetailSectionBlock = styled.div`
       }
     }
   }
-  @media (max-width: 768px) {
+  @media (max-width: 412px) {
     margin-top: 100px;
     text-align: center;
     padding: 50px 0;

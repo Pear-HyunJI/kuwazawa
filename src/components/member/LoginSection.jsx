@@ -7,34 +7,76 @@ import { useNavigate } from "react-router-dom";
 
 const LoginSectionBlock = styled.div`
   max-width: 600px;
-  margin: 50px auto;
-  table {
-    col:nth-child(1) {
-      width: 150px;
-    }
-    col:nth-child(2) {
-      width: auto;
-    }
-    td {
-      padding: 5px;
-      &:nth-child(1) {
-        text-align: right;
-      }
-      input {
-        border: 1px solid #ddd;
-        height: 30px;
+
+  margin: 0px auto;
+  text-align: left;
+  h2 {
+    padding-top: 60px;
+    font-size: 35px;
+    color: #5a4620;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+  .loginWrap {
+    padding: 50px;
+    border: 2px solid #5a462030;
+    table {
+      padding: 50px;
+
+      col:nth-child(1) {
         width: 100%;
-        text-indent: 1em;
+      }
+      col:nth-child(2) {
+        width: auto;
+      }
+      tr {
+        // width: 500px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+        td {
+          padding: 5px;
+          &:nth-child(1) {
+            display: flex;
+            text-align: left;
+          }
+          input {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            height: 40px;
+            width: 100%;
+
+            text-indent: 1em;
+          }
+        }
+      }
+    }
+    .btn {
+      text-align: center;
+      margin-top: 20px;
+      button {
+        width: 96%;
+        border-radius: 5px;
+        padding: 10px 0;
+        background: #5a462030;
+        color: #5a462099;
+        font-size: 20px;
+        font-weight: bold;
       }
     }
   }
-  .btn {
-    text-align: center;
-    margin-top: 20px;
-    button {
+  @media screen and (max-width: 412px) {
+    max-width: 380px;
+    h2 {
+      padding-top: 80px;
+      font-size: 35px;
+      color: #5a4620;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .joinWrap {
       padding: 10px;
-      background: red;
-      color: #fff;
     }
   }
 `;
@@ -97,45 +139,50 @@ const LoginSection = () => {
 
   return (
     <LoginSectionBlock>
+      <h2>로그인</h2>
       <form onSubmit={handleLogin}>
-        <table>
-          <colgroup>
-            <col />
-            <col />
-          </colgroup>
-          <tbody>
-            <tr>
-              <td>
-                <label htmlFor="userId">이메일: </label>
-              </td>
-              <td>
-                <input
-                  ref={userIdRef}
-                  type="text"
-                  id="userId"
-                  name="userId"
-                  onChange={(e) => setUserId(e.target.value)}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label htmlFor="userPw">비밀번호: </label>
-              </td>
-              <td>
-                <input
-                  ref={userPwRef}
-                  type="password"
-                  id="userPw"
-                  name="userPw"
-                  onChange={(e) => setUserPw(e.target.value)}
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div className="btn">
-          <button type="submit">로그인</button>
+        <div className="loginWrap">
+          <table>
+            <colgroup>
+              <col />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <label htmlFor="userId">이메일: </label>
+                </td>
+                <td>
+                  <input
+                    ref={userIdRef}
+                    type="text"
+                    id="userId"
+                    name="userId"
+                    placeholder="이메일을 입력해 주세요."
+                    onChange={(e) => setUserId(e.target.value)}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label htmlFor="userPw">비밀번호: </label>
+                </td>
+                <td>
+                  <input
+                    ref={userPwRef}
+                    type="password"
+                    id="userPw"
+                    name="userPw"
+                    placeholder="비밀번호를 입력해 주세요."
+                    onChange={(e) => setUserPw(e.target.value)}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div className="btn">
+            <button type="submit">로그인</button>
+          </div>
         </div>
       </form>
     </LoginSectionBlock>
