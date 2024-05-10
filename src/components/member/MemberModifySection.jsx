@@ -76,8 +76,13 @@ const MemberModifySectionBlock = styled.div`
       margin-bottom: 20px;
       text-align: center;
     }
-    .joinWrap {
+    .memberModifyWrap {
       padding: 10px;
+      .btn {
+        button {
+          font-size: 15px;
+        }
+      }
     }
   }
 `;

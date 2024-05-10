@@ -75,7 +75,7 @@ const LoginSectionBlock = styled.div`
       margin-bottom: 20px;
       text-align: center;
     }
-    .joinWrap {
+    .loginWrap {
       padding: 10px;
     }
   }
