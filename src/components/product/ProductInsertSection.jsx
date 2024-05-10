@@ -68,6 +68,7 @@ const OnlineShopInsertSectionBlock = styled.div`
 const OnlineShopInsertSection = () => {
   const navigate = useNavigate();
   const [product, setProduct] = useState({
+    category: "클래식상품",
     name: "",
     price: "",
     description: "",
@@ -121,6 +122,7 @@ const OnlineShopInsertSection = () => {
       }
       await kuwazawa_productDB.push(addProduct);
       setProduct({
+        category: "클래식상품",
         name: "",
         price: "",
         description: "",
@@ -141,6 +143,18 @@ const OnlineShopInsertSection = () => {
       <h2>상품 등록</h2>
       <div className="content">
         <form onSubmit={onSubmit}>
+          <div>
+            <label htmlFor="category">카테고리:</label>
+            <select
+              name="category"
+              id="category"
+              value={product.category}
+              onChange={handleChange}
+            >
+              <option value="클래식상품">클래식상품</option>
+              <option value="시즌한정상품">시즌한정상품</option>
+            </select>
+          </div>
           <div>
             <label htmlFor="name">상품명:</label>
             <input

@@ -6,53 +6,63 @@ const memberSlice = createSlice({
   initialState: {
     members: [],
     user: null,
-    manager: false,
   },
   reducers: {
     initMembers(state, action) {
       state.members = action.payload;
     },
     userLogin(state, action) {
-      state.user = action.payload;
-      //사용자가 페이지를 새로고침하거나 브라우저를 닫은 후에도 사용자 정보를 유지
-      localStorage.loging = JSON.stringify(action.payload);
-      if (action.payload.userId == "junhyeok_an@naver.com") {
-        localStorage.manager = JSON.stringify(true);
-        state.manager = true;
-      } else {
-        localStorage.manager = JSON.stringify(false);
-        state.manager = false;
-      }
+      const {
+        key,
+        userId,
+        userIrum,
+        userPw,
+        handphone,
+        addr1,
+        addr2,
+        zipCode,
+      } = action.payload.findUser;
+
+      state.user = {
+        key,
+        userId,
+        userIrum,
+        userPw,
+        handphone,
+        addr1,
+        addr2,
+        zipCode,
+      };
+      localStorage.loging = JSON.stringify({ key: key, userId: userId });
+    },
+    localUser(state, action) {
+      const findUser = state.members.find(
+        (item) => item.key == action.payload.key
+      );
+      state.user = findUser;
     },
     userLogout(state, action) {
-      state.user = action.payload;
-      state.manager = false;
+      state.user = null;
       localStorage.clear();
     },
   },
 });
 
-export const { initMembers, userLogin, userLogout } = memberSlice.actions;
+export const { initMembers, userLogin, userLogout, localUser } =
+  memberSlice.actions;
 // firebase에서 회원정보를 불러와서 store에 저장
 export const fetchMembers = () => async (dispatch) => {
   try {
-    // 함수 내부에서는 .on('value', ...) => Firebase 데이터베이스에서 회원 정 변경이 있을 때마다 해당 정보를 가져옴.
-    kuwazawa_memberDB.on("value", (membersSnapshot) => {
-      const membersObj = membersSnapshot.val();
-      const membersArr = Object.values(membersObj);
+    kuwazawa_memberDB.on("value", (snapshot) => {
+      const membersObj = snapshot.val();
+      const membersArr = Object.entries(membersObj).map(([key, value]) => {
+        return { key: key, ...value };
+      });
       dispatch(initMembers(membersArr));
     });
   } catch (error) {
-    console.error(error);
+    console.error("오류:", error);
   }
 };
 
-export const updateMember = (members, updatedData) => async (dispatch) => {
-  try {
-    await kuwazawa_memberDB.child(members).update(updatedData);
-    dispatch(updateMember({ members, updatedData }));
-  } catch (error) {
-    console.error(error);
-  }
-};
 export default memberSlice.reducer;

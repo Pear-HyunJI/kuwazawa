@@ -1,19 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { kuwazawa_memberDB } from "@/assets/firebase";
+import { useNavigate } from "react-router-dom";
 import { fetchMembers } from "@/store/member";
+import { useDispatch, useSelector } from "react-redux";
 
 const JoinSectionBlock = styled.div`
-  .header {
-    color: #5a4620;
-    text-align: center;
-    padding: 100px 0;
-  }
-  h2 {
-    font-size: 35px;
-  }
   max-width: 600px;
   margin: 50px auto;
   table {
@@ -31,7 +23,7 @@ const JoinSectionBlock = styled.div`
       input {
         border: 1px solid #ddd;
         height: 30px;
-        width: 70%;
+        width: 100%;
         text-indent: 1em;
       }
     }
@@ -41,7 +33,7 @@ const JoinSectionBlock = styled.div`
     margin-top: 20px;
     button {
       padding: 10px;
-      background: #5a4620;
+      background: red;
       color: #fff;
     }
   }
@@ -49,46 +41,68 @@ const JoinSectionBlock = styled.div`
 
 const JoinSection = () => {
   const dispatch = useDispatch();
-  // store의 index.js의 members의 members[]
   const members = useSelector((state) => state.members.members);
 
   const navigate = useNavigate();
   const userIdRef = useRef("");
   const userPwRef = useRef("");
   const userPwOkRef = useRef("");
+  const mZipcodeRef = useRef("");
+  const mAddressRef = useRef("");
+  const mAddressSubRef = useRef("");
+  const [userInfo, setUserInfo] = useState({
+    userId: "",
+    userPw: "",
+    userPwOk: "",
+    userIrum: "",
+    handphone: "",
+    zipCode: "",
+    addr1: "",
+    addr2: "",
+  });
 
-  const [userId, setUserId] = useState("");
-  const [userPw, setUserPw] = useState("");
-  const [userPwOk, setUserPwOk] = useState("");
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    setUserInfo((userInfo) => ({ ...userInfo, [name]: value }));
+  };
 
-  const onJoin = async (e) => {
+  const register = async (e) => {
     e.preventDefault();
-    if (!userId) {
+    if (!userInfo.userId) {
       alert("이메일을 입력하세요.");
       userIdRef.current.focus();
       return;
     }
-    if (!userPw) {
+    if (!userInfo.userPw) {
       alert("비밀번호를 입력하세요.");
       userPwRef.current.focus();
       return;
     }
-    if (!userPwOk) {
+    if (!userInfo.userPwOk) {
       alert("비밀번호를 입력하세요.");
       userPwOkRef.current.focus();
       return;
     }
-    if (userPw != userPwOk) {
+    if (userInfo.userPw != userInfo.userPwOk) {
       alert("비밀번호가 일치하지 않습니다.");
       userPwRef.current.focus();
       return;
     }
 
-    if (!idCheck(userId)) {
+    if (!idCheck(userInfo.userId)) {
       return false;
     }
 
-    const addMember = { userId: userId, userPw: userPw };
+    const addMember = {
+      mid: Date.now(),
+      userId: userInfo.userId,
+      userPw: userInfo.userPw,
+      userIrum: userInfo.userIrum,
+      handphone: userInfo.handphone,
+      zipCode: userInfo.zipCode,
+      addr1: userInfo.addr1,
+      addr2: userInfo.addr2,
+    };
     try {
       await kuwazawa_memberDB.push(addMember);
       alert("회원가입이 성공했습니다.");
@@ -114,13 +128,44 @@ const JoinSection = () => {
     dispatch(fetchMembers());
   }, []);
 
+  useEffect(() => {
+    window.openDaumPostcode = () => {
+      new window.daum.Postcode({
+        oncomplete: (data) => {
+          let fullAddr = ""; // 최종 주소 변수
+          let extraAddr = ""; // 조합형 주소 변수
+          if (data.userSelectedType === "R") {
+            // 사용자가 도로명 주소를 선택했을 경우
+            fullAddr = data.roadAddress;
+          } else {
+            // 사용자가 지번 주소를 선택했을 경우(J)
+            fullAddr = data.jibunAddress;
+          }
+          if (data.userSelectedType === "R") {
+            if (data.bname !== "") {
+              extraAddr += data.bname;
+            }
+            if (data.buildingName !== "") {
+              extraAddr +=
+                extraAddr !== "" ? ", " + data.buildingName : data.buildingName;
+            }
+            fullAddr += extraAddr !== "" ? " (" + extraAddr + ")" : "";
+          }
+          // 주소 정보를 입력 요소에 설정
+          setUserInfo((prevState) => ({
+            ...prevState,
+            zipCode: data.zonecode,
+            addr1: fullAddr,
+          }));
+          mAddressSubRef.current.focus();
+        },
+      }).open();
+    };
+  }, []);
+
   return (
     <JoinSectionBlock>
-      <div className="header">
-        <h2>CONTACT</h2>
-        <p>회원가입을 해주세요.</p>
-      </div>
-      <form onSubmit={onJoin}>
+      <form onSubmit={register}>
         <table border="0">
           <colgroup>
             <col />
@@ -137,9 +182,9 @@ const JoinSection = () => {
                   name="userId"
                   id="userId"
                   ref={userIdRef}
-                  value={userId}
+                  value={userInfo.userId}
                   onChange={(e) => {
-                    setUserId(e.target.value);
+                    handleChange(e);
                     idCheck(e.target.value);
                   }}
                 />
@@ -155,8 +200,8 @@ const JoinSection = () => {
                   name="userPw"
                   id="userPw"
                   ref={userPwRef}
-                  value={userPw}
-                  onChange={(e) => setUserPw(e.target.value)}
+                  value={userInfo.userPw}
+                  onChange={handleChange}
                 />
               </td>
             </tr>
@@ -170,8 +215,90 @@ const JoinSection = () => {
                   name="userPwOk"
                   id="userPwOk"
                   ref={userPwOkRef}
-                  value={userPwOk}
-                  onChange={(e) => setUserPwOk(e.target.value)}
+                  value={userInfo.userPwOk}
+                  onChange={handleChange}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label htmlFor="userIrum">이름 : </label>
+              </td>
+              <td>
+                <input
+                  type="text"
+                  name="userIrum"
+                  id="userIrum"
+                  value={userInfo.userIrum}
+                  onChange={handleChange}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label htmlFor="handphone">휴대폰번호 : </label>
+              </td>
+              <td>
+                <input
+                  type="text"
+                  name="handphone"
+                  id="handphone"
+                  value={userInfo.handphone}
+                  onChange={handleChange}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td rowSpan="3">
+                <label htmlFor="addr1">주소 : </label>
+              </td>
+              <td>
+                <button
+                  type="button"
+                  onClick={window.openDaumPostcode}
+                  style={{
+                    height: "30px",
+                    verticalAlign: "middle",
+                    padding: "0 5px",
+                    marginRight: "5px",
+                  }}
+                >
+                  우편번호
+                </button>
+                <input
+                  style={{ width: "150px" }}
+                  type="text"
+                  name="zipCode"
+                  id="zipCode"
+                  ref={mZipcodeRef}
+                  value={userInfo.zipCode}
+                  onChange={handleChange}
+                  readOnly
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input
+                  type="text"
+                  name="addr1"
+                  id="addr1"
+                  ref={mAddressRef}
+                  value={userInfo.addr1}
+                  onChange={handleChange}
+                  readOnly
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input
+                  type="text"
+                  name="addr2"
+                  id="addr2"
+                  ref={mAddressSubRef}
+                  value={userInfo.addr2}
+                  onChange={handleChange}
                 />
               </td>
             </tr>
