@@ -59,7 +59,7 @@ const MiniGame = () => {
     let disableAction = false;
 
     const addSnack = async () => {
-      const index = Math.floor(Math.random() * 5);
+      const index = Math.floor(Math.random() * 6);
       const snack = Snack[index];
 
       const body = Matter.Bodies.circle(195, 55, snack.radius, {
@@ -70,7 +70,7 @@ const MiniGame = () => {
             texture: `/assets/image/game/${snack.name}.png`,
           },
         },
-        restitution: 0.4,
+        restitution: 0.2,
       });
 
       currentBody = body;
@@ -139,6 +139,15 @@ const MiniGame = () => {
             collision.bodyB.name === "topLine")
         ) {
           alert("Game over");
+          currentBody = null;
+          currentSnack = null;
+          disableAction = false;
+          Matter.Composite.allBodies(world).forEach((body) => {
+            if (body.label === "Circle Body") {
+              Matter.World.remove(world, body);
+            }
+          });
+          addSnack();
         }
       });
     });
