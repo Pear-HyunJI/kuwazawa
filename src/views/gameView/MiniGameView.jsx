@@ -35,5 +35,5 @@ const MiniGameView = () => {
   );
 };
 
-ReactDOM.render(<MiniGameView />, document.getElementById("root"));
+// ReactDOM.render(<MiniGameView />, document.getElementById("root"));
 export default MiniGameView;
