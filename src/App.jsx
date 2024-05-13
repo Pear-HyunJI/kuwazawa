@@ -28,7 +28,6 @@ import ReviewView from "@/views/Review/ReviewView";
 import ReviewListView from "@/views/Review/ReviewListView";
 import ReviewModifyView from "@/views/Review/ReviewModifyView";
 //게임
-import GameView from "@/views/gameView/GameView";
 import MiniGameView from "@/views/gameView/MiniGameView";
 
 const App = () => {
