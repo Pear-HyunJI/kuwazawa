@@ -113,11 +113,6 @@ const MiniGame = () => {
         if (bodyA.index === bodyB.index) {
           const index = collision.bodyA.index;
 
-          if (index === 8) {
-            alert("You win!");
-            return;
-          }
-
           Matter.Composite.remove(world, [bodyA, bodyB]);
 
           const newSnack = Snack[index + 1];
@@ -135,6 +130,11 @@ const MiniGame = () => {
           );
 
           Matter.World.add(world, newBody);
+
+          if (index === 9) {
+            alert("You win!");
+            return;
+          }
         }
 
         if (

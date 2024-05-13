@@ -109,7 +109,7 @@ const MiniGame = () => {
         if (bodyA.index === bodyB.index) {
           const index = collision.bodyA.index;
 
-          if (index === 8) {
+          if (index === 10) {
             alert("You win!");
             return;
           }
