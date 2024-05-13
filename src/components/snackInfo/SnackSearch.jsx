@@ -31,6 +31,13 @@ const SnackSearchBlock = styled.div`
     background: #5a4620;
     );
   }
+  @media screen and (max-width: 412px) {
+
+    padding-bottom: 25px;
+    h2{
+      margin-bottom: 50px;
+    }
+  }
 `;
 
 const SnackSearch = ({ onSearch }) => {

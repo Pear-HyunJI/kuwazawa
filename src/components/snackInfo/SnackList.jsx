@@ -4,6 +4,7 @@ import PageFlip from "react-pageflip";
 import oddPagesData from "@/assets/data/oddPages";
 import evenPagesData from "@/assets/data/evenPages";
 import { GrPrevious, GrNext } from "react-icons/gr";
+import { useMediaQuery } from "react-responsive";
 
 const SnackListBlock = styled.div`
 
@@ -138,13 +139,64 @@ padding: 100px 0;
      
     }
     .nextPage {
-      top: 10px;
+      top: 100px;
       right: 10px;
+    }
+  }
+  @media screen and (max-width: 412px) {
+    padding: 10px;
+    .oddPage{
+      .kategory{
+        font-size: 30px;
+        &::before{
+          height: 35px;
+        }
+      }
+      .titleContainer{
+        
+        margin: 80px 0 80px;
+        .title{
+          font-size: 24px;
+        }
+      }
+      .subTitle{
+        font-size: 19px;
+        word-break: keep-all;
+        &::before {
+        content: "";
+        position: absolute;
+        top: -105%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        height: 35px;
+        background-color: #50453299;
+        opacity: 1;}
+      
+      }
+    }
+    .evenPage{
+      .imageContainer{.center{
+        .contentImage {
+          margin: 2px;
+          width: 130px;
+        }
+      }}
+      .info {
+        margin-top: 10px;
+        font-size: 10px;
+      }
+    }
+    button{
+      margin: 0 -9px;
+      z-index:1;
+     
     }
   }
 `;
 
 const SnackList = ({ pageIndex, searchKeyword }) => {
+  const mobile = useMediaQuery({ maxWidth: 412 });
   const oddPages = oddPagesData;
   const evenPages = evenPagesData;
   const pageFlipRef = useRef();
@@ -267,9 +319,15 @@ const SnackList = ({ pageIndex, searchKeyword }) => {
         <button className="prevPage" onClick={prevPage}>
           <GrPrevious />
         </button>
-        <PageFlip width={600} height={700} ref={pageFlipRef} onFlip={onFlip}>
-          {allPages}
-        </PageFlip>
+        {mobile ? (
+          <PageFlip width={360} height={500} ref={pageFlipRef} onFlip={onFlip}>
+            {allPages}
+          </PageFlip>
+        ) : (
+          <PageFlip width={600} height={700} ref={pageFlipRef} onFlip={onFlip}>
+            {allPages}
+          </PageFlip>
+        )}
 
         <button className="nextPage" onClick={nextPage}>
           <GrNext />

@@ -52,6 +52,21 @@ const SnackTagBlock = styled.div`
       visibility: visible;
     }
   }
+  @media screen and (max-width: 412px) {
+    padding-bottom: 15px;
+    button {
+      // border: 1px solid red;
+      height: 55px;
+      width: 85px;
+      background-color: #c4b28020;
+      border-radius: 10px;
+      font-size: 17px;
+      &::before {
+        width: 0;
+        height: 0;
+      }
+    }
+  }
 `;
 
 const SnackTag = ({ onButtonClick }) => {

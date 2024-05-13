@@ -131,7 +131,7 @@ const MiniGame = () => {
 
           Matter.World.add(world, newBody);
 
-          if (index === 9) {
+          if (index === Snack.length - 1) {
             alert("You win!");
             return;
           }

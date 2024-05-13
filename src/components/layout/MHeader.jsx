@@ -200,7 +200,7 @@ const MHeader = ({ isOpen, toggleMenu, handleCloseMenu }) => {
                   로그아웃&nbsp;&nbsp;
                 </a>{" "}
                 |
-                <Link to="/" onClick={handleCloseMenu}>
+                <Link to="/memberModify" onClick={handleCloseMenu}>
                   &nbsp;&nbsp;정보수정({user.userId})
                 </Link>
               </li>
