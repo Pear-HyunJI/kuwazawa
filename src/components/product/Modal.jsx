@@ -19,11 +19,11 @@ const ModalBlock = styled.div`
       display: block;
       width: 308px;
       text-align: center;
-      color: #555;
+      color: black;
       background: #fff;
       h2 {
         text-align: left;
-        background: red;
+        background: #ddd;
         color: #fff;
         padding: 10px;
         margin: 0;
