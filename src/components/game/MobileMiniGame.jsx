@@ -20,29 +20,29 @@ const MiniGame = () => {
       options: {
         wireframes: false,
         background: "#fcecdc",
-        width: 500,
-        height: 680,
+        width: 390,
+        height: 520,
       },
     });
     const world = engine.world;
 
     // 캔버스 크기에 맞게 벽과 선 생성
-    const leftWall = Matter.Bodies.rectangle(10, 340, 30, 680, {
+    const leftWall = Matter.Bodies.rectangle(5, 260, 15, 520, {
       isStatic: true,
       render: { fillStyle: "#6e543a" },
     });
 
-    const rightWall = Matter.Bodies.rectangle(490, 340, 30, 680, {
+    const rightWall = Matter.Bodies.rectangle(385, 260, 15, 520, {
       isStatic: true,
       render: { fillStyle: "#6e543a" },
     });
 
-    const ground = Matter.Bodies.rectangle(250, 670, 500, 30, {
+    const ground = Matter.Bodies.rectangle(200, 520, 460, 30, {
       isStatic: true,
       render: { fillStyle: "#6e543a" },
     });
 
-    const topLine = Matter.Bodies.rectangle(250, 145, 500, 1, {
+    const topLine = Matter.Bodies.rectangle(250, 110, 500, 2, {
       name: "topLine",
       isStatic: true,
       render: { fillStyle: "#6e543a" },
@@ -62,7 +62,7 @@ const MiniGame = () => {
       const index = Math.floor(Math.random() * 5);
       const snack = Snack[index];
 
-      const body = Matter.Bodies.circle(250, 68, snack.radius, {
+      const body = Matter.Bodies.circle(195, 55, snack.radius, {
         index: index,
         isSleeping: true,
         render: {
@@ -79,33 +79,29 @@ const MiniGame = () => {
       Matter.World.add(world, body);
     };
 
-    window.onkeydown = (event) => {
-      switch (event.code) {
-        case "KeyA":
-          if (currentBody.position.x - currentSnack.radius > 30)
-            Matter.Body.setPosition(currentBody, {
-              x: currentBody.position.x - 10,
-              y: currentBody.position.y,
-            });
-          break;
-        case "KeyD":
-          if (currentBody.position.x + currentSnack.radius < 470)
-            Matter.Body.setPosition(currentBody, {
-              x: currentBody.position.x + 10,
-              y: currentBody.position.y,
-            });
-          break;
-        case "KeyS":
-          currentBody.isSleeping = false;
-          disableAction = true;
+    window.addEventListener("touchstart", (event) => {
+      const touch = event.touches[0];
+      const x = touch.clientX;
+      const y = touch.clientY;
 
-          setTimeout(() => {
-            addSnack();
-            disableAction = false;
-          }, 1000);
-          break;
+      // 현재 스낵이 있는 경우에만 동작하도록
+      if (currentBody) {
+        // 터치한 X 좌표를 현재 스낵의 X 좌표로 설정
+        Matter.Body.setPosition(currentBody, {
+          x: x,
+          y: currentBody.position.y,
+        });
+
+        // 현재 스낵의 이즈슬리핑 펄스 설정
+        currentBody.isSleeping = false;
+        disableAction = true;
+
+        setTimeout(() => {
+          addSnack();
+          disableAction = false;
+        }, 1000);
       }
-    };
+    });
 
     Matter.Events.on(engine, "collisionStart", (event) => {
       event.pairs.forEach((collision) => {
