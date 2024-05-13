@@ -102,6 +102,7 @@ const LeftHeader = ({ isOpen, toggleMenu, handleCloseMenu }) => {
     e.preventDefault();
     dispatch(userLogout());
     dispatch(initCarts([]));
+    alert("로그아웃을 했습니다.");
     navigate("/");
   };
 

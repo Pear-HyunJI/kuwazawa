@@ -64,10 +64,11 @@ const JoinSectionBlock = styled.div`
         width: 96%;
         border-radius: 5px;
         padding: 10px 0;
-        background: #5a462030;
-        color: #5a462099;
+        background: #5A4620;
+        color: #fff;
         font-size: 20px;
         font-weight: bold;
+        &:hover{ background: #3d3115;}
       }
     }
   }
@@ -212,7 +213,7 @@ const JoinSection = () => {
 
   return (
     <JoinSectionBlock>
-      <h2>회원가입</h2>
+      <h2>Join</h2>
       <form onSubmit={register}>
         <div className="joinWrap">
           <table border="0">
@@ -223,7 +224,7 @@ const JoinSection = () => {
             <tbody>
               <tr>
                 <td>
-                  <label htmlFor="userId">이메일 </label>
+                  <label htmlFor="userId">E-mail</label>
                   <p>*</p>
                 </td>
                 <td>
@@ -243,7 +244,7 @@ const JoinSection = () => {
               </tr>
               <tr>
                 <td>
-                  <label htmlFor="userPw">비밀번호 </label>
+                  <label htmlFor="userPw">Password </label>
                   <p>*</p>
                 </td>
                 <td>
@@ -285,7 +286,7 @@ const JoinSection = () => {
               </tr> */}
               <tr>
                 <td>
-                  <label htmlFor="userIrum">이름 </label>
+                  <label htmlFor="userIrum">Name </label>
                   <p>*</p>
                 </td>
                 <td>
@@ -301,7 +302,7 @@ const JoinSection = () => {
               </tr>
               <tr>
                 <td>
-                  <label htmlFor="handphone">휴대폰번호 </label>
+                  <label htmlFor="handphone">Mobile number</label>
                   <p>*</p>
                 </td>
                 <td>
@@ -317,7 +318,7 @@ const JoinSection = () => {
               </tr>
               <tr>
                 <td rowSpan="3">
-                  <label htmlFor="addr1">주소 </label>
+                  <label htmlFor="addr1">Address</label>
                 </td>
                 <td>
                   <button
@@ -374,7 +375,7 @@ const JoinSection = () => {
             </tbody>
           </table>
           <div className="btn">
-            <button type="submit">가입하기</button>
+            <button type="submit">Sign Up</button>
           </div>
         </div>
       </form>

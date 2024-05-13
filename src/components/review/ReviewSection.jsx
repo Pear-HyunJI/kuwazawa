@@ -7,38 +7,68 @@ import { useNavigate, useLocation } from "react-router-dom";
 const ReviewSectionBlock = styled.div`
   max-width: 500px;
   margin: 0 auto;
+
+  .content {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
   h2 {
     text-align: center;
-    padding: 50px 0;
-    font-size: 45px;
+    padding: 20px 0;
+    font-size: 2rem;
   }
-  div {
+
+  .title {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+
+  form {
     display: flex;
-    padding: 5px;
-    margin: 5px;
-    label {
-      width: 100px;
-      display: inline-block;
+    flex-direction: column;
+    align-items: center;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+
+      label {
+        font-size: 1rem;
+        margin-bottom: 5px;
+      }
+
+      select,
+      textarea {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+        width: 100%;
+      }
     }
-    select,
-    textarea {
-      flex: 1;
-      border: 1px solid #000;
-    }
-    select {
-      height: 30px;
-    }
-    textarea {
-      height: 200px;
-      padding: 5px;
-    }
-    &.btn {
+
+    .btn {
+      display: flex;
       justify-content: center;
-      margin-top: 20px;
+
       button {
         padding: 10px 20px;
         background: #5a4620;
         color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background: #3d3115;
+        }
       }
     }
   }
@@ -98,38 +128,40 @@ const ReviewSection = ({ productArray }) => {
     <ReviewSectionBlock>
       <h2>리뷰 작성하기</h2>
       {/* <p>상품 이름 : {productArray.name}</p> */}
-      <p>상품 이름 : {product.name}</p>
-      <form onSubmit={onSubmit}>
-        <div>
-          <label htmlFor="rating">별점주기:</label>
-          <select
-            name="rating"
-            id="rating"
-            value={review.rating}
-            onChange={handleChange}
-          >
-            <option value="☆">☆</option>
-            <option value="★">★</option>
-            <option value="★★">★★</option>
-            <option value="★★★">★★★</option>
-            <option value="★★★★">★★★★</option>
-            <option value="★★★★★">★★★★★</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="content">리뷰 작성:</label>
-          <textarea
-            name="content"
-            placeholder="리뷰를 작성해주세요."
-            id="content"
-            value={review.content}
-            onChange={handleChange}
-          ></textarea>
-        </div>
-        <div className="btn">
-          <button type="submit">등록</button>
-        </div>
-      </form>
+      <div className="content">
+        <p className="title">상품 이름 : {product.name}</p>
+        <form onSubmit={onSubmit}>
+          <div>
+            <label htmlFor="rating">별점주기:</label>
+            <select
+              name="rating"
+              id="rating"
+              value={review.rating}
+              onChange={handleChange}
+            >
+              <option value="☆">☆</option>
+              <option value="★">★</option>
+              <option value="★★">★★</option>
+              <option value="★★★">★★★</option>
+              <option value="★★★★">★★★★</option>
+              <option value="★★★★★">★★★★★</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="content">리뷰 작성:</label>
+            <textarea
+              name="content"
+              placeholder="리뷰를 작성해주세요."
+              id="content"
+              value={review.content}
+              onChange={handleChange}
+            ></textarea>
+          </div>
+          <div className="btn">
+            <button type="submit">등록</button>
+          </div>
+        </form>
+      </div>
     </ReviewSectionBlock>
   );
 };

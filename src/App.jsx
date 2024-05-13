@@ -14,6 +14,7 @@ import ProductModifyView from "@/views/product/ProductModifyView";
 import ProductInsertView from "@/views/product/ProductInsertView";
 import ProductDetailView from "@/views/product/ProductDetailView";
 import PaymentView from "@/views/product/PaymentView";
+import PaymentFinishView from "@/views/product/PaymentFinishView";
 // 공지사항
 import BoardView from "@/views/boardView/BoardView";
 import BoardDetailView from "./views/boardView/BoardDetailView";
@@ -47,6 +48,7 @@ const App = () => {
         <Route path="/productModify" element={<ProductModifyView />} />
         <Route path="/product/:id" element={<ProductDetailView />} />
         <Route path="/payment" element={<PaymentView />} />
+        <Route path="/paymentFinish" element={<PaymentFinishView />} />
         {/* 공지사항 */}
         <Route path="/board" element={<BoardView />} />
         <Route path="/boardWrite" element={<BoardWriteView />} />

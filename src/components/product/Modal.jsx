@@ -21,13 +21,25 @@ const ModalBlock = styled.div`
       text-align: center;
       color: black;
       background: #fff;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 308px;
+      text-align: center;
+      color: #555;
+      background: #f0f0f0;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       h2 {
         text-align: left;
-        background: #ddd;
+        background: #dbba81;
         color: #fff;
         padding: 10px;
         margin: 0;
         font-size: 20px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
       }
       p {
         padding: 30px 0;
@@ -36,8 +48,16 @@ const ModalBlock = styled.div`
         padding: 20px 0;
         button {
           border: 1px solid #ddd;
-          padding: 5px;
+          padding:  10px 20px;
           margin: 0 5px;
+          cursor: pointer;
+          background-color: #5a4620;
+          color: #fff;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;
+          &:hover {
+            background-color: #78592b;
+          }
         }
       }
     }

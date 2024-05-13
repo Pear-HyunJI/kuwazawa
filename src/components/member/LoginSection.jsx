@@ -59,10 +59,11 @@ const LoginSectionBlock = styled.div`
         width: 96%;
         border-radius: 5px;
         padding: 10px 0;
-        background: #5a462030;
-        color: #5a462099;
+        background: #5A4620;
+        color: #fff;
         font-size: 20px;
         font-weight: bold;
+        &:hover{ background: #3d3115;}
       }
     }
   }
@@ -139,7 +140,7 @@ const LoginSection = () => {
 
   return (
     <LoginSectionBlock>
-      <h2>로그인</h2>
+      <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div className="loginWrap">
           <table>
@@ -150,7 +151,7 @@ const LoginSection = () => {
             <tbody>
               <tr>
                 <td>
-                  <label htmlFor="userId">이메일: </label>
+                  <label htmlFor="userId">E-mail: </label>
                 </td>
                 <td>
                   <input
@@ -165,7 +166,7 @@ const LoginSection = () => {
               </tr>
               <tr>
                 <td>
-                  <label htmlFor="userPw">비밀번호: </label>
+                  <label htmlFor="userPw">Password: </label>
                 </td>
                 <td>
                   <input
@@ -181,7 +182,7 @@ const LoginSection = () => {
             </tbody>
           </table>
           <div className="btn">
-            <button type="submit">로그인</button>
+            <button type="submit">Sign In</button>
           </div>
         </div>
       </form>

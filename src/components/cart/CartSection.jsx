@@ -13,6 +13,7 @@ const CartSectionBlock = styled.div`
     font-size: 2.5rem;
     text-align: center;
     padding: 20px 0;
+    color: #333;
   }
 
   table {
@@ -29,6 +30,8 @@ const CartSectionBlock = styled.div`
     padding: 15px;
     border-bottom: 1px solid #ddd;
     text-align: left;
+    font-size: 1rem;
+    color: #555;
   }
 
   th {
@@ -43,6 +46,7 @@ const CartSectionBlock = styled.div`
       border: 1px solid #ccc;
       border-radius: 4px;
       text-align: center;
+      font-size: 0.9rem;
     }
 
     button {
@@ -52,7 +56,8 @@ const CartSectionBlock = styled.div`
       background-color: #5a4620;
       color: #fff;
       cursor: pointer;
-      transition: all 0.5s;
+      transition: all 0.3s;
+      font-size: 0.9rem;
       &:hover {
         background: #3d3115;
       }
@@ -63,7 +68,9 @@ const CartSectionBlock = styled.div`
     td {
       padding: 100px 0;
       text-align: center;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
+      color: #777;
+
       img {
         display: block;
         margin: 0 auto 20px;
@@ -75,87 +82,69 @@ const CartSectionBlock = styled.div`
   tfoot {
     td {
       text-align: center;
+      font-size: 1rem;
     }
   }
+  .buttonGroup {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    button {
+      margin-right: 10px;
+      border: none;
+      border-radius: 4px;
+      background-color: #5a4620;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.9rem;
+      padding:10px 20px;
+      color: #fff;
+      &:hover {
+        background: #3d3115;
+      }
+    }
+  }
+
   @media (max-width: 768px) {
-    padding: 50px 50px;
+    padding: 50px 20px;
 
     h2 {
-      font-size: 2.5rem;
-      text-align: center;
-      padding: 20px 0;
+      font-size: 2rem;
     }
 
     table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #fbfbfb;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+      th,
+      td {
+        padding: 10px;
+        font-size: 0.8rem;
+      }
 
-    th,
-    td {
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-      text-align: left;
-      font-size: 12px;
-    }
-
-    th {
-      background-color: #f5f5f5;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    .nameTd {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    td {
-      input[type="number"] {
-        width: 50px;
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        text-align: center;
+      .nameTd {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       button {
-        padding: 8px 12px;
-        border: none;
-        border-radius: 4px;
-        background-color: #5a4620;
-        color: #fff;
-        cursor: pointer;
-        transition: all 0.5s;
-        font-size: 10px;
-        &:hover {
-          background: #3d3115;
-        }
+        font-size: 0.8rem;
       }
     }
 
     .empty {
       td {
-        padding: 100px 0;
-        text-align: center;
-        font-size: 1.5rem;
-        img {
-          display: block;
-          margin: 0 auto 20px;
-          max-width: 200px;
-        }
+        font-size: 1rem;
       }
     }
 
     tfoot {
       td {
-        text-align: center;
+        font-size: 0.9rem;
       }
     }
+  }
+  buttonGroup{
+    
   }
 `;
 
@@ -165,6 +154,7 @@ const CartSection = () => {
   const products = useSelector((state) => state.products.products);
   const carts = useSelector((state) => state.products.carts);
   const user = useSelector((state) => state.members.user);
+  const [selectAll, setSelectAll] = useState(false)
 
   const [tempProducts, setTempProducts] = useState([]);
   const [total, setTotal] = useState(0);
@@ -232,7 +222,7 @@ const CartSection = () => {
       navigate("/payment", { state: { product: tempProducts } });
     }
   };
-
+  
   const [selectedProducts, setSelectedProducts] = useState([]);
 
   const handleToggle = (productId) => {
@@ -241,7 +231,10 @@ const CartSection = () => {
     } else {
       setSelectedProducts([...selectedProducts, productId]);
     }
+    console.log('selectedProducts 를 선택 후:', selectedProducts);
   };
+
+
 
   const partBuy = (e) => {
     e.preventDefault();
@@ -279,6 +272,16 @@ const CartSection = () => {
     }
   }, [carts]);
 
+  useEffect(() => {
+    if (selectAll) {
+      const allIds = tempProducts.map((item) => item.product.id);
+      setSelectedProducts(allIds);
+    } else {
+      setSelectedProducts([]);
+    }
+    console.log("안되는 이유:",selectAll )
+  }, [selectAll, tempProducts]);
+
   return (
     <CartSectionBlock className="row">
       <h2>장바구니</h2>
@@ -286,7 +289,9 @@ const CartSection = () => {
         <thead>
           <tr>
             <th>
-              <input type="checkbox" />
+              전체선택 <input type="checkbox" 
+              checked={selectAll}
+              onChange={(e) => setSelectAll(e.target.checked)} />
             </th>
             <th>이미지</th>
             <th>상품명</th>
@@ -300,11 +305,7 @@ const CartSection = () => {
             {tempProducts.map((item, index) => (
               <tr key={index}>
                 <td style={{ textAlign: "center" }}>
-                  <input
-                    type="checkbox"
-                    name="choice"
-                    onClick={() => handleToggle(item.product.id)}
-                  />
+                  <input type="checkbox" name="choice" onClick={() => handleToggle(item.product.id)} />
                 </td>
                 <td>
                   <img src={item.product.photo} alt={item.product.name} />
@@ -342,7 +343,7 @@ const CartSection = () => {
         ) : (
           <tbody>
             <tr className="empty">
-              <td colSpan="5">
+              <td colSpan="6">
                 <img src={EmptyCartImage} alt="" />
                 장바구니가 비어 있습니다.
               </td>
@@ -351,7 +352,7 @@ const CartSection = () => {
         )}
         <tfoot>
           <tr>
-            <td colSpan="5">
+            <td colSpan="6">
               합계 : {total.toLocaleString()} <br />
               주문상품수량 : {tempProducts && tempProducts.length}종 {allCount}
               개
@@ -359,7 +360,7 @@ const CartSection = () => {
           </tr>
         </tfoot>
       </table>
-      <div>
+      <div className="buttonGroup">
         <button type="button" onClick={partBuy}>
           선택상품 주문하기
         </button>
