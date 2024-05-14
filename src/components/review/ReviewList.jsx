@@ -113,6 +113,8 @@ const ReviewList = ({ product }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const reviewsPerPage = 4;
   const paginationLength = 5;
+  const user = useSelector((state) => state.members.user);
+  
 
   useEffect(() => {
     dispatch(fetchReview());
@@ -197,22 +199,25 @@ const ReviewList = ({ product }) => {
                   ))}
                 </Slider>
               )}
-
-              <button className="modify">
-                <Link
-                  to={`/reviewModify/${post.content}`}
-                  state={{ post: post }}
-                >
-                  리뷰 수정하기
-                </Link>
-              </button>
-              <a
+                {user && user.userId === post.writer && (
+                  <button className="modify">
+                    <Link
+                      to={`/reviewModify/${post.content}`}
+                      state={{ post: post }}
+                    >
+                      리뷰 수정하기
+                    </Link>
+                  </button>
+                )}
+              {user && user.userId == "junhyeok_an@naver.com" &&(
+                <a
                 href="#"
                 onClick={(e) => onRemove(e, post.key)}
                 className="btn"
               >
                 리뷰 삭제하기
               </a>
+              )}
             </div>
           ))}
       </div>
