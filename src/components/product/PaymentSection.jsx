@@ -3,7 +3,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const PaymentSectionBlock = styled.div``
+const PaymentSectionBlock = styled.div`
+@media (max-width: 768px){
+  padding:5px;
+}`
 
 const Step1Block = styled.div`
   width: 100%;
@@ -71,8 +74,7 @@ const Step1Block = styled.div`
       border-color: #4684f0;
     }
   }
-  @media (max-width: 768px){
-  }
+ 
 `;
 
 const Step2Block = styled.div`
