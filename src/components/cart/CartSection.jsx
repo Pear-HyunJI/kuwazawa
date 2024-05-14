@@ -250,6 +250,15 @@ const CartSection = () => {
     }
   };
 
+  const toggleSelectAll = (e) => {
+    const isChecked = e.target.checked;
+    setSelectAll(isChecked); // 전체선택 상태 업데이트
+  
+    // 모든 상품 체크박스의 선택 상태를 업데이트
+    const allIds = tempProducts.map((item) => item.product.id);
+    setSelectedProducts(isChecked ? allIds : []); // 전체 선택되었을 때 모든 상품 선택, 그렇지 않으면 선택 해제
+  };
+
   useEffect(() => {
     if (carts.length) {
       setTempProducts(() => {
@@ -305,7 +314,10 @@ const CartSection = () => {
             {tempProducts.map((item, index) => (
               <tr key={index}>
                 <td style={{ textAlign: "center" }}>
-                  <input type="checkbox" name="choice" onClick={() => handleToggle(item.product.id)} />
+                  <input type="checkbox" 
+                  name="choice" onClick={() => handleToggle(item.product.id)} 
+                  checked={selectAll}
+                  onChange={toggleSelectAll} />
                 </td>
                 <td>
                   <img src={item.product.photo} alt={item.product.name} />
