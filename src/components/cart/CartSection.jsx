@@ -196,7 +196,6 @@ const CartSection = () => {
           setTempProducts((prevTempProducts) =>
             prevTempProducts.filter((item) => item.product.id !== id)
           );
-          // 상품 삭제 후 합계와 주문상품수량 업데이트
           setTotal(0);
           setAllCount(0);
         })
@@ -239,15 +238,6 @@ const CartSection = () => {
     }
   };
 
-  const toggleSelectAll = (e) => {
-    const isChecked = e.target.checked;
-    setSelectAll(isChecked); // 전체선택 상태 업데이트
-
-    // 모든 상품 체크박스의 선택 상태를 업데이트
-    const allIds = tempProducts.map((item) => item.product.id);
-    setSelectedProducts(isChecked ? allIds : []); // 전체 선택되었을 때 모든 상품 선택, 그렇지 않으면 선택 해제
-  };
-
   useEffect(() => {
     if (carts.length) {
       setTempProducts(() => {
@@ -279,13 +269,28 @@ const CartSection = () => {
     }
   }, [selectAll, tempProducts]);
 
-  // useEffect(() => {
-  //   if (selectedProducts.length === tempProducts.length) {
-  //     setSelectAll(true);
-  //   } else {
-  //     setSelectAll(false);
-  //   }
-  // }, [selectedProducts, tempProducts]);
+  const calculateTotal = () => {
+    let total = 0;
+    selectedProducts.forEach((productId) => {
+      const selectedProduct = tempProducts.find(
+        (item) => item.product.id === productId
+      );
+      total +=
+        parseInt(selectedProduct.product.price) * parseInt(selectedProduct.qty);
+    });
+    return total;
+  };
+
+  const calculateTotalQuantity = () => {
+    let totalQuantity = 0;
+    selectedProducts.forEach((productId) => {
+      const selectedProduct = tempProducts.find(
+        (item) => item.product.id === productId
+      );
+      totalQuantity += parseInt(selectedProduct.qty);
+    });
+    return totalQuantity;
+  };
 
   return (
     <CartSectionBlock className="row">
@@ -366,9 +371,8 @@ const CartSection = () => {
         <tfoot>
           <tr>
             <td colSpan="6">
-              합계 : {total.toLocaleString()} <br />
-              주문상품수량 : {tempProducts && tempProducts.length}종 {allCount}
-              개
+              합계 : {calculateTotal().toLocaleString()}&yen;<br />
+              주문상품수량 : {selectedProducts.length}종 {calculateTotalQuantity()}개
             </td>
           </tr>
         </tfoot>
