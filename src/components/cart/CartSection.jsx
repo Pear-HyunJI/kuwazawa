@@ -98,7 +98,7 @@ const CartSectionBlock = styled.div`
       cursor: pointer;
       transition: all 0.3s;
       font-size: 0.9rem;
-      padding:10px 20px;
+      padding: 10px 20px;
       color: #fff;
       &:hover {
         background: #3d3115;
@@ -143,9 +143,6 @@ const CartSectionBlock = styled.div`
       }
     }
   }
-  buttonGroup{
-    
-  }
 `;
 
 const CartSection = () => {
@@ -154,19 +151,14 @@ const CartSection = () => {
   const products = useSelector((state) => state.products.products);
   const carts = useSelector((state) => state.products.carts);
   const user = useSelector((state) => state.members.user);
-  const [selectAll, setSelectAll] = useState(false)
-
+  const [selectAll, setSelectAll] = useState(false);
   const [tempProducts, setTempProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [allCount, setAllCount] = useState(0);
-
   const [quantityValues, setQuantityValues] = useState({});
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
   const onChange = (e, id, inventory) => {
-    setQuantityValues((prevState) => ({
-      ...prevState,
-      [id]: newQty,
-    }));
     let newQty = parseInt(e.target.value);
     if (newQty < 1) {
       newQty = 1;
@@ -174,6 +166,10 @@ const CartSection = () => {
     if (newQty > inventory) {
       newQty = inventory;
     }
+    setQuantityValues((prevState) => ({
+      ...prevState,
+      [id]: newQty,
+    }));
     if (user) {
       kuwazawa_cartDB
         .child(user.key)
@@ -201,10 +197,8 @@ const CartSection = () => {
             prevTempProducts.filter((item) => item.product.id !== id)
           );
           // 상품 삭제 후 합계와 주문상품수량 업데이트
-
           setTotal(0);
           setAllCount(0);
-          // setQuantityValues(null);
         })
         .catch((error) => {
           console.error("삭제 중 오류 발생:", error);
@@ -222,8 +216,6 @@ const CartSection = () => {
       navigate("/payment", { state: { product: tempProducts } });
     }
   };
-  
-  const [selectedProducts, setSelectedProducts] = useState([]);
 
   const handleToggle = (productId) => {
     if (selectedProducts.includes(productId)) {
@@ -231,10 +223,7 @@ const CartSection = () => {
     } else {
       setSelectedProducts([...selectedProducts, productId]);
     }
-    console.log('selectedProducts 를 선택 후:', selectedProducts);
   };
-
-
 
   const partBuy = (e) => {
     e.preventDefault();
@@ -279,8 +268,15 @@ const CartSection = () => {
     } else {
       setSelectedProducts([]);
     }
-    console.log("안되는 이유:",selectAll )
   }, [selectAll, tempProducts]);
+
+  // useEffect(() => {
+  //   if (selectedProducts.length === tempProducts.length) {
+  //     setSelectAll(true);
+  //   } else {
+  //     setSelectAll(false);
+  //   }
+  // }, [selectedProducts, tempProducts]);
 
   return (
     <CartSectionBlock className="row">
@@ -289,9 +285,12 @@ const CartSection = () => {
         <thead>
           <tr>
             <th>
-              전체선택 <input type="checkbox" 
-              checked={selectAll}
-              onChange={(e) => setSelectAll(e.target.checked)} />
+              전체선택{" "}
+              <input
+                type="checkbox"
+                checked={selectAll}
+                onChange={(e) => setSelectAll(e.target.checked)}
+              />
             </th>
             <th>이미지</th>
             <th>상품명</th>
@@ -305,7 +304,12 @@ const CartSection = () => {
             {tempProducts.map((item, index) => (
               <tr key={index}>
                 <td style={{ textAlign: "center" }}>
-                  <input type="checkbox" name="choice" onClick={() => handleToggle(item.product.id)} />
+                  <input
+                    type="checkbox"
+                    name="choice"
+                    checked={selectedProducts.includes(item.product.id)}
+                    onChange={() => handleToggle(item.product.id)}
+                  />
                 </td>
                 <td>
                   <img src={item.product.photo} alt={item.product.name} />
