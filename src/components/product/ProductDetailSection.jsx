@@ -8,6 +8,10 @@ import "slick-carousel/slick/slick-theme.css";
 import Modal from "@/components/product/Modal";
 import { fetchCarts } from "@/store/product";
 import { kuwazawa_cartDB } from "@/assets/firebase";
+import {
+  IoIosArrowDropleftCircle,
+  IoIosArrowDroprightCircle,
+} from "react-icons/io";
 
 const ProductDetailSectionBlock = styled.div`
   text-align: center;
@@ -25,6 +29,14 @@ const ProductDetailSectionBlock = styled.div`
         margin-top: 20px;
         .slick-slide {
           padding: 10px;
+        }
+        .slick-arrow {
+          color: #000;
+        }
+        .slick-current {
+          img {
+            opacity: 0.3;
+          }
         }
       }
     }
@@ -248,6 +260,10 @@ const ProductDetailSection = ({ product }) => {
             infinite={true}
             draggable={false}
             initialSlide={0} // 처음에 첫 번째 슬라이드부터 시작
+            prevArrow={<IoIosArrowDropleftCircle />}
+            nextArrow={<IoIosArrowDroprightCircle />}
+            //         prevArrow: <IoIosArrowDropleftCircle />,
+            // nextArrow: <IoIosArrowDroprightCircle />,
           >
             {product.detailPhotos.map((item, index) => {
               return (
