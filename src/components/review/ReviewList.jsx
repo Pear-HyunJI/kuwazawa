@@ -6,6 +6,12 @@ import { fetchReview } from "@/store/board";
 import { kuwazawa_reviewDB } from "@/assets/firebase";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import {
+  IoIosArrowDropleftCircle,
+  IoIosArrowDroprightCircle,
+} from "react-icons/io";
 
 const ReviewListBlock = styled.div`
   background: #fff;
@@ -29,6 +35,11 @@ const ReviewListBlock = styled.div`
     font-weight: bold;
     font-size: 16px;
   }
+  .review img {
+    max-width: 100%;
+    margin-top: 10px;
+    border-radius: 5px;
+  }
   .modify,
   .btn {
     background: #5a4620;
@@ -46,23 +57,19 @@ const ReviewListBlock = styled.div`
     cursor: pointer;
     transition: background 0.3s;
   }
-
   .modify:hover,
   .btn:hover {
     background: #3d3115;
   }
-
   .pagination {
     display: flex;
     justify-content: center;
     margin: 20px 0;
   }
-
   .page-item {
     list-style: none;
     margin: 0 5px;
   }
-
   .page-link {
     color: #5a4620;
     cursor: pointer;
@@ -72,15 +79,30 @@ const ReviewListBlock = styled.div`
     transition: all 0.3s ease;
     margin: 5px;
   }
-
   .page-link:hover {
     background-color: #5a4620;
     color: #fff;
   }
-
   .page-link.active {
     background-color: #5a4620;
     color: #fff;
+  }
+  .slider {
+    width: 100%;
+    .slick-slide {
+      padding: 0 10px; // Add spacing between slides
+    }
+
+    margin-bottom: 20px;
+  }
+  .slick-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 50px;
+    color: #000;
+  }
+  .slick-dots {
   }
 `;
 
@@ -135,6 +157,25 @@ const ReviewList = ({ product }) => {
     }
   }
 
+  const options = {
+    dots: true,
+    autoplay: false,
+    autoplaySpeed: 3000,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    prevArrow: <IoIosArrowDropleftCircle />,
+    nextArrow: <IoIosArrowDroprightCircle />,
+    responsive: [
+      {
+        breakpoint: 415,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   return (
     <ReviewListBlock>
       <div className="content">
@@ -146,6 +187,17 @@ const ReviewList = ({ product }) => {
                 별점 : {post.rating} | 작성자 : {post.writer}
               </p>
               <p>후기 : {post.content}</p>
+
+              {post.reviewPhotos && post.reviewPhotos.length > 0 && (
+                <Slider className="slider" {...options}>
+                  {post.reviewPhotos.map((photoURL, idx) => (
+                    <div className="slide" key={idx}>
+                      <img src={photoURL} alt={`Review ${idx + 1}`} />
+                    </div>
+                  ))}
+                </Slider>
+              )}
+
               <button className="modify">
                 <Link
                   to={`/reviewModify/${post.content}`}

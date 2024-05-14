@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { kuwazawa_reviewDB } from "@/assets/firebase";
+import { kuwazawa_reviewDB, oStorage } from "@/assets/firebase";
 
 const ReviewModifyBlock = styled.div`
   max-width: 500px;
@@ -46,31 +46,59 @@ const ReviewModifyBlock = styled.div`
 const ReviewModify = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
   const { post } = location.state; //객체
 
   const initialReviewState = {
-    rating: "",
-    content: "",
+    rating: post.rating || "",
+    content: post.content || "",
+    reviewPhotos: post.reviewPhotos || [],
   };
 
   const [review, setReview] = useState(initialReviewState);
+  const [newReviewPhotos, setNewReviewPhotos] = useState([]);
+
+  useEffect(() => {
+    setReview({
+      rating: post.rating,
+      content: post.content,
+      reviewPhotos: post.reviewPhotos || [],
+    });
+  }, [post]);
 
   const handleChange = (e) => {
     const { value, name } = e.target;
     setReview((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const onSubmit = (e) => {
+  const handleReviewFileChange = (e) => {
+    const files = e.target.files;
+    setNewReviewPhotos(Array.from(files));
+  };
+
+  const onSubmit = async (e) => {
     e.preventDefault();
     const date = new Date().toISOString();
-    kuwazawa_reviewDB.child(post.key).update({ ...review, date });
-    console.log("post", post);
-
-    // navigate(`/product/${post.productId}`);
-    navigate(`/product`);
-    // history.goBack();
-    // navigate(-1);
+    try {
+      const storageRef = oStorage.ref();
+      if (newReviewPhotos.length > 0) {
+        const reviewPhotoURLs = [];
+        await Promise.all(
+          newReviewPhotos.map(async (file, index) => {
+            const fileName = `reviewPhoto${index + 1}_${Date.now()}_${
+              file.name
+            }`;
+            const reviewFileRef = storageRef.child(fileName);
+            await reviewFileRef.put(file);
+            reviewPhotoURLs.push(await reviewFileRef.getDownloadURL());
+          })
+        );
+        review.reviewPhotos = reviewPhotoURLs;
+      }
+      await kuwazawa_reviewDB.child(post.key).update({ ...review, date });
+      navigate("/product");
+    } catch (error) {
+      console.log("오류 : ", error);
+    }
   };
 
   return (
@@ -102,6 +130,16 @@ const ReviewModify = () => {
             value={review.content}
             onChange={handleChange}
           ></textarea>
+        </div>
+        <div>
+          <label htmlFor="reviewPhoto">사진 등록하기:</label>
+          <input
+            type="file"
+            name="reviewPhoto"
+            id="reviewPhoto"
+            onChange={handleReviewFileChange}
+            multiple
+          />
         </div>
         <div className="btn">
           <button type="submit">등록</button>
