@@ -6,6 +6,10 @@ import { useNavigate } from "react-router-dom";
 const ProductModifyBlock = styled.div`
   max-width: 500px;
   margin: 0 auto;
+  h2 {
+    padding: 50px 0;
+    text-align: center;
+  }
   div {
     display: flex;
     padding: 5px;
@@ -114,6 +118,7 @@ const OnlineShopModify = ({ item }) => {
 
   return (
     <ProductModifyBlock>
+      <h2>상품 수정</h2>
       <form onSubmit={onSubmit}>
         <div>
           <label htmlFor="category">카테고리:</label>
