@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Modal from "@/components/product/Modal";
 import { fetchCarts } from "@/store/product";
-import { kuwazawa_cartDB } from "@/assets/firebase";
+import { kuwazawa_cartDB, kuwazawa_productDB } from "@/assets/firebase";
 import {
   IoIosArrowDropleftCircle,
   IoIosArrowDroprightCircle,
@@ -226,6 +226,34 @@ const ProductDetailSection = ({ product }) => {
     setSubNav(subSliderRef.current);
   }, []);
 
+  const removeProduct = async (e, key, id)=>{
+    e.preventDefault()
+    const answer = confirm("정말로 삭제하시겠습니까?")
+    if (answer) {
+        try {
+            await kuwazawa_productDB.child(key).remove()
+            const cartsSnapshot = await kuwazawa_cartDB.once('value');
+            if (cartsSnapshot.val()){
+              const userCartsObj = cartsSnapshot.val()
+              for (const userCartKey in userCartsObj) {
+                const userProductsObj = userCartsObj[userCartKey];
+                for (const productId in userProductsObj) {
+                  if (productId == id) {
+                    // 해당 상품 ID를 가진 항목 삭제
+                    await cartDB.child(userCartKey).child(productId).remove();
+                  }
+                }
+              }
+            }
+            navigate('/product')
+        } catch(error){
+            console.log("오류 : ", error)
+        }
+    } else {
+        return
+    }
+  }
+
   return (
     <ProductDetailSectionBlock className="row">
       <h2 style={{ color: "#333", marginBottom: "20px", fontSize: "30px" }}>
@@ -324,11 +352,8 @@ const ProductDetailSection = ({ product }) => {
             <Link to={`/review/${product.name}`} state={{ product: product }}>
               리뷰쓰기
             </Link>
-            {user && user.userId == "junhyeok_an@naver.com" && (
-              <Link to="/productModify" state={{ product }}>
-                상품수정
-              </Link>
-            )}
+            {user && user.userId == "junhyeok_an@naver.com" && (<Link to="/productModify" state={{ product }}>상품수정</Link>)}
+            {(user && user.userId=='junhyeok_an@naver.com') && <a href="#" onClick={ (e)=>removeProduct(e, product.key, product.id) }>상품삭제</a>}
           </div>
         </div>
       </div>
