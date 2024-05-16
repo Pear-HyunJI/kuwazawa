@@ -8,6 +8,7 @@ const OnlineShopInsertSectionBlock = styled.div`
   margin: 0 auto;
 
   h2 {
+    padding: 50px 0;
     text-align: center;
   }
 

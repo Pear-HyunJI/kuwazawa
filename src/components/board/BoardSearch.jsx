@@ -14,7 +14,7 @@ const BoardSearchBlock = styled.div`
   h2 {
     font-size: 35px;
     color: #5a4620;
-    margin-bottom: 130px;
+    margin-bottom: 80px;
   }
   .searchWrap {
     display: flex;

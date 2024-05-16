@@ -19,7 +19,7 @@ import {
 
 const LeftHeaderBlock = styled.div`
   position: fixed;
-  z-index: 500;
+  z-index: 5000;
   top: 0;
   left: 0px;
   width: ${(props) => (props.isOpen ? "100%" : "auto")}; /* 변경 */

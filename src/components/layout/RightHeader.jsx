@@ -10,7 +10,7 @@ const RightHeaderBlock = styled.div`
   position: fixed;
   right: 0px;
   padding: 50px;
-  z-index: 1000;
+  z-index: 10000;
   color: ${(props) => (props.isOpen ? "#fff" : "#5a4620")};
   transition: color 0.3s ease;
 
