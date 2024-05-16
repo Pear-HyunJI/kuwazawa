@@ -17,8 +17,34 @@ const ReviewListBlock = styled.div`
   background: #fff;
   border-radius: 10px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  // 별점 정렬 버튼 스타일 추가
+  .sortButton {
+    display: flex;
+    justify-content: left;
+    padding-left: 30px;
+    margin-bottom: 0px;
+
+    button {
+      background-color: transparent;
+      color: #333;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: border-bottom-color 0.3s ease-in-out;
+
+      &.on {
+        border-bottom-color: #5a4620;
+      }
+
+      &:hover {
+        color: #5a4620;
+      }
+    }
+  }
   .content {
-    padding: 30px;
+    padding: 30px 30px 0px 30px;
   }
   .review {
     padding: 20px;
@@ -65,6 +91,7 @@ const ReviewListBlock = styled.div`
     display: flex;
     justify-content: center;
     margin: 20px 0;
+    padding-bottom: 30px;
   }
   .page-item {
     list-style: none;
@@ -106,7 +133,7 @@ const ReviewListBlock = styled.div`
   }
 `;
 
-const ReviewList = ({ product }) => {
+const ReviewList = ({ product, showPhotosOnly }) => {
   const navigate = useNavigate();
   const list = useSelector((state) => state.boards.list);
   const dispatch = useDispatch();
@@ -114,7 +141,27 @@ const ReviewList = ({ product }) => {
   const reviewsPerPage = 4;
   const paginationLength = 5;
   const user = useSelector((state) => state.members.user);
-  
+  const [sortOrder, setSortOrder] = useState(""); // 리뷰 정렬 순서 상태
+
+  // 리뷰를 평점에 따라 정렬
+  const sortReviews = (order) => {
+    const sortedReviews = [...list].sort((a, b) => {
+      if (order === "asc") {
+        return a.rating.localeCompare(b.rating); // 오름차순
+      } else {
+        return b.rating.localeCompare(a.rating); // 내림차순
+      }
+    });
+    return sortedReviews;
+  };
+
+  // 정렬 순서가 변경될 때마다 리뷰를 정렬하고 업데이트하는 useEffect
+  useEffect(() => {
+    if (sortOrder !== "") {
+      const sortedReviews = sortReviews(sortOrder);
+      dispatch({ type: "SET_REVIEWS", payload: sortedReviews }); // 리덕스 스토어 업데이트
+    }
+  }, [sortOrder, dispatch]);
 
   useEffect(() => {
     dispatch(fetchReview());
@@ -130,16 +177,30 @@ const ReviewList = ({ product }) => {
     (review) => review.productId === product.id
   );
 
+  /// 실제로 정렬된 리뷰를 사용하도록 수정
+  let sortedReviews = filteredReviews;
+  if (sortOrder !== "") {
+    sortedReviews = sortReviews(sortOrder);
+  }
+
+  // 포토리뷰만 보기가 활성화되었을 때
+  if (showPhotosOnly) {
+    sortedReviews = sortedReviews.filter(
+      (review) => review.reviewPhotos && review.reviewPhotos.length > 0
+    );
+  }
+
   const indexOfLastReview = currentPage * reviewsPerPage;
   const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
-  const currentReviews = filteredReviews.slice(
+  const currentReviews = sortedReviews.slice(
     indexOfFirstReview,
     indexOfLastReview
   );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const lastPage = Math.ceil(filteredReviews.length / reviewsPerPage);
+  // 포토리뷰만 필터링된 리스트의 길이를 기준으로 페이지 계산
+  const lastPage = Math.ceil(sortedReviews.length / reviewsPerPage);
 
   let startPage, endPage;
   if (lastPage <= paginationLength) {
@@ -180,6 +241,22 @@ const ReviewList = ({ product }) => {
 
   return (
     <ReviewListBlock>
+      {/* 별점 정렬 버튼 */}
+      <div className="sortButton">
+        <button
+          onClick={() => setSortOrder("desc")}
+          className={sortOrder == "desc" && "on"}
+        >
+          별점 높은 순
+        </button>
+        <button
+          onClick={() => setSortOrder("asc")}
+          className={sortOrder == "asc" && "on"}
+        >
+          별점 낮은 순
+        </button>
+      </div>
+
       <div className="content">
         {currentReviews.length > 0 &&
           currentReviews.map((post, index) => (
@@ -199,24 +276,24 @@ const ReviewList = ({ product }) => {
                   ))}
                 </Slider>
               )}
-                {user && user.userId === post.writer && (
-                  <button className="modify">
-                    <Link
-                      to={`/reviewModify/${post.content}`}
-                      state={{ post: post }}
-                    >
-                      리뷰 수정하기
-                    </Link>
-                  </button>
-                )}
-              {user && user.userId == "junhyeok_an@naver.com" &&(
+              {user && user.userId === post.writer && (
+                <button className="modify">
+                  <Link
+                    to={`/reviewModify/${post.content}`}
+                    state={{ post: post }}
+                  >
+                    리뷰 수정하기
+                  </Link>
+                </button>
+              )}
+              {user && user.userId == "junhyeok_an@naver.com" && (
                 <a
-                href="#"
-                onClick={(e) => onRemove(e, post.key)}
-                className="btn"
-              >
-                리뷰 삭제하기
-              </a>
+                  href="#"
+                  onClick={(e) => onRemove(e, post.key)}
+                  className="btn"
+                >
+                  리뷰 삭제하기
+                </a>
               )}
             </div>
           ))}
