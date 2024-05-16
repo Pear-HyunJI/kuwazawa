@@ -250,21 +250,6 @@ const MemberModifySection = () => {
                   />
                 </td>
               </tr>
-              {/* <tr>
-                <td>
-                  <label htmlFor="userPwOk">비밀번호확인 : </label>
-                </td>
-                <td>
-                  <input
-                    type="password"
-                    name="userPwOk"
-                    id="userPwOk"
-                    ref={userPwOkRef}
-                    value={userInfo.userPwOk}
-                    onChange={handleChange}
-                  />
-                </td>
-              </tr> */}
               <tr>
                 <td>
                   <label htmlFor="userIrum">이름 : </label>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { useHorizontalScroll } from "@/components/layout/UseHorizontalScroll";
 import { Link } from "react-router-dom";
@@ -188,6 +188,27 @@ const SnackSlider = () => {
       desc3: "한 번 발라 더 깊은 맛으로。",
     },
   ];
+
+  // useEffect(() => {
+  //   const handleScrollEnd = () => {
+  //     const sliderElement = sliderRef.current;
+  //     if (
+  //       sliderElement.scrollLeft + sliderElement.clientWidth ===
+  //       sliderElement.scrollWidth
+  //     ) {
+  //       window.scrollTo({
+  //         top: window.scrollY + 500,
+  //         behavior: "smooth", 
+  //       });
+  //     }
+  //   };
+
+  //   sliderRef.current.addEventListener("scroll", handleScrollEnd);
+
+  //   return () => {
+  //     sliderRef.current.removeEventListener("scroll", handleScrollEnd);
+  //   };
+  // }, [sliderRef]);
 
   return (
     <Container>

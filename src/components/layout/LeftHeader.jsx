@@ -173,9 +173,9 @@ const LeftHeader = ({ isOpen, toggleMenu, handleCloseMenu }) => {
                 <a href="#" onClick={handleLogout}>
                   로그아웃&nbsp;&nbsp;
                 </a>{" "}
-                |
+                |&nbsp;&nbsp;
                 <Link to="/memberModify" onClick={handleCloseMenu}>
-                  &nbsp;&nbsp;정보수정({user.userId})
+                  정보수정({user.userId})
                 </Link>
               </li>
             ) : (

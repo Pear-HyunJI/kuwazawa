@@ -199,9 +199,9 @@ const MHeader = ({ isOpen, toggleMenu, handleCloseMenu }) => {
                 <a href="#" onClick={handleLogout}>
                   로그아웃&nbsp;&nbsp;
                 </a>{" "}
-                |
+                |&nbsp;&nbsp;
                 <Link to="/memberModify" onClick={handleCloseMenu}>
-                  &nbsp;&nbsp;정보수정({user.userId})
+                  정보수정({user.userId})
                 </Link>
               </li>
             ) : (
@@ -209,9 +209,9 @@ const MHeader = ({ isOpen, toggleMenu, handleCloseMenu }) => {
                 <Link to="/login" onClick={handleCloseMenu}>
                   로그인&nbsp;&nbsp;
                 </Link>{" "}
-                |
+                |&nbsp;&nbsp;
                 <Link to="/join" onClick={handleCloseMenu}>
-                  &nbsp;&nbsp;회원가입
+                  회원가입
                 </Link>
               </li>
             )}

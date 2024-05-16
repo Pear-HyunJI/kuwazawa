@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import _ from "lodash";
+import { Link } from "react-router-dom";
 
 const TextAreaBlock = styled.div`
   text-align: center;
@@ -14,6 +15,9 @@ const TextAreaBlock = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  h3{
+    font-size: 45px;
   }
   .cream {
     z-index: 50;
@@ -124,6 +128,7 @@ const TextArea = () => {
   return (
     <TextAreaBlock className="row">
       <div className="container">
+      <h3>전통과 정성</h3>
         <div className="imgBox">
           <img src={product[currentImageIndex].img} alt="" />
         </div>
@@ -139,14 +144,14 @@ const TextArea = () => {
         </div>
       </div>
       <div className="bottom">
-        <h3>전통과 정성</h3> <br />
+         <br />
         <p>후쿠시마현 이시카와초에 있는 창업 메이지 20년의 화과자점 입니다 .</p>
         <p>
           창업 당시부터 변함없는 맛의 차, 만주, 도랴야끼에 생크림 샌드. 인기의
           화과자 장인이 색채를 더하는 계절의 화과자 등 . 수제로만든 맛있는
           느낌을 즐기세요 .
         </p>
-        <button className="btn">View More</button>
+        <button className="btn"><Link to="/storeInfo">View More</Link></button>
       </div>
     </TextAreaBlock>
   );

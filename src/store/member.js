@@ -50,7 +50,6 @@ const memberSlice = createSlice({
 
 export const { initMembers, userLogin, userLogout, localUser } =
   memberSlice.actions;
-// firebase에서 회원정보를 불러와서 store에 저장
 export const fetchMembers = () => async (dispatch) => {
   try {
     kuwazawa_memberDB.on("value", (snapshot) => {

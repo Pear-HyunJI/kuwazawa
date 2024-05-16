@@ -2,6 +2,7 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
+import { Link } from "react-router-dom";
 
 const shaking = keyframes`
   0%, 100% {
@@ -149,7 +150,7 @@ const MainSlider = () => {
       <Slider className="slider" {...options}>
         {sliders.map((item, index) => (
           <div className="slide" key={index}>
-            <img src={item.src} alt={item.alt} />
+            <Link to="/product"><img src={item.src} alt={item.alt} /></Link>
           </div>
         ))}
       </Slider>

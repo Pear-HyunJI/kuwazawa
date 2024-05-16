@@ -269,21 +269,6 @@ const JoinSection = () => {
                   />
                 </td>
               </tr>
-              {/* <tr>
-                <td>
-                  <label htmlFor="userPwOk">비밀번호확인 </label>
-                </td>
-                <td>
-                  <input
-                    type="password"
-                    name="userPwOk"
-                    id="userPwOk"
-                    ref={userPwOkRef}
-                    value={userInfo.userPwOk}
-                    onChange={handleChange}
-                  />
-                </td>
-              </tr> */}
               <tr>
                 <td>
                   <label htmlFor="userIrum">Name </label>
@@ -304,6 +289,7 @@ const JoinSection = () => {
                 <td>
                   <label htmlFor="handphone">Mobile number</label>
                   <p>*</p>
+                  <span style={{fontSize:"14px", color:"#bbb", marginLeft:"5px"}}>숫자만 입력해 주세요.</span>
                 </td>
                 <td>
                   <input

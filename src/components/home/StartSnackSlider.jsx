@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 const StartSnackSliderBlock = styled.div`
   height: ${({ mobile }) =>
@@ -26,8 +27,17 @@ const StartSnackSliderBlock = styled.div`
     background: #5a462099;
     transition: width 0.5s, height 0.5s; // 크기 변경 애니메이션 추가
   }
+
   @media screen and (max-width: 412px) {
   }
+`;
+
+const ArrowDown = styled(IoMdArrowDropdown)`
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2s infinite;
 `;
 
 const StartSnackSlider = ({ scrollPosition }) => {
@@ -56,6 +66,7 @@ const StartSnackSlider = ({ scrollPosition }) => {
 
   return (
     <StartSnackSliderBlock mobile={mobile}>
+       <ArrowDown />
       <div className="snack">
         <img src="./assets/image/homeSnack/home_img1.png" alt="화과자" />
       </div>
